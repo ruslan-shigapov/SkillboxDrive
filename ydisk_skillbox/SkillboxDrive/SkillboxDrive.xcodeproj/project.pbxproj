@@ -57,7 +57,9 @@
 		E485F72629ADACAB00F84055 /* SkillboxDrive */ = {
 			isa = PBXGroup;
 			children = (
-				E485F73D29ADAFC200F84055 /* ViewContollers */,
+				E485F73D29ADAFC200F84055 /* Login */,
+				E485F73E29ADC8DB00F84055 /* Models */,
+				E485F73F29ADCE3100F84055 /* Services */,
 				E485F73C29ADAF9800F84055 /* Storyboards */,
 				E485F73B29ADAF7000F84055 /* App */,
 			);
@@ -83,12 +85,26 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		E485F73D29ADAFC200F84055 /* ViewContollers */ = {
+		E485F73D29ADAFC200F84055 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				E485F72B29ADACAB00F84055 /* LoginViewController.swift */,
 			);
-			path = ViewContollers;
+			path = Login;
+			sourceTree = "<group>";
+		};
+		E485F73E29ADC8DB00F84055 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E485F73F29ADCE3100F84055 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
