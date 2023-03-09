@@ -10,6 +10,7 @@
 		E4033BBE29B99BA40069CA13 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BBD29B99BA40069CA13 /* NetworkManager.swift */; };
 		E4033BC129B99CD20069CA13 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E4033BC029B99CD20069CA13 /* Alamofire */; };
 		E4033BC329B99D4D0069CA13 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BC229B99D4D0069CA13 /* Response.swift */; };
+		E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */; };
 		E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72729ADACAB00F84055 /* AppDelegate.swift */; };
 		E485F72A29ADACAB00F84055 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72929ADACAB00F84055 /* SceneDelegate.swift */; };
 		E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72B29ADACAB00F84055 /* LoginViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		E4033BBD29B99BA40069CA13 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E4033BC229B99D4D0069CA13 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E485F72429ADACAB00F84055 /* SkillboxDrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillboxDrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E485F72729ADACAB00F84055 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E485F72929ADACAB00F84055 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				E485F72B29ADACAB00F84055 /* LoginViewController.swift */,
+				E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4033BBE29B99BA40069CA13 /* NetworkManager.swift in Sources */,
+				E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */,
 				E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */,
 				E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */,
 				E485F72A29ADACAB00F84055 /* SceneDelegate.swift in Sources */,

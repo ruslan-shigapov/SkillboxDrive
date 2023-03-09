@@ -20,7 +20,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="dUP-Ae-u2Z">
                                 <rect key="frame" x="100" y="235" width="193" height="168"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="3uc-dA-hDe">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="3uc-dA-hDe">
                                         <rect key="frame" x="39" y="0.0" width="115" height="115"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppName" translatesAutoresizingMaskIntoConstraints="NO" id="UEm-vv-Hxq">
@@ -45,7 +45,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="O1l-Fm-15n"/>
-                                    <segue destination="mkX-fg-OL8" kind="presentation" modalPresentationStyle="fullScreen" id="FDJ-gH-JUU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -58,10 +57,14 @@
                             <constraint firstItem="dUP-Ae-u2Z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="176" id="YVV-kp-Z0I"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="Ojj-Dn-xui" kind="presentation" identifier="withoutOnboarding" modalPresentationStyle="fullScreen" id="pbz-cj-F9W"/>
+                        <segue destination="mkX-fg-OL8" kind="presentation" identifier="withOnboarding" modalPresentationStyle="fullScreen" id="XOr-WL-3ur"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="123" y="-2"/>
+            <point key="canvasLocation" x="121" y="-2"/>
         </scene>
         <!--Item-->
         <scene sceneID="pn1-10-vRL">
@@ -80,10 +83,10 @@
             </objects>
             <point key="canvasLocation" x="3352" y="-388"/>
         </scene>
-        <!--View Controller-->
+        <!--Onboarding View Controller-->
         <scene sceneID="XTq-PZ-4iB">
             <objects>
-                <viewController id="mkX-fg-OL8" sceneMemberID="viewController">
+                <viewController id="mkX-fg-OL8" customClass="OnboardingViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="she-ay-wHX">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QV3-0o-ng2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="912" y="-2"/>
+            <point key="canvasLocation" x="891" y="379"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="b5S-t7-ZJA">
@@ -136,7 +139,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnT-h0-2WB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1663" y="-2"/>
+            <point key="canvasLocation" x="1653" y="-2"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ufk-iP-QSl">
@@ -192,9 +195,12 @@
             <point key="canvasLocation" x="2421" y="756"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="pbz-cj-F9W"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="AppLogo" width="115" height="115"/>
         <image name="AppName" width="193" height="24"/>
-        <image name="Logo" width="115" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
