@@ -8,7 +8,13 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        UserDefaults.standard.setValue(false, forKey: "isFirstLaunch")
+    }
+    
     @IBAction func buttonPressed() {
         
     }
