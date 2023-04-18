@@ -12,25 +12,29 @@ class OnboardingViewController: UIViewController {
     @IBOutlet var textLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var pageControl: UIPageControl!
-    
-    var delegate: PageViewControllerDelegate!
-    
-    var currentPage = 0 
-    var numberOfPages = 0
-    var image: UIImage?
-    var presentText: String?
+        
+    var currentPage = OnboardingScreen.first
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        pageControl.currentPage = currentPage
-        pageControl.numberOfPages = numberOfPages
-        
-        textLabel.text = presentText
-        imageView.image = image
+        updateUI()
     }
     
     @IBAction func nextButtonPressed() {
-        currentPage += 1
+        if currentPage == .first {
+            currentPage = .second
+            updateUI()
+        } else if currentPage == .second {
+            currentPage = .third
+            updateUI()
+        } else {
+            performSegue(withIdentifier: "toLogin", sender: nil)
+        }
+    }
+    
+    private func updateUI() {
+        pageControl.currentPage = currentPage.rawValue
+        textLabel.text = currentPage.definition
+        imageView.image = currentPage.image
     }
 }

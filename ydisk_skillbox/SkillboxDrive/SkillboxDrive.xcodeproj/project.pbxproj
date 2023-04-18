@@ -20,7 +20,7 @@
 		E4C8177129C44DBD00AF63FD /* GraphikRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E4C8177029C44DBD00AF63FD /* GraphikRegular.otf */; };
 		E4C8177329C4507400AF63FD /* GraphikSemibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E4C8177229C4507400AF63FD /* GraphikSemibold.otf */; };
 		E4C8177729C4587100AF63FD /* GraphikLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E4C8177629C4587100AF63FD /* GraphikLight.otf */; };
-		E4EA7E0A29C43F25009642AA /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EA7E0929C43F25009642AA /* PageViewController.swift */; };
+		E4D96A1B29EE9B3200C45651 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D96A1A29EE9B3200C45651 /* OnboardingScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +38,7 @@
 		E4C8177029C44DBD00AF63FD /* GraphikRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikRegular.otf; sourceTree = "<group>"; };
 		E4C8177229C4507400AF63FD /* GraphikSemibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikSemibold.otf; sourceTree = "<group>"; };
 		E4C8177629C4587100AF63FD /* GraphikLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikLight.otf; sourceTree = "<group>"; };
-		E4EA7E0929C43F25009642AA /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		E4D96A1A29EE9B3200C45651 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +114,7 @@
 		E485F73E29ADC8DB00F84055 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E4D96A1A29EE9B3200C45651 /* OnboardingScreen.swift */,
 				E4033BC229B99D4D0069CA13 /* Response.swift */,
 			);
 			path = Models;
@@ -140,7 +141,6 @@
 		E4EA7E0829C43EFC009642AA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				E4EA7E0929C43F25009642AA /* PageViewController.swift */,
 				E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */,
 			);
 			path = Onboarding;
@@ -227,9 +227,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4033BBE29B99BA40069CA13 /* NetworkManager.swift in Sources */,
-				E4EA7E0A29C43F25009642AA /* PageViewController.swift in Sources */,
 				E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */,
 				E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */,
+				E4D96A1B29EE9B3200C45651 /* OnboardingScreen.swift in Sources */,
 				E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */,
 				E485F72A29ADACAB00F84055 /* SceneDelegate.swift in Sources */,
 				E4033BC329B99D4D0069CA13 /* Response.swift in Sources */,
