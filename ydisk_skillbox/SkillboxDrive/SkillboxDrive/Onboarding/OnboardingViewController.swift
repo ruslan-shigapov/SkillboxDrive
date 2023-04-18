@@ -28,7 +28,8 @@ class OnboardingViewController: UIViewController {
             currentPage = .third
             updateUI()
         } else {
-            performSegue(withIdentifier: "toLogin", sender: nil)
+            UserDefaults.standard.set(true, forKey: "isFirstLaunch")
+            dismiss(animated: true)
         }
     }
     

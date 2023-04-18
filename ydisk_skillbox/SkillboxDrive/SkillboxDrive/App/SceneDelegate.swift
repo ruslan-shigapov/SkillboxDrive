@@ -13,12 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
-//        if let _ = UserDefaults.standard.value(forKey: "isFirstLaunch") {
-//            let window = UIWindow(windowScene: scene as! UIWindowScene)
-//            window.rootViewController = LoginViewController()
-//            self.window = window
-//            window.makeKeyAndVisible()
-//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
