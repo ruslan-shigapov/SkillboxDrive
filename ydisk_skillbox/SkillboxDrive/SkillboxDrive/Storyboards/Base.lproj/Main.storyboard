@@ -220,7 +220,7 @@
         <!--Item-->
         <scene sceneID="YEc-bb-gg2">
             <objects>
-                <viewController id="BzL-0X-Y8c" sceneMemberID="viewController">
+                <viewController id="BzL-0X-Y8c" customClass="RecentsViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VUI-P1-DWO">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

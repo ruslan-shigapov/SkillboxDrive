@@ -9,23 +9,43 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    private var token = ""
+        
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startPresentation()
     }
     
     @IBAction func buttonPressed() {
-        
+        updateData()
+    }
+
+    private func updateData() {
+        guard !token.isEmpty else {
+            let requestTokenViewController = AuthViewController()
+            requestTokenViewController.delegate = self
+            present(requestTokenViewController, animated: true)
+            return
+        }
     }
     
     private func startPresentation() {
-        let isFirstLaunch = UserDefaults.standard.bool(forKey: "isFirstLaunch")
-        if isFirstLaunch == false {
+        let thePresentationWasViewed = UserDefaults.standard.bool(forKey: "thePresentationWasViewed")
+        if thePresentationWasViewed != true {
             if let onboardingVC = storyboard?.instantiateViewController(
                 withIdentifier: "OnboardingViewController") as? OnboardingViewController {
+                
                 present(onboardingVC, animated: true)
             }
         }
     }
 }
 
+extension LoginViewController: AuthViewControllerDelegate {
+    
+    func handleTokenChanged(token: String) {
+        self.token = token
+        print("New token: \(token)")
+        updateData()
+    }
+}

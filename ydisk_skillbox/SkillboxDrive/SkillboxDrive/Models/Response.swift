@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct Response {
-    
+struct Response: Codable {
+    let code: String
+    let state: String
 }

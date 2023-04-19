@@ -28,7 +28,7 @@ class OnboardingViewController: UIViewController {
             currentPage = .third
             updateUI()
         } else {
-            UserDefaults.standard.set(true, forKey: "isFirstLaunch")
+            UserDefaults.standard.set(true, forKey: "thePresentationWasViewed")
             dismiss(animated: true)
         }
     }
