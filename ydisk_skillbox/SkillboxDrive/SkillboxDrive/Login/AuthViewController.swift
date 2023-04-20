@@ -5,7 +5,7 @@
 //  Created by Руслан Шигапов on 19.04.2023.
 //
 
-import UIKit
+import Foundation
 import WebKit
 
 protocol AuthViewControllerDelegate: AnyObject {
@@ -58,7 +58,7 @@ extension AuthViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
-                 decisionHandler: @escaping(WKNavigationActionPolicy) -> Void) {
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
         if let url = navigationAction.request.url {
             let targetString = url.absoluteString.replacingOccurrences(of: "#", with: "?")
@@ -67,11 +67,10 @@ extension AuthViewController: WKNavigationDelegate {
             let token = components.queryItems?.first(where: { $0.name == "access_token" })?.value
 
             if let token = token {
-                print(token)
                 delegate?.handleTokenChanged(token: token)
+                dismiss(animated: true)
             }
-
-            dismiss(animated: true)
+            decisionHandler(.allow)
         }
     }
 }

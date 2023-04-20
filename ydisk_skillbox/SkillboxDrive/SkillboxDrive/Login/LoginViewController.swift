@@ -17,16 +17,14 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func buttonPressed() {
-        updateData()
-    }
-
-    private func updateData() {
         guard !token.isEmpty else {
             let requestTokenViewController = AuthViewController()
             requestTokenViewController.delegate = self
+            requestTokenViewController.modalPresentationStyle = .fullScreen
             present(requestTokenViewController, animated: true)
             return
         }
+        performSegue(withIdentifier: "toFiles", sender: nil)
     }
     
     private func startPresentation() {
@@ -45,7 +43,5 @@ extension LoginViewController: AuthViewControllerDelegate {
     
     func handleTokenChanged(token: String) {
         self.token = token
-        print("New token: \(token)")
-        updateData()
     }
 }
