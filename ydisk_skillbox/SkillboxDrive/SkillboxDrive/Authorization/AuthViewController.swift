@@ -8,16 +8,12 @@
 import Foundation
 import WebKit
 
-protocol AuthViewControllerDelegate: AnyObject {
-    func handleTokenChanged(token: String)
-}
-
 class AuthViewController: UIViewController {
     
-    weak var delegate: AuthViewControllerDelegate?
+    @IBOutlet var webView: WKWebView!
     
-    private let webView = WKWebView()
     private let clientID = "c503ad12d73b459f8f68967c64cbd0c6"
+    private var token = ""
 
     private var request: URLRequest? {
         guard var urlComponents = URLComponents(
@@ -33,24 +29,16 @@ class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViews()
-        
+
         guard let request = request else { return }
         webView.load(request)
         webView.navigationDelegate = self
     }
     
-    private func setupViews() {
-        view.backgroundColor = .white
-        view.addSubview(webView)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            webView.topAnchor.constraint(equalTo: view.topAnchor),
-            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let navigationVC = segue.destination as? UINavigationController else { return }
+        guard let tabBarVC = navigationVC.topViewController as? TabBarController else { return }
+        tabBarVC.token = token
     }
 }
 
@@ -67,8 +55,8 @@ extension AuthViewController: WKNavigationDelegate {
             let token = components.queryItems?.first(where: { $0.name == "access_token" })?.value
 
             if let token = token {
-                delegate?.handleTokenChanged(token: token)
-                dismiss(animated: true)
+                self.token = token
+                performSegue(withIdentifier: "toRecents", sender: nil)
             }
             decisionHandler(.allow)
         }

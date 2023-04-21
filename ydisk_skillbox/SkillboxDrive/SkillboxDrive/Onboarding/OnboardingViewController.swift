@@ -9,8 +9,8 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
         
-    @IBOutlet var textLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var textLabel: UILabel!
     @IBOutlet var pageControl: UIPageControl!
         
     var currentPage = OnboardingScreen.first
@@ -34,8 +34,8 @@ class OnboardingViewController: UIViewController {
     }
     
     private func updateUI() {
-        pageControl.currentPage = currentPage.rawValue
-        textLabel.text = currentPage.definition
         imageView.image = currentPage.image
+        textLabel.text = currentPage.definition
+        pageControl.currentPage = currentPage.rawValue
     }
 }

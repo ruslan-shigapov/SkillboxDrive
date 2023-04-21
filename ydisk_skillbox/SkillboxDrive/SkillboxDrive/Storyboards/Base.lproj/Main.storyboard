@@ -48,7 +48,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="buttonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="O1l-Fm-15n"/>
+                                    <segue destination="AtK-fJ-G9H" kind="presentation" modalPresentationStyle="fullScreen" id="WIy-xL-2l9"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -63,25 +63,22 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DHC-h3-CtA"/>
-                    <connections>
-                        <segue destination="Ojj-Dn-xui" kind="presentation" identifier="toFiles" modalPresentationStyle="fullScreen" id="Zwe-91-KKJ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-592" y="-2"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="pn1-10-vRL">
             <objects>
-                <viewController id="vsy-89-UHM" sceneMemberID="viewController">
+                <viewController title="Profile" id="vsy-89-UHM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BYj-TF-fNm">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="L5Y-ai-YWD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="ch8-zM-rH1"/>
+                    <tabBarItem key="tabBarItem" title="" image="person" catalog="system" id="ch8-zM-rH1"/>
                     <navigationItem key="navigationItem" id="JWI-iN-rcU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9LM-75-4LL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -160,7 +157,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QV3-0o-ng2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280" y="-2"/>
+            <point key="canvasLocation" x="-593" y="757"/>
+        </scene>
+        <!--Auth View Controller-->
+        <scene sceneID="VSW-eM-xPt">
+            <objects>
+                <viewController modalTransitionStyle="crossDissolve" id="AtK-fJ-G9H" customClass="AuthViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tqa-NX-P7s">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUu-P8-Rl4">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5IE-k4-hzm"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gUu-P8-Rl4" firstAttribute="leading" secondItem="tqa-NX-P7s" secondAttribute="leading" id="HSG-uG-Jmc"/>
+                            <constraint firstAttribute="trailing" secondItem="gUu-P8-Rl4" secondAttribute="trailing" id="iy9-D2-n75"/>
+                            <constraint firstItem="gUu-P8-Rl4" firstAttribute="top" secondItem="tqa-NX-P7s" secondAttribute="top" id="pAl-9Y-Ent"/>
+                            <constraint firstAttribute="bottom" secondItem="gUu-P8-Rl4" secondAttribute="bottom" id="zCH-su-Z6W"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="gUu-P8-Rl4" id="fpl-LL-dbt"/>
+                        <segue destination="Ojj-Dn-xui" kind="presentation" identifier="toRecents" modalPresentationStyle="fullScreen" id="jxy-tM-5mf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xZN-GA-6Be" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="312" y="-2"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="b5S-t7-ZJA">
@@ -178,12 +210,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnT-h0-2WB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1158" y="-2"/>
+            <point key="canvasLocation" x="1195" y="-2"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ufk-iP-QSl">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="vDV-Lw-MNb" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="vDV-Lw-MNb" customClass="TabBarController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Jmz-3M-wlv"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7wT-XZ-7Ot">
@@ -193,50 +225,53 @@
                     </tabBar>
                     <connections>
                         <segue destination="vsy-89-UHM" kind="relationship" relationship="viewControllers" id="cUU-s6-3D6"/>
-                        <segue destination="j5K-zC-iLW" kind="relationship" relationship="viewControllers" id="iWr-Kh-GFE"/>
                         <segue destination="BzL-0X-Y8c" kind="relationship" relationship="viewControllers" id="AyB-FV-UMD"/>
+                        <segue destination="j5K-zC-iLW" kind="relationship" relationship="viewControllers" id="iWr-Kh-GFE"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZT8-t3-HfN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2048" y="-2"/>
         </scene>
-        <!--Item-->
+        <!--Files-->
         <scene sceneID="q6K-Ze-Kbu">
             <objects>
-                <viewController id="j5K-zC-iLW" sceneMemberID="viewController">
+                <viewController title="Files" id="j5K-zC-iLW" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YOD-c1-gJM">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Qiq-Sh-P3d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="XRV-05-zE0"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="" image="archivebox" catalog="system" id="XRV-05-zE0"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DhM-KQ-cEP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3352" y="379"/>
         </scene>
-        <!--Item-->
+        <!--Recents-->
         <scene sceneID="YEc-bb-gg2">
             <objects>
-                <viewController id="BzL-0X-Y8c" customClass="RecentsViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Recents" id="BzL-0X-Y8c" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VUI-P1-DWO">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="hLn-GS-icZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="SJa-uP-sO4"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="" image="doc" catalog="system" id="SJa-uP-sO4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Av8-Pg-ezb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2047" y="820"/>
+            <point key="canvasLocation" x="2047" y="757"/>
         </scene>
     </scenes>
     <resources>
         <image name="AppLogo" width="115" height="115"/>
         <image name="AppName" width="193" height="24"/>
+        <image name="archivebox" catalog="system" width="128" height="107"/>
+        <image name="doc" catalog="system" width="115" height="128"/>
+        <image name="person" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

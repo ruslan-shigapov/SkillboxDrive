@@ -8,23 +8,10 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    
-    private var token = ""
         
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startPresentation()
-    }
-    
-    @IBAction func buttonPressed() {
-        guard !token.isEmpty else {
-            let requestTokenViewController = AuthViewController()
-            requestTokenViewController.delegate = self
-            requestTokenViewController.modalPresentationStyle = .fullScreen
-            present(requestTokenViewController, animated: true)
-            return
-        }
-        performSegue(withIdentifier: "toFiles", sender: nil)
     }
     
     private func startPresentation() {
@@ -36,12 +23,5 @@ class LoginViewController: UIViewController {
                 present(onboardingVC, animated: true)
             }
         }
-    }
-}
-
-extension LoginViewController: AuthViewControllerDelegate {
-    
-    func handleTokenChanged(token: String) {
-        self.token = token
     }
 }
