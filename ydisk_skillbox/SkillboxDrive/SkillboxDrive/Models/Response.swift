@@ -8,6 +8,11 @@
 import Foundation
 
 struct Response: Codable {
-    let code: String
-    let state: String
+    let items: [File]?
+}
+
+struct File: Codable {
+    let name: String?
+    let preview: String?
+    let size: Int64?
 }

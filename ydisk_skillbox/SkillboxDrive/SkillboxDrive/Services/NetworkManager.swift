@@ -6,10 +6,15 @@
 //
 
 import Foundation
-import Alamofire
 
 enum Link: String {
-    case url = "https://oauth.yandex.ru/authorize?response_type=code&client_id=f50a781a68354ae48cc0a5a33d25eca4"
+    case url = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded"
+}
+
+enum NetworkError: Error {
+    case invalidURL
+    case noData
+    case decodingError
 }
 
 class NetworkManager {
@@ -17,17 +22,27 @@ class NetworkManager {
     
     private init() {}
     
-//    func fetchAccess(from url: String, completion: @escaping (Result<Response, Error>) -> Void) {
-//        AF.request(url)
-//            .validate()
-//            .responseJSON { dataResponse in
-//                switch dataResponse.result {
-//                case .success(let value):
-//                    let response = Response.init(from: )
-//                    completion(.success(response))
-//                case .failure(let error):
-//                    completion(.failure(error))
-//                }
-//            }
-//    }
+    func fetchData(from url: String, with token: String?, completion: @escaping (Result<Response, NetworkError>) -> Void) {
+        guard let url = URL(string: url) else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        var request = URLRequest(url: url)
+        guard let token = token else { return }
+        request.setValue("OAuth \(token)", forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
+            do {
+                let response = try JSONDecoder().decode(Response.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(response))
+                }
+            } catch {
+                completion(.failure(.decodingError))
+            }
+        }.resume()
+    }
 }

@@ -10,10 +10,11 @@ import WebKit
 
 class AuthViewController: UIViewController {
     
+    // MARK: - IB Outlets
     @IBOutlet var webView: WKWebView!
     
-    private let clientID = "c503ad12d73b459f8f68967c64cbd0c6"
-    private var token = ""
+    // MARK: - Private Properties
+    private var token: String?
 
     private var request: URLRequest? {
         guard var urlComponents = URLComponents(
@@ -21,12 +22,13 @@ class AuthViewController: UIViewController {
         
         urlComponents.queryItems = [
             URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "client_id", value: "\(clientID)")
+            URLQueryItem(name: "client_id", value: "\(DataStore.shared.clientID)")
         ]
         guard let url = urlComponents.url else { return nil }
         return URLRequest(url: url)
     }
     
+    // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,11 +39,19 @@ class AuthViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationVC = segue.destination as? UINavigationController else { return }
-        guard let tabBarVC = navigationVC.topViewController as? TabBarController else { return }
-        tabBarVC.token = token
+        guard let tabBarVC = navigationVC.topViewController as? UITabBarController else { return }
+        tabBarVC.selectedIndex = 1
+        
+        guard let viewControllers = tabBarVC.viewControllers else { return }
+        viewControllers.forEach {
+            if let recentsVC = $0 as? RecentsViewController {
+                recentsVC.token = token
+            }
+        }
     }
 }
 
+// MARK: - WKNavigationDelegate
 extension AuthViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView,

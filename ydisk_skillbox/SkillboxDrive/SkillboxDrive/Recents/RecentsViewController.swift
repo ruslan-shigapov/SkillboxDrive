@@ -9,14 +9,24 @@ import UIKit
 
 class RecentsViewController: UITableViewController {
     
+    // MARK: - Public Properties
     var token: String?
+    
+    // MARK: - Private Properties
+    private var response: Response?
+    
+//    private var spinnerView = UIActivityIndicatorView()
 
+    
+    // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+//        showSpinner(in: view)
+
+        fetchData()
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
@@ -81,5 +91,30 @@ class RecentsViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+//    // MARK: - UIActivityIndicatorView
+//    private func showSpinner(in view: UIView) {
+//        spinnerView = UIActivityIndicatorView(style: .large)
+//        spinnerView.color = .gray
+//        spinnerView.startAnimating()
+//        spinnerView.center = view.center
+//        spinnerView.hidesWhenStopped = true
+//
+//        view.addSubview(spinnerView)
+//    }
+    
+    // MARK: - Networking
+    private func fetchData() {
+        NetworkManager.shared.fetchData(from: Link.url.rawValue, with: token) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Received: \(response.items?.count ?? 0) files")
+                self?.response = response
+                self?.tableView.reloadData()
+//                self?.spinnerView.stopAnimating()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }

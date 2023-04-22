@@ -215,7 +215,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ufk-iP-QSl">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="vDV-Lw-MNb" customClass="TabBarController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="vDV-Lw-MNb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Jmz-3M-wlv"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7wT-XZ-7Ot">

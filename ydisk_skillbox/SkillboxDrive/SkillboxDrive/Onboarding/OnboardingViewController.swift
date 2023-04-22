@@ -9,17 +9,21 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
         
+    // MARK: - IB Outlets
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var textLabel: UILabel!
     @IBOutlet var pageControl: UIPageControl!
         
-    var currentPage = OnboardingScreen.first
+    // MARK: - Private Properties
+    private var currentPage = OnboardingScreen.first
     
+    // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
     }
     
+    // MARK: - IB Actions
     @IBAction func nextButtonPressed() {
         if currentPage == .first {
             currentPage = .second
@@ -33,9 +37,10 @@ class OnboardingViewController: UIViewController {
         }
     }
     
+    // MARK: - Private Methods
     private func updateUI() {
         imageView.image = currentPage.image
-        textLabel.text = currentPage.definition
+        textLabel.text = currentPage.description
         pageControl.currentPage = currentPage.rawValue
     }
 }
