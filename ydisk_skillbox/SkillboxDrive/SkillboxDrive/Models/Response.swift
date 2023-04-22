@@ -8,10 +8,10 @@
 import Foundation
 
 struct Response: Codable {
-    let items: [File]?
+    let items: [Item]?
 }
 
-struct File: Codable {
+struct Item: Codable {
     let name: String?
     let preview: String?
     let size: Int64?

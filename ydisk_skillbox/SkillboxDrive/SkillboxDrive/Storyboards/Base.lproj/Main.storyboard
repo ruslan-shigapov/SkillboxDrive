@@ -225,7 +225,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="vsy-89-UHM" kind="relationship" relationship="viewControllers" id="cUU-s6-3D6"/>
-                        <segue destination="BzL-0X-Y8c" kind="relationship" relationship="viewControllers" id="AyB-FV-UMD"/>
+                        <segue destination="9yr-AO-Ln9" kind="relationship" relationship="viewControllers" id="T2o-FH-Ent"/>
                         <segue destination="j5K-zC-iLW" kind="relationship" relationship="viewControllers" id="iWr-Kh-GFE"/>
                     </connections>
                 </tabBarController>
@@ -250,20 +250,34 @@
             <point key="canvasLocation" x="3352" y="379"/>
         </scene>
         <!--Recents-->
-        <scene sceneID="YEc-bb-gg2">
+        <scene sceneID="rDz-Oe-W2r">
             <objects>
-                <viewController title="Recents" id="BzL-0X-Y8c" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VUI-P1-DWO">
+                <tableViewController title="Recents" id="9yr-AO-Ln9" customClass="RecentsViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="sHM-g0-NIQ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="hLn-GS-icZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" id="qQx-RC-EYd" customClass="ItemCell" customModule="SkillboxDrive" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qQx-RC-EYd" id="dak-37-mLY">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9yr-AO-Ln9" id="VzI-BY-9sv"/>
+                            <outlet property="delegate" destination="9yr-AO-Ln9" id="t0T-Ec-ykB"/>
+                        </connections>
+                    </tableView>
                     <tabBarItem key="tabBarItem" tag="1" title="" image="doc" catalog="system" id="SJa-uP-sO4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Av8-Pg-ezb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p8e-2g-n1r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2047" y="757"/>
+            <point key="canvasLocation" x="2047" y="756"/>
         </scene>
     </scenes>
     <resources>
