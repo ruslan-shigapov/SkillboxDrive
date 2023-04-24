@@ -6,20 +6,20 @@
 //
 
 import UIKit
-import Kingfisher
 
 class RecentsViewController: UITableViewController {
     
     // MARK: - Public Properties
-    var token: String?
+    var token: String!
     
     // MARK: - Private Properties
     private var response: Response?
     
     // MARK: - Override Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchData()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.separatorStyle = .none
+        fetchResponse()
     }
 
     // MARK: - Table view data source
@@ -52,11 +52,10 @@ class RecentsViewController: UITableViewController {
     */
     
     // MARK: - Networking
-    private func fetchData() {
+    private func fetchResponse() {
         NetworkManager.shared.fetchData(from: Link.url.rawValue, with: token) { [weak self] result in
             switch result {
             case .success(let response):
-                print("Received: \(response.items?.count ?? 0) files")
                 self?.response = response
                 self?.tableView.reloadData()
             case .failure(let error):

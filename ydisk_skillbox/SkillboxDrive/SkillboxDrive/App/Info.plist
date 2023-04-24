@@ -5,7 +5,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>GraphikRegular.otf</string>
-		<string>GraphikSemibold.otf</string>
 		<string>GraphikLight.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

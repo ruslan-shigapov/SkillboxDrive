@@ -38,13 +38,13 @@ class AuthViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navigationVC = segue.destination as? UINavigationController else { return }
-        guard let tabBarVC = navigationVC.topViewController as? UITabBarController else { return }
+        guard let tabBarVC = segue.destination as? UITabBarController else { return }
         tabBarVC.selectedIndex = 1
         
         guard let viewControllers = tabBarVC.viewControllers else { return }
         viewControllers.forEach {
-            if let recentsVC = $0 as? RecentsViewController {
+            guard let navigationVC = $0 as? UINavigationController else { return }
+            if let recentsVC = navigationVC.topViewController as? RecentsViewController {
                 recentsVC.token = token
             }
         }
@@ -66,7 +66,7 @@ extension AuthViewController: WKNavigationDelegate {
 
             if let token = token {
                 self.token = token
-                performSegue(withIdentifier: "toRecents", sender: nil)
+                performSegue(withIdentifier: "toTabBar", sender: nil)
             }
             decisionHandler(.allow)
         }
