@@ -12,12 +12,8 @@ struct Response: Codable {
 }
 
 struct Item: Codable {
-    let name: String?
+    let name: String
     let preview: String?
     let created: String
     let size: Int64
-    
-    var information: String {
-        "\(String(describing: size)) кб \(created))"
-    }
 }
