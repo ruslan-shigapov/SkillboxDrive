@@ -15,32 +15,32 @@ class OnboardingViewController: UIViewController {
     @IBOutlet var pageControl: UIPageControl!
         
     // MARK: - Private Properties
-    private var currentPage = OnboardingScreen.first
+    private var viewModel: OnboardingViewModelProtocol! {
+        didSet {
+            viewModel.viewModelDidChange = { [unowned self] viewModel in
+                setupUI()
+            }
+        }
+    }
     
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+        viewModel = OnboardingViewModel()
+        setupUI()
     }
     
     // MARK: - IB Actions
     @IBAction func nextButtonPressed() {
-        if currentPage == .first {
-            currentPage = .second
-            updateUI()
-        } else if currentPage == .second {
-            currentPage = .third
-            updateUI()
-        } else {
-            UserDefaults.standard.set(true, forKey: "thePresentationWasViewed")
-            dismiss(animated: true)
+        viewModel.goToNextPage { [unowned self] in
+            self.dismiss(animated: true)
         }
     }
     
     // MARK: - Private Methods
-    private func updateUI() {
-        imageView.image = currentPage.image
-        textLabel.text = currentPage.description
-        pageControl.currentPage = currentPage.rawValue
+    private func setupUI() {
+        imageView.image = viewModel.currentPage.image
+        textLabel.text = viewModel.currentPage.description
+        pageControl.currentPage = viewModel.currentPage.rawValue
     }
 }

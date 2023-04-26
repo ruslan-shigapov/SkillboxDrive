@@ -51,7 +51,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="AtK-fJ-G9H" kind="presentation" modalPresentationStyle="fullScreen" id="WIy-xL-2l9"/>
+                                    <action selector="enterButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Gr-mK-GnL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -143,7 +143,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QV3-0o-ng2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-593" y="756"/>
+            <point key="canvasLocation" x="-1495" y="-2"/>
         </scene>
         <!--Профиль-->
         <scene sceneID="7rU-sD-TiO">
@@ -159,12 +159,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RFw-ME-KWs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="642" y="1530"/>
+            <point key="canvasLocation" x="642" y="1522"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="VSW-eM-xPt">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" id="AtK-fJ-G9H" customClass="AuthViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthViewController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="AtK-fJ-G9H" customClass="AuthViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tqa-NX-P7s">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -189,7 +189,6 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="gUu-P8-Rl4" id="fpl-LL-dbt"/>
-                        <segue destination="vDV-Lw-MNb" kind="presentation" identifier="toTabBar" modalPresentationStyle="fullScreen" id="6q8-gG-YCm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xZN-GA-6Be" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -203,7 +202,7 @@
                     <tabBarItem key="tabBarItem" title="" image="doc" catalog="system" id="1FB-e0-Srq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zcT-do-6Zg">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="17"/>
@@ -222,13 +221,18 @@
         <!--Tab Bar Controller-->
         <scene sceneID="ufk-iP-QSl">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="vDV-Lw-MNb" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="vDV-Lw-MNb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Jmz-3M-wlv"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7wT-XZ-7Ot">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="cAG-Mc-wjU" kind="relationship" relationship="viewControllers" id="Tde-dX-RWt"/>
                         <segue destination="Ojj-Dn-xui" kind="relationship" relationship="viewControllers" id="AFb-gY-Npa"/>
@@ -245,7 +249,7 @@
                 <navigationController id="cAG-Mc-wjU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="person" catalog="system" id="Njw-Mt-7bU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IDr-zl-v90">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="17"/>
@@ -333,7 +337,7 @@
                 <navigationController id="4fH-v5-mpo" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="archivebox" catalog="system" id="uU3-ds-3Cb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dSb-yX-Gv5">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="17"/>

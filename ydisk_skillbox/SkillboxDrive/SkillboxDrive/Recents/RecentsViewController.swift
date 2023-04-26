@@ -9,30 +9,31 @@ import UIKit
 
 class RecentsViewController: UITableViewController {
     
-    // MARK: - Public Properties
-    var token: String!
-    
     // MARK: - Private Properties
-    private var response: Response?
+    private var viewModel: RecentsViewModelProtocol! {
+        didSet {
+            viewModel.fetchResponse { [unowned self] in
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     // MARK: - Override Methods
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.separatorStyle = .none
-        fetchResponse()
+        viewModel = RecentsViewModel()
     }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        response?.items?.count ?? 0
+        viewModel.numberOfRows()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
         guard let cell = cell as? ItemCell else { return UITableViewCell() }
-        if let item = response?.items?[indexPath.row] {
-            cell.configure(with: item)
-        }
+        cell.viewModel = viewModel.getItemCellViewModel(at: indexPath)
         return cell
     }
     
@@ -50,17 +51,4 @@ class RecentsViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
-    // MARK: - Networking
-    private func fetchResponse() {
-        NetworkManager.shared.fetchData(from: Link.url.rawValue, with: token) { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.response = response
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
 }

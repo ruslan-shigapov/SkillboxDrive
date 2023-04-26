@@ -8,7 +8,7 @@
 import Foundation
 
 enum Link: String {
-    case url = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded"
+    case url = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?preview_size=25x22"
 }
 
 enum NetworkError: Error {

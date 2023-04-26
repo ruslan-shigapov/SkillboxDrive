@@ -10,24 +10,21 @@ import Kingfisher
 
 class ItemCell: UITableViewCell {
 
+    // MARK: - IB Outlets
     @IBOutlet var iconView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var infoLabel: UILabel!
-
-    func configure(with item: Item) {
-        nameLabel.text = item.name
-        infoLabel.text = item.information
-        guard let icon = item.preview else {
-            iconView.image = UIImage(named: "Folder")
-            return
-        }
-        guard let imageURL = URL(string: icon) else { return }
-        iconView.kf.setImage(with: imageURL) { result in
-            switch result {
-            case .success(let value):
-                print("Task done for: \(value.source.url?.lastPathComponent ?? "")")
-            case .failure(let error):
-                print("Job failed: \(error.localizedDescription)")
+    
+    // MARK: - Public Properties
+    var viewModel: ItemCellViewModelProtocol! {
+        didSet {
+            nameLabel.text = viewModel.name
+            infoLabel.text = viewModel.information
+            if let imageURL = URL(string: viewModel.preview ?? "") {
+                iconView.kf.indicatorType = .activity
+                iconView.kf.setImage(with: imageURL)
+            } else {
+                iconView.image = UIImage(named: "Folder")
             }
         }
     }

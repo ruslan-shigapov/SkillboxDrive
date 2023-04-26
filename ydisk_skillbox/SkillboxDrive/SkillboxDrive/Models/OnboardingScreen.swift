@@ -15,7 +15,6 @@ enum OnboardingScreen: Int {
     var image: UIImage? {
         UIImage(named: "Picture \(self.rawValue)")
     }
-        
     var description: String {
         switch self {
         case .first:

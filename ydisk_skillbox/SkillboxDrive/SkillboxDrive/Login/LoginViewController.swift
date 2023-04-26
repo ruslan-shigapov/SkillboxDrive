@@ -8,21 +8,36 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    // MARK: - Private Properties
+    private var viewModel: LoginViewModelProtocol!
         
     // MARK: - Override Methods
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        startPresentation()
-    }
-    
-    // MARK: - Private Methods
-    private func startPresentation() {
-        let thePresentationWasViewed = UserDefaults.standard.bool(forKey: "thePresentationWasViewed")
-        if thePresentationWasViewed != true {
-            if let onboardingVC = storyboard?.instantiateViewController(
+        viewModel = LoginViewModel()
+        viewModel.startPresentation { [unowned self] in
+            if let onboardingVC = self.storyboard?.instantiateViewController(
                 withIdentifier: "OnboardingViewController") as? OnboardingViewController {
                 
-                present(onboardingVC, animated: true)
+                self.present(onboardingVC, animated: true)
+            }
+        }
+    }
+    
+    // MARK: - IB Actions
+    @IBAction func enterButtonPressed() {
+        if let _ = viewModel.token {
+            if let tabBarController = self.storyboard?.instantiateViewController(
+                withIdentifier: "TabBarController") as? UITabBarController {
+                
+                present(tabBarController, animated: true)
+            }
+        } else {
+            if let authViewController = self.storyboard?.instantiateViewController(
+                withIdentifier: "AuthViewController") as? AuthViewController {
+                
+                present(authViewController, animated: true)
             }
         }
     }

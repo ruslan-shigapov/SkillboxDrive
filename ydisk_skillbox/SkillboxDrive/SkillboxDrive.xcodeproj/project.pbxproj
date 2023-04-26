@@ -12,7 +12,8 @@
 		E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */; };
 		E417B67C29F009F80042B6FD /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67B29F009F80042B6FD /* AuthViewController.swift */; };
 		E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67E29F0311D0042B6FD /* RecentsViewController.swift */; };
-		E485E6F729F3E53A005CFE1D /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485E6F629F3E53A005CFE1D /* DataStore.swift */; };
+		E453C20E29F9337C00505AE6 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E453C20D29F9337C00505AE6 /* ImageManager.swift */; };
+		E485E6F729F3E53A005CFE1D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485E6F629F3E53A005CFE1D /* DataManager.swift */; };
 		E485E6FA29F3F34D005CFE1D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E485E6F929F3F34D005CFE1D /* Kingfisher */; };
 		E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72729ADACAB00F84055 /* AppDelegate.swift */; };
 		E485F72A29ADACAB00F84055 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72929ADACAB00F84055 /* SceneDelegate.swift */; };
@@ -23,6 +24,11 @@
 		E4BFFEA529F403010033392D /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BFFEA429F403010033392D /* ItemCell.swift */; };
 		E4C8177129C44DBD00AF63FD /* GraphikRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E4C8177029C44DBD00AF63FD /* GraphikRegular.otf */; };
 		E4C8177729C4587100AF63FD /* GraphikLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E4C8177629C4587100AF63FD /* GraphikLight.otf */; };
+		E4D8AAA429F6B7820046C879 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D8AAA329F6B7820046C879 /* OnboardingViewModel.swift */; };
+		E4D8AAA629F6B78F0046C879 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D8AAA529F6B78F0046C879 /* LoginViewModel.swift */; };
+		E4D8AAA829F6B79D0046C879 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D8AAA729F6B79D0046C879 /* AuthViewModel.swift */; };
+		E4D8AAAA29F6B7A90046C879 /* RecentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D8AAA929F6B7A90046C879 /* RecentsViewModel.swift */; };
+		E4D8AAAC29F6B7C10046C879 /* ItemCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D8AAAB29F6B7C10046C879 /* ItemCellViewModel.swift */; };
 		E4D96A1B29EE9B3200C45651 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D96A1A29EE9B3200C45651 /* OnboardingScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +38,8 @@
 		E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E417B67B29F009F80042B6FD /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E417B67E29F0311D0042B6FD /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
-		E485E6F629F3E53A005CFE1D /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		E453C20D29F9337C00505AE6 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		E485E6F629F3E53A005CFE1D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E485F72429ADACAB00F84055 /* SkillboxDrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillboxDrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E485F72729ADACAB00F84055 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E485F72929ADACAB00F84055 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +51,11 @@
 		E4BFFEA429F403010033392D /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		E4C8177029C44DBD00AF63FD /* GraphikRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikRegular.otf; sourceTree = "<group>"; };
 		E4C8177629C4587100AF63FD /* GraphikLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikLight.otf; sourceTree = "<group>"; };
+		E4D8AAA329F6B7820046C879 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		E4D8AAA529F6B78F0046C879 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		E4D8AAA729F6B79D0046C879 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		E4D8AAA929F6B7A90046C879 /* RecentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewModel.swift; sourceTree = "<group>"; };
+		E4D8AAAB29F6B7C10046C879 /* ItemCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellViewModel.swift; sourceTree = "<group>"; };
 		E4D96A1A29EE9B3200C45651 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				E417B67E29F0311D0042B6FD /* RecentsViewController.swift */,
+				E4D8AAA929F6B7A90046C879 /* RecentsViewModel.swift */,
 				E4BFFEA329F402BB0033392D /* Cell */,
 			);
 			path = Recents;
@@ -140,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				E485F72B29ADACAB00F84055 /* LoginViewController.swift */,
+				E4D8AAA529F6B78F0046C879 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -157,7 +171,8 @@
 			isa = PBXGroup;
 			children = (
 				E4033BBD29B99BA40069CA13 /* NetworkManager.swift */,
-				E485E6F629F3E53A005CFE1D /* DataStore.swift */,
+				E453C20D29F9337C00505AE6 /* ImageManager.swift */,
+				E485E6F629F3E53A005CFE1D /* DataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -166,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				E417B67B29F009F80042B6FD /* AuthViewController.swift */,
+				E4D8AAA729F6B79D0046C879 /* AuthViewModel.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -174,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				E4BFFEA429F403010033392D /* ItemCell.swift */,
+				E4D8AAAB29F6B7C10046C879 /* ItemCellViewModel.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -191,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */,
+				E4D8AAA329F6B7820046C879 /* OnboardingViewModel.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -275,14 +293,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4033BBE29B99BA40069CA13 /* NetworkManager.swift in Sources */,
+				E453C20E29F9337C00505AE6 /* ImageManager.swift in Sources */,
 				E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */,
 				E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */,
 				E4BFFEA529F403010033392D /* ItemCell.swift in Sources */,
-				E485E6F729F3E53A005CFE1D /* DataStore.swift in Sources */,
+				E485E6F729F3E53A005CFE1D /* DataManager.swift in Sources */,
+				E4D8AAAA29F6B7A90046C879 /* RecentsViewModel.swift in Sources */,
 				E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */,
 				E4D96A1B29EE9B3200C45651 /* OnboardingScreen.swift in Sources */,
+				E4D8AAA429F6B7820046C879 /* OnboardingViewModel.swift in Sources */,
+				E4D8AAA629F6B78F0046C879 /* LoginViewModel.swift in Sources */,
 				E417B67C29F009F80042B6FD /* AuthViewController.swift in Sources */,
+				E4D8AAA829F6B79D0046C879 /* AuthViewModel.swift in Sources */,
 				E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */,
+				E4D8AAAC29F6B7C10046C879 /* ItemCellViewModel.swift in Sources */,
 				E485F72A29ADACAB00F84055 /* SceneDelegate.swift in Sources */,
 				E4033BC329B99D4D0069CA13 /* Response.swift in Sources */,
 			);
