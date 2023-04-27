@@ -20,9 +20,19 @@ class ItemCell: UITableViewCell {
         didSet {
             nameLabel.text = viewModel.name
             infoLabel.text = viewModel.information
-            if let imageURL = URL(string: viewModel.preview ?? "") {
-                iconView.kf.indicatorType = .activity
-                iconView.kf.setImage(with: imageURL)
+            if let preview = viewModel.preview {
+                guard let token = DataManager.shared.token else { return }
+                let modifier = AnyModifier { request in
+                    var request = request
+                    request.setValue("OAuth \(token)", forHTTPHeaderField: "Authorization")
+                    return request
+                }
+                iconView.kf.setImage(
+                    with: preview,
+                    options: [
+                        .requestModifier(modifier)
+                    ]
+                )
             } else {
                 iconView.image = UIImage(named: "Folder")
             }

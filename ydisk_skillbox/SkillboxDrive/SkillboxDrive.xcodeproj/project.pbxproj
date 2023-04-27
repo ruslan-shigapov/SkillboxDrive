@@ -12,7 +12,6 @@
 		E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */; };
 		E417B67C29F009F80042B6FD /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67B29F009F80042B6FD /* AuthViewController.swift */; };
 		E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67E29F0311D0042B6FD /* RecentsViewController.swift */; };
-		E453C20E29F9337C00505AE6 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E453C20D29F9337C00505AE6 /* ImageManager.swift */; };
 		E485E6F729F3E53A005CFE1D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485E6F629F3E53A005CFE1D /* DataManager.swift */; };
 		E485E6FA29F3F34D005CFE1D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E485E6F929F3F34D005CFE1D /* Kingfisher */; };
 		E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72729ADACAB00F84055 /* AppDelegate.swift */; };
@@ -38,7 +37,6 @@
 		E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E417B67B29F009F80042B6FD /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E417B67E29F0311D0042B6FD /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
-		E453C20D29F9337C00505AE6 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		E485E6F629F3E53A005CFE1D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E485F72429ADACAB00F84055 /* SkillboxDrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillboxDrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E485F72729ADACAB00F84055 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +79,13 @@
 			path = Recents;
 			sourceTree = "<group>";
 		};
+		E4762D0D29F96C2600C32AFB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		E485E6F429F3E033005CFE1D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +96,7 @@
 		E485E6F529F3E042005CFE1D /* Browse */ = {
 			isa = PBXGroup;
 			children = (
+				E4762D0D29F96C2600C32AFB /* Cell */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -171,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				E4033BBD29B99BA40069CA13 /* NetworkManager.swift */,
-				E453C20D29F9337C00505AE6 /* ImageManager.swift */,
 				E485E6F629F3E53A005CFE1D /* DataManager.swift */,
 			);
 			path = Services;
@@ -293,7 +298,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4033BBE29B99BA40069CA13 /* NetworkManager.swift in Sources */,
-				E453C20E29F9337C00505AE6 /* ImageManager.swift in Sources */,
 				E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */,
 				E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */,
 				E4BFFEA529F403010033392D /* ItemCell.swift in Sources */,

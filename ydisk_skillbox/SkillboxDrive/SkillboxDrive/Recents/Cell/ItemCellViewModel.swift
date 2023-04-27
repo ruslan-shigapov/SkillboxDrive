@@ -10,7 +10,7 @@ import UIKit
 protocol ItemCellViewModelProtocol {
     var name: String { get }
     var information: String { get }
-    var preview: String? { get }
+    var preview: URL? { get }
     init(item: Item)
 }
 
@@ -22,7 +22,7 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
         String(format: "%.1f", Double(item.size) / 1024)
     }
     var created: String {
-        var formatter = DateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
         guard let date = formatter.date(from: item.created) else { return "" }
         formatter.dateFormat = "dd.MM.yy  HH:mm"
@@ -31,8 +31,8 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
     var information: String {
         "\(size) кб  \(created)"
     }
-    var preview: String? {
-        item.preview
+    var preview: URL? {
+        URL(string: item.preview ?? "")
     }
     private let item: Item
     required init(item: Item) {
