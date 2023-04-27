@@ -22,6 +22,8 @@ class RecentsViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.separatorStyle = .none
+        tableView.indicatorStyle = .black
+        tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
         viewModel = RecentsViewModel()
     }
 
@@ -40,6 +42,13 @@ class RecentsViewController: UITableViewController {
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    @objc private func refresh(sender: UIRefreshControl) {
+        viewModel.fetchResponse { [unowned self] in
+            self.tableView.reloadData()
+            sender.endRefreshing()
+        }
     }
 
     /*
