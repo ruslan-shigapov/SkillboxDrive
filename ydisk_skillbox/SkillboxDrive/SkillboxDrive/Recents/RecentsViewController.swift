@@ -19,12 +19,17 @@ class RecentsViewController: UITableViewController {
     }
     
     // MARK: - Override Methods
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.separatorStyle = .none
         tableView.indicatorStyle = .black
         tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
         viewModel = RecentsViewModel()
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
     }
 
     // MARK: - Table view data source
@@ -44,20 +49,11 @@ class RecentsViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // MARK: - Private Methods
     @objc private func refresh(sender: UIRefreshControl) {
         viewModel.fetchResponse { [unowned self] in
             self.tableView.reloadData()
             sender.endRefreshing()
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

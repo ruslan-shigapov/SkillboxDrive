@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - IB Actions
     @IBAction func enterButtonPressed() {
-        if let _ = viewModel.token {
+        if let _ = UserDefaults.standard.string(forKey: "token") {
             if let tabBarController = self.storyboard?.instantiateViewController(
                 withIdentifier: "TabBarController") as? UITabBarController {
                 

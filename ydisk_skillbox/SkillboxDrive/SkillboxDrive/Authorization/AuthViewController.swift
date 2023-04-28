@@ -12,6 +12,7 @@ class AuthViewController: UIViewController {
     
     // MARK: - IB Outlets
     @IBOutlet var webView: WKWebView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Private Properties
     private var viewModel: AuthViewModelProtocol!
@@ -32,7 +33,7 @@ extension AuthViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
+
         if let url = navigationAction.request.url {
             viewModel.getToken(from: url) { [unowned self] in
                 if let tabBarController = self.storyboard?.instantiateViewController(
@@ -41,6 +42,7 @@ extension AuthViewController: WKNavigationDelegate {
                     self.present(tabBarController, animated: true)
                 }
             }
+            activityIndicator.stopAnimating()
             decisionHandler(.allow)
         }
     }

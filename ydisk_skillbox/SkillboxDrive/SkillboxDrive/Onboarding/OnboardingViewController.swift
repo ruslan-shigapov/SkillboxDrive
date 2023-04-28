@@ -17,7 +17,7 @@ class OnboardingViewController: UIViewController {
     // MARK: - Private Properties
     private var viewModel: OnboardingViewModelProtocol! {
         didSet {
-            viewModel.viewModelDidChange = { [unowned self] viewModel in
+            viewModel.viewModelDidChange = { [unowned self] _ in
                 setupUI()
             }
         }

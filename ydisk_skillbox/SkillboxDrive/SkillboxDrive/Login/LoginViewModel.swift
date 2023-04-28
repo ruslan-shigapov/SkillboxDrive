@@ -8,14 +8,11 @@
 import Foundation
 
 protocol LoginViewModelProtocol {
-    var token: String? { get }
     func startPresentation(completion: @escaping() -> Void)
 }
 
 class LoginViewModel: LoginViewModelProtocol {
-    var token: String? {
-        DataManager.shared.token
-    }
+    
     func startPresentation(completion: @escaping() -> Void) {
         let thePresentationWasViewed = UserDefaults.standard.bool(forKey: "thePresentationWasViewed")
         if thePresentationWasViewed != true {

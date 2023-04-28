@@ -14,8 +14,10 @@ protocol OnboardingViewModelProtocol {
 }
 
 class OnboardingViewModel: OnboardingViewModelProtocol {
+    
     var currentPage: OnboardingScreen = .first
     var viewModelDidChange: ((OnboardingViewModelProtocol) -> Void)?
+    
     func goToNextPage(completion: @escaping () -> Void) {
         if currentPage == .first {
             currentPage = .second

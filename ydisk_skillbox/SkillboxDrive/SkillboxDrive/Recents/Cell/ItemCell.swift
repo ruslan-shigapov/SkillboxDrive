@@ -21,7 +21,7 @@ class ItemCell: UITableViewCell {
             nameLabel.text = viewModel.name
             infoLabel.text = viewModel.information
             if let preview = viewModel.preview {
-                guard let token = DataManager.shared.token else { return }
+                guard let token = UserDefaults.standard.string(forKey: "token") else { return }
                 let modifier = AnyModifier { request in
                     var request = request
                     request.setValue("OAuth \(token)", forHTTPHeaderField: "Authorization")

@@ -44,7 +44,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Войти"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Login"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="10"/>
@@ -87,7 +87,7 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Далее"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Next"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="10"/>
@@ -145,7 +145,7 @@
             </objects>
             <point key="canvasLocation" x="-1495" y="-2"/>
         </scene>
-        <!--Профиль-->
+        <!--Profile-->
         <scene sceneID="7rU-sD-TiO">
             <objects>
                 <viewController id="3ls-tU-CG6" sceneMemberID="viewController">
@@ -155,7 +155,7 @@
                         <viewLayoutGuide key="safeArea" id="fIB-Ht-f8k"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Профиль" id="58N-Nf-u0S"/>
+                    <navigationItem key="navigationItem" title="Profile" id="58N-Nf-u0S"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RFw-ME-KWs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -177,6 +177,10 @@
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yTc-pq-LY3">
+                                <rect key="frame" x="186" y="416" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5IE-k4-hzm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -188,6 +192,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="yTc-pq-LY3" id="KsH-iB-37Q"/>
                         <outlet property="webView" destination="gUu-P8-Rl4" id="fpl-LL-dbt"/>
                     </connections>
                 </viewController>
@@ -206,7 +211,6 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="17"/>
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -266,7 +270,7 @@
         <!--Recents-->
         <scene sceneID="rDz-Oe-W2r">
             <objects>
-                <tableViewController title="Recents" id="9yr-AO-Ln9" customClass="RecentsViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="9yr-AO-Ln9" customClass="RecentsViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="sHM-g0-NIQ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -324,9 +328,9 @@
                             <outlet property="delegate" destination="9yr-AO-Ln9" id="t0T-Ec-ykB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Последние" id="i5j-HH-bwx"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationItem key="navigationItem" title="Recents" id="i5j-HH-bwx"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="lI2-JA-Xkm">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                 </tableViewController>
@@ -354,7 +358,7 @@
             </objects>
             <point key="canvasLocation" x="1871" y="756"/>
         </scene>
-        <!--Все файлы-->
+        <!--Browse-->
         <scene sceneID="Eds-n0-mkf">
             <objects>
                 <tableViewController id="zgz-qe-fbw" sceneMemberID="viewController">
@@ -415,7 +419,7 @@
                             <outlet property="delegate" destination="zgz-qe-fbw" id="qF4-dk-WCn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Все файлы" id="KVW-aS-KBT"/>
+                    <navigationItem key="navigationItem" title="Browse" id="KVW-aS-KBT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QNj-Kt-0s9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

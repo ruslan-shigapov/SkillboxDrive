@@ -15,15 +15,17 @@ protocol RecentsViewModelProtocol {
 }
 
 class RecentsViewModel: RecentsViewModelProtocol {
-    private var response: Response?
+    
+    private var items: [Item] = []
+    
     func fetchResponse(completion: @escaping () -> Void) {
         NetworkManager.shared.fetchData(
             from: Link.url.rawValue,
-            with: DataManager.shared.token
+            with: UserDefaults.standard.string(forKey: "token")
         ) { [unowned self] result in
             switch result {
             case .success(let response):
-                self.response = response
+                self.items = response.items ?? []
                 completion()
             case .failure(let error):
                 print(error.localizedDescription)
@@ -31,9 +33,9 @@ class RecentsViewModel: RecentsViewModelProtocol {
         }
     }
     func numberOfRows() -> Int {
-        response?.items?.count ?? 0
+        items.count
     }
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol {
-        ItemCellViewModel(item: (response?.items?[indexPath.row])!)
+        ItemCellViewModel(item: items[indexPath.row])
     }
 }

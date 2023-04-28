@@ -13,6 +13,7 @@ protocol AuthViewModelProtocol {
 }
 
 class AuthViewModel: AuthViewModelProtocol {
+    
     var request: URLRequest? {
         guard var urlComponents = URLComponents(
             string: "https://oauth.yandex.ru/authorize") else { return nil }
@@ -24,12 +25,13 @@ class AuthViewModel: AuthViewModelProtocol {
         guard let url = urlComponents.url else { return nil }
         return URLRequest(url: url)
     }
+    
     func getToken(from url: URL, completion: @escaping () -> Void) {
         let targetString = url.absoluteString.replacingOccurrences(of: "#", with: "?")
         guard let components = URLComponents(string: targetString) else { return }
         let token = components.queryItems?.first(where: { $0.name == "access_token" })?.value
         if let token = token {
-            DataManager.shared.token = token
+            UserDefaults.standard.set(token, forKey: "token")
             completion()
         }
     }

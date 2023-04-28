@@ -15,6 +15,7 @@ protocol ItemCellViewModelProtocol {
 }
 
 class ItemCellViewModel: ItemCellViewModelProtocol {
+    
     var name: String {
         NSString(string: item.name).deletingPathExtension
     }
@@ -34,7 +35,9 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
     var preview: URL? {
         URL(string: item.preview ?? "")
     }
+    
     private let item: Item
+    
     required init(item: Item) {
         self.item = item
     }
