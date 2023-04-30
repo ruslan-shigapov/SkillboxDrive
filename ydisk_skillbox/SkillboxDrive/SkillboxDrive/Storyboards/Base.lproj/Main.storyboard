@@ -321,7 +321,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="activityIndicator" destination="xpe-nJ-y1f" id="PBs-Qs-lWO"/>
+                                    <outlet property="activityIndicator" destination="xpe-nJ-y1f" id="1E9-Ty-Bv6"/>
                                     <outlet property="iconView" destination="uPN-sg-9ye" id="C3k-rh-sS3"/>
                                     <outlet property="infoLabel" destination="0Zd-VT-EKc" id="Fco-Hg-I3K"/>
                                     <outlet property="nameLabel" destination="TC3-GV-u5M" id="EXP-dC-zGA"/>
@@ -366,7 +366,7 @@
         <!--Browse-->
         <scene sceneID="Eds-n0-mkf">
             <objects>
-                <tableViewController id="zgz-qe-fbw" sceneMemberID="viewController">
+                <tableViewController id="zgz-qe-fbw" customClass="BrowseViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="QXP-ka-PGf">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -402,6 +402,10 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="YkI-i3-QtC">
+                                            <rect key="frame" x="20" y="13" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="Jn6-gI-8YM" secondAttribute="bottom" constant="11" id="5qh-hz-pqa"/>
@@ -413,6 +417,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="YkI-i3-QtC" id="bac-A1-LDw"/>
                                     <outlet property="iconView" destination="Jn6-gI-8YM" id="ott-tB-rqg"/>
                                     <outlet property="infoLabel" destination="37d-6r-Ekx" id="gbJ-gx-AzY"/>
                                     <outlet property="nameLabel" destination="0du-i0-lDe" id="OBQ-TR-PVY"/>
@@ -425,6 +430,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Browse" id="KVW-aS-KBT"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="h7K-OO-Azx">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QNj-Kt-0s9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

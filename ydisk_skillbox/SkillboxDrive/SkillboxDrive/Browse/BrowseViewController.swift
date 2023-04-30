@@ -1,16 +1,16 @@
 //
-//  RecentsViewController.swift
+//  BrowseViewController.swift
 //  SkillboxDrive
 //
-//  Created by Руслан Шигапов on 19.04.2023.
+//  Created by Руслан Шигапов on 30.04.2023.
 //
 
 import UIKit
 
-class RecentsViewController: UITableViewController {
+class BrowseViewController: UITableViewController {
     
     // MARK: - Private Properties
-    private var viewModel: RecentsViewModelProtocol! {
+    private var viewModel: BrowseViewModelProtocol! {
         didSet {
             viewModel.fetchResponse { [unowned self] in
                 self.tableView.reloadData()
@@ -23,19 +23,19 @@ class RecentsViewController: UITableViewController {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
-        viewModel = RecentsViewModel()
+        viewModel = BrowseViewModel()
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows()
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
         guard let cell = cell as? ItemCell else { return UITableViewCell() }

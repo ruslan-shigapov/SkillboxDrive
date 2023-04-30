@@ -10,8 +10,8 @@ import Alamofire
 
 enum Link: String {
     case RecentsURL = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?preview_size=25x22"
-    case DetailsURL
-    case BrowseURL
+    case BrowseURL = "https://cloud-api.yandex.net/v1/disk/resources/files?preview_size=25x22"
+    case DetailsURL = ""
 }
 
 class NetworkManager {

@@ -1,27 +1,27 @@
 //
-//  RecentsViewModel.swift
+//  BrowseViewModel.swift
 //  SkillboxDrive
 //
-//  Created by Руслан Шигапов on 24.04.2023.
+//  Created by Руслан Шигапов on 30.04.2023.
 //
 
 import Foundation
 
-protocol RecentsViewModelProtocol {
+protocol BrowseViewModelProtocol {
     func fetchResponse(completion: @escaping() -> Void)
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
 //    func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
 }
 
-class RecentsViewModel: RecentsViewModelProtocol {
+class BrowseViewModel: BrowseViewModelProtocol {
     
     private var items: [Item] = []
     
     func fetchResponse(completion: @escaping() -> Void) {
         NetworkManager.shared.fetch(
             Response.self,
-            from: Link.RecentsURL.rawValue
+            from: Link.BrowseURL.rawValue
         ) { [unowned self] result in
             switch result {
             case .success(let response):
