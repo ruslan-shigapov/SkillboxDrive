@@ -12,8 +12,6 @@
 		E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */; };
 		E417B67C29F009F80042B6FD /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67B29F009F80042B6FD /* AuthViewController.swift */; };
 		E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67E29F0311D0042B6FD /* RecentsViewController.swift */; };
-		E485E6F729F3E53A005CFE1D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485E6F629F3E53A005CFE1D /* DataManager.swift */; };
-		E485E6FA29F3F34D005CFE1D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E485E6F929F3F34D005CFE1D /* Kingfisher */; };
 		E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72729ADACAB00F84055 /* AppDelegate.swift */; };
 		E485F72A29ADACAB00F84055 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72929ADACAB00F84055 /* SceneDelegate.swift */; };
 		E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72B29ADACAB00F84055 /* LoginViewController.swift */; };
@@ -29,6 +27,7 @@
 		E4D8AAAA29F6B7A90046C879 /* RecentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D8AAA929F6B7A90046C879 /* RecentsViewModel.swift */; };
 		E4D8AAAC29F6B7C10046C879 /* ItemCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D8AAAB29F6B7C10046C879 /* ItemCellViewModel.swift */; };
 		E4D96A1B29EE9B3200C45651 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D96A1A29EE9B3200C45651 /* OnboardingScreen.swift */; };
+		E4E5F0D329FD386C00241D8F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E4E5F0D229FD386C00241D8F /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +36,6 @@
 		E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E417B67B29F009F80042B6FD /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E417B67E29F0311D0042B6FD /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
-		E485E6F629F3E53A005CFE1D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E485F72429ADACAB00F84055 /* SkillboxDrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillboxDrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E485F72729ADACAB00F84055 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E485F72929ADACAB00F84055 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E485E6FA29F3F34D005CFE1D /* Kingfisher in Frameworks */,
+				E4E5F0D329FD386C00241D8F /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				E4033BBD29B99BA40069CA13 /* NetworkManager.swift */,
-				E485E6F629F3E53A005CFE1D /* DataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -235,7 +232,7 @@
 			);
 			name = SkillboxDrive;
 			packageProductDependencies = (
-				E485E6F929F3F34D005CFE1D /* Kingfisher */,
+				E4E5F0D229FD386C00241D8F /* Alamofire */,
 			);
 			productName = SkillboxDrive;
 			productReference = E485F72429ADACAB00F84055 /* SkillboxDrive.app */;
@@ -266,7 +263,7 @@
 			);
 			mainGroup = E485F71B29ADACAB00F84055;
 			packageReferences = (
-				E485E6F829F3F34D005CFE1D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				E4E5F0D129FD386B00241D8F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = E485F72529ADACAB00F84055 /* Products */;
 			projectDirPath = "";
@@ -301,7 +298,6 @@
 				E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */,
 				E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */,
 				E4BFFEA529F403010033392D /* ItemCell.swift in Sources */,
-				E485E6F729F3E53A005CFE1D /* DataManager.swift in Sources */,
 				E4D8AAAA29F6B7A90046C879 /* RecentsViewModel.swift in Sources */,
 				E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */,
 				E4D96A1B29EE9B3200C45651 /* OnboardingScreen.swift in Sources */,
@@ -542,21 +538,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E485E6F829F3F34D005CFE1D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		E4E5F0D129FD386B00241D8F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
+				minimumVersion = 5.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E485E6F929F3F34D005CFE1D /* Kingfisher */ = {
+		E4E5F0D229FD386C00241D8F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E485E6F829F3F34D005CFE1D /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
+			package = E4E5F0D129FD386B00241D8F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

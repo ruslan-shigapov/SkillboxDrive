@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol RecentsViewModelProtocol {
     func fetchResponse(completion: @escaping() -> Void)
@@ -18,14 +19,14 @@ class RecentsViewModel: RecentsViewModelProtocol {
     
     private var items: [Item] = []
     
-    func fetchResponse(completion: @escaping () -> Void) {
-        NetworkManager.shared.fetchData(
-            from: Link.url.rawValue,
-            with: UserDefaults.standard.string(forKey: "token")
+    func fetchResponse(completion: @escaping() -> Void) {
+        NetworkManager.shared.fetch(
+            Response.self,
+            from: Link.RecentsURL.rawValue
         ) { [unowned self] result in
             switch result {
             case .success(let response):
-                self.items = response.items ?? []
+                self.items = response.items
                 completion()
             case .failure(let error):
                 print(error.localizedDescription)

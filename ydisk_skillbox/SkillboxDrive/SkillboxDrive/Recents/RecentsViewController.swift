@@ -23,7 +23,11 @@ class RecentsViewController: UITableViewController {
         super.viewDidLoad()
         tableView.separatorStyle = .none
         tableView.indicatorStyle = .black
-        tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        tableView.refreshControl?.addTarget(
+            self,
+            action: #selector(refresh(sender:)),
+            for: .valueChanged
+        )
         viewModel = RecentsViewModel()
     }
     

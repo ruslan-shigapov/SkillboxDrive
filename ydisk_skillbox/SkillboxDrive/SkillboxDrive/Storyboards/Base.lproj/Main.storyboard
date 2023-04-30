@@ -97,7 +97,7 @@
                                     <action selector="nextButtonPressed" destination="mkX-fg-OL8" eventType="touchUpInside" id="aR7-37-WqC"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="4k2-l6-qEc">
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="4k2-l6-qEc">
                                 <rect key="frame" x="138.66666666666666" y="615" width="116" height="26"/>
                                 <color key="pageIndicatorTintColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.21960784310000001" green="0.2470588235" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -306,6 +306,10 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="xpe-nJ-y1f">
+                                            <rect key="frame" x="20" y="13" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="uPN-sg-9ye" firstAttribute="leading" secondItem="dak-37-mLY" secondAttribute="leading" constant="18" id="PHO-6X-b7F"/>
@@ -317,6 +321,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="xpe-nJ-y1f" id="PBs-Qs-lWO"/>
                                     <outlet property="iconView" destination="uPN-sg-9ye" id="C3k-rh-sS3"/>
                                     <outlet property="infoLabel" destination="0Zd-VT-EKc" id="Fco-Hg-I3K"/>
                                     <outlet property="nameLabel" destination="TC3-GV-u5M" id="EXP-dC-zGA"/>

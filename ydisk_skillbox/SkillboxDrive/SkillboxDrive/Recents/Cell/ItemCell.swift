@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class ItemCell: UITableViewCell {
 
@@ -14,25 +13,20 @@ class ItemCell: UITableViewCell {
     @IBOutlet var iconView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var infoLabel: UILabel!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Public Properties
     var viewModel: ItemCellViewModelProtocol! {
         didSet {
             nameLabel.text = viewModel.name
             infoLabel.text = viewModel.information
-            if let preview = viewModel.preview {
-                guard let token = UserDefaults.standard.string(forKey: "token") else { return }
-                let modifier = AnyModifier { request in
-                    var request = request
-                    request.setValue("OAuth \(token)", forHTTPHeaderField: "Authorization")
-                    return request
+            if let _ = viewModel.preview {
+                activityIndicator.startAnimating()
+                viewModel.fetchImage { [unowned self] in
+                    guard let imageData = viewModel.imageData else { return }
+                    self.iconView.image = UIImage(data: imageData)
+                    self.activityIndicator.stopAnimating()
                 }
-                iconView.kf.setImage(
-                    with: preview,
-                    options: [
-                        .requestModifier(modifier)
-                    ]
-                )
             } else {
                 iconView.image = UIImage(named: "Folder")
             }

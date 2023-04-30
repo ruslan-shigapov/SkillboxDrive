@@ -20,7 +20,7 @@ class AuthViewModel: AuthViewModelProtocol {
         
         urlComponents.queryItems = [
             URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "client_id", value: "\(DataManager.shared.clientID)")
+            URLQueryItem(name: "client_id", value: "c503ad12d73b459f8f68967c64cbd0c6")
         ]
         guard let url = urlComponents.url else { return nil }
         return URLRequest(url: url)

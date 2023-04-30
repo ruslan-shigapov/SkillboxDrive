@@ -10,19 +10,22 @@ import UIKit
 class LoginViewController: UIViewController {
     
     // MARK: - Private Properties
-    private var viewModel: LoginViewModelProtocol!
+    private var viewModel: LoginViewModelProtocol! {
+        didSet {
+            viewModel.startPresentation { [unowned self] in
+                if let onboardingVC = self.storyboard?.instantiateViewController(
+                    withIdentifier: "OnboardingViewController") as? OnboardingViewController {
+                    
+                    self.present(onboardingVC, animated: true)
+                }
+            }
+        }
+    }
         
     // MARK: - Override Methods
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel = LoginViewModel()
-        viewModel.startPresentation { [unowned self] in
-            if let onboardingVC = self.storyboard?.instantiateViewController(
-                withIdentifier: "OnboardingViewController") as? OnboardingViewController {
-                
-                self.present(onboardingVC, animated: true)
-            }
-        }
     }
     
     // MARK: - IB Actions

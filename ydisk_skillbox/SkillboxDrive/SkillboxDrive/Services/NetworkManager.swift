@@ -6,43 +6,44 @@
 //
 
 import Foundation
+import Alamofire
 
 enum Link: String {
-    case url = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?preview_size=25x22"
-}
-
-enum NetworkError: Error {
-    case invalidURL
-    case noData
-    case decodingError
+    case RecentsURL = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?preview_size=25x22"
+    case DetailsURL
+    case BrowseURL
 }
 
 class NetworkManager {
     static let shared = NetworkManager()
-    
+        
     private init() {}
     
-    func fetchData(from url: String, with token: String?, completion: @escaping (Result<Response, NetworkError>) -> Void) {
-        guard let url = URL(string: url) else {
-            completion(.failure(.invalidURL))
-            return
-        }
-        var request = URLRequest(url: url)
-        guard let token = token else { return }
-        request.setValue("OAuth \(token)", forHTTPHeaderField: "Authorization")
-        URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data else {
-                completion(.failure(.noData))
-                return
-            }
-            do {
-                let response = try JSONDecoder().decode(Response.self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(response))
+    func fetch<T: Decodable>(_ type: T.Type, from url: String, completion: @escaping (Result<T, AFError>) -> Void)  {
+        guard let token = UserDefaults.standard.string(forKey: "token") else { return }
+        AF.request(url, headers: ["Authorization": "OAuth \(token)"])
+            .validate()
+            .responseDecodable(of: T.self) { dataResponse in
+                switch dataResponse.result {
+                case .success(let value):
+                    completion(.success(value))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-            } catch {
-                completion(.failure(.decodingError))
             }
-        }.resume()
+    }
+    
+    func fetchData(from url: String, completion: @escaping (Result<Data, AFError>) -> Void) {
+        guard let token = UserDefaults.standard.string(forKey: "token") else { return }
+        AF.request(url, headers: ["Authorization": "OAuth \(token)"])
+            .validate()
+            .responseData { dataResponse in
+                switch dataResponse.result {
+                case .success(let imageData):
+                    completion(.success(imageData))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
     }
 }

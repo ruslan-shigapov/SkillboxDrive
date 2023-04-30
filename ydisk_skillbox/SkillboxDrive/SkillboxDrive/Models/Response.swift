@@ -8,7 +8,7 @@
 import Foundation
 
 struct Response: Codable {
-    let items: [Item]?
+    let items: [Item]
 }
 
 struct Item: Codable {

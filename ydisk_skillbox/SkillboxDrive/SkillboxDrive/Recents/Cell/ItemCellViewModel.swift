@@ -8,14 +8,18 @@
 import UIKit
 
 protocol ItemCellViewModelProtocol {
+    var imageData: Data? { get }
     var name: String { get }
     var information: String { get }
-    var preview: URL? { get }
+    var preview: String? { get }
     init(item: Item)
+    func fetchImage(completion: @escaping () -> Void)
 }
 
 class ItemCellViewModel: ItemCellViewModelProtocol {
     
+    var imageData: Data?
+
     var name: String {
         NSString(string: item.name).deletingPathExtension
     }
@@ -32,13 +36,26 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
     var information: String {
         "\(size) кб  \(created)"
     }
-    var preview: URL? {
-        URL(string: item.preview ?? "")
+    var preview: String? {
+        item.preview
     }
     
     private let item: Item
     
     required init(item: Item) {
         self.item = item
+    }
+    
+    func fetchImage(completion: @escaping() -> Void) {
+        guard let previewURL = preview else { return }
+        NetworkManager.shared.fetchData(from: previewURL) { [unowned self] result in
+            switch result {
+            case .success(let imageData):
+                self.imageData = imageData
+                completion()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
