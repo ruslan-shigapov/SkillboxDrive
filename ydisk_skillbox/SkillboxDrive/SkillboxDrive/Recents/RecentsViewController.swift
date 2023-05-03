@@ -9,6 +9,8 @@ import UIKit
 
 class RecentsViewController: UITableViewController {
     
+    @IBOutlet var alertView: UIView!
+    
     // MARK: - Private Properties
     private var viewModel: RecentsViewModelProtocol! {
         didSet {
@@ -52,6 +54,7 @@ class RecentsViewController: UITableViewController {
     @objc private func refresh(sender: UIRefreshControl) {
         viewModel.fetchResponse { [unowned self] in
             self.tableView.reloadData()
+            self.alertView.frame.size.height = 40
             sender.endRefreshing()
         }
     }

@@ -275,6 +275,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="QpI-Y4-W7M">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no Internet connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8B-si-Cqa">
+                                    <rect key="frame" x="108" y="-13" width="177" height="26"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="177" id="BZh-J0-hwR"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Graphik-Light" family="Graphik" pointSize="13"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.84313725490196079" green="0.24313725490196078" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="S8B-si-Cqa" firstAttribute="centerY" secondItem="QpI-Y4-W7M" secondAttribute="centerY" id="Gps-mn-izj"/>
+                                <constraint firstItem="S8B-si-Cqa" firstAttribute="centerX" secondItem="QpI-Y4-W7M" secondAttribute="centerX" id="S2N-NF-eNS"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="item" rowHeight="44" id="qQx-RC-EYd" customClass="ItemCell" customModule="SkillboxDrive" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="393" height="44"/>
@@ -338,6 +358,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
+                    <connections>
+                        <outlet property="alertView" destination="QpI-Y4-W7M" id="h4w-Z9-1x3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8e-2g-n1r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -431,6 +454,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Browse" id="KVW-aS-KBT"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="h7K-OO-Azx">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                 </tableViewController>

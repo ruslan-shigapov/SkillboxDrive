@@ -29,6 +29,7 @@ class RecentsViewModel: RecentsViewModelProtocol {
                 completion()
             case .failure(let error):
                 print(error.localizedDescription)
+                completion()
             }
         }
     }
