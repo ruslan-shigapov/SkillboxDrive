@@ -10,7 +10,7 @@ import Foundation
 protocol OnboardingViewModelProtocol {
     var currentPage: OnboardingScreen { get }
     var viewModelDidChange: ((OnboardingViewModelProtocol) -> Void)? { get set }
-    func goToNextPage(completion: @escaping() -> Void)
+    func goToNextPage(completion: @escaping () -> Void)
 }
 
 class OnboardingViewModel: OnboardingViewModelProtocol {
@@ -26,7 +26,7 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
             currentPage = .third
             viewModelDidChange?(self)
         } else {
-            UserDefaults.standard.set(true, forKey: "thePresentationWasViewed")
+            UserDefaults.standard.set(true, forKey: "presentationWasViewed")
             completion()
         }
     }

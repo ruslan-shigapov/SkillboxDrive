@@ -21,9 +21,9 @@ class BrowseViewController: UITableViewController {
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = BrowseViewModel()
         tableView.separatorStyle = .none
         tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
-        viewModel = BrowseViewModel()
     }
     
     // MARK: - Navigation

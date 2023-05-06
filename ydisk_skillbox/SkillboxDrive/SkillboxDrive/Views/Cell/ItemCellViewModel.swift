@@ -14,27 +14,31 @@ protocol ItemCellViewModelProtocol {
     var preview: String? { get }
     init(item: Item)
     func fetchImage(completion: @escaping () -> Void)
+    func saveData()
 }
 
 class ItemCellViewModel: ItemCellViewModelProtocol {
     
     var imageData: Data?
-
+    
     var name: String {
-        NSString(string: item.name).deletingPathExtension
+        guard let name = item.name else { return "Unknown name" }
+        return NSString(string: name).deletingPathExtension
     }
     var size: String {
-        String(format: "%.1f", Double(item.size) / 1024)
+        guard let size = item.size else { return "?" }
+        return String(format: "%.1f", Double(size) / 1024) + " kb"
     }
     var created: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
-        guard let date = formatter.date(from: item.created) else { return "" }
+        guard let created = item.created else { return "" }
+        guard let date = formatter.date(from: created) else { return "" }
         formatter.dateFormat = "dd.MM.yy  HH:mm"
         return formatter.string(from: date)
     }
     var information: String {
-        "\(size) кб  \(created)"
+        "\(size)  \(created)"
     }
     var preview: String? {
         item.preview
@@ -48,14 +52,17 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
     
     func fetchImage(completion: @escaping() -> Void) {
         guard let previewURL = preview else { return }
-        NetworkManager.shared.fetchData(from: previewURL) { [unowned self] result in
+        NetworkManager.shared.fetchData(from: previewURL) { [weak self] result in
             switch result {
             case .success(let imageData):
-                self.imageData = imageData
+                self?.imageData = imageData
                 completion()
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
+    }
+    func saveData() {
+        StorageManager.shared.save(item.name, item.created, item.size, item.preview)
     }
 }

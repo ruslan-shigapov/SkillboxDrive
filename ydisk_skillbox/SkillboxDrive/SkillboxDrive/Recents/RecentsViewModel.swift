@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RecentsViewModelProtocol {
-    func fetchResponse(completion: @escaping() -> Void)
+    func fetchResponse(completion: @escaping (Bool) -> Void)
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
 //    func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
@@ -18,18 +18,29 @@ class RecentsViewModel: RecentsViewModelProtocol {
     
     private var items: [Item] = []
     
-    func fetchResponse(completion: @escaping() -> Void) {
+    func fetchResponse(completion: @escaping (Bool) -> Void) {
         NetworkManager.shared.fetch(
             Response.self,
             from: Link.RecentsURL.rawValue
-        ) { [unowned self] result in
+        ) { [weak self] result in
             switch result {
             case .success(let response):
-                self.items = response.items
-                completion()
+                guard let items = response.items else { return }
+                self?.items = items
+                completion(true)
+            case .failure(_):
+                self?.fetchData()
+                completion(false)
+            }
+        }
+    }
+    private func fetchData() {
+        StorageManager.shared.fetchData { [weak self] result in
+            switch result {
+            case .success(let files):
+                self?.items = Item.getItems(from: files)
             case .failure(let error):
                 print(error.localizedDescription)
-                completion()
             }
         }
     }

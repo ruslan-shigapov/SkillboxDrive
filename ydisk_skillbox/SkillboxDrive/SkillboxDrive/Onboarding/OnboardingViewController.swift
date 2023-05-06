@@ -17,8 +17,8 @@ class OnboardingViewController: UIViewController {
     // MARK: - Private Properties
     private var viewModel: OnboardingViewModelProtocol! {
         didSet {
-            viewModel.viewModelDidChange = { [unowned self] _ in
-                setupUI()
+            viewModel.viewModelDidChange = { [weak self] _ in
+                self?.setupUI()
             }
         }
     }
@@ -33,7 +33,7 @@ class OnboardingViewController: UIViewController {
     // MARK: - IB Actions
     @IBAction func nextButtonPressed() {
         viewModel.goToNextPage { [unowned self] in
-            self.dismiss(animated: true)
+            dismiss(animated: true)
         }
     }
     

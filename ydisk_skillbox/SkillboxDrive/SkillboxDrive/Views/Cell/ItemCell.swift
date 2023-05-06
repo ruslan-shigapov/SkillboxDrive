@@ -24,12 +24,13 @@ class ItemCell: UITableViewCell {
                 activityIndicator.startAnimating()
                 viewModel.fetchImage { [unowned self] in
                     guard let imageData = viewModel.imageData else { return }
-                    self.iconView.image = UIImage(data: imageData)
-                    self.activityIndicator.stopAnimating()
+                    iconView.image = UIImage(data: imageData)
+                    activityIndicator.stopAnimating()
                 }
             } else {
                 iconView.image = UIImage(named: "Folder")
             }
+            viewModel.saveData()
         }
     }
 }

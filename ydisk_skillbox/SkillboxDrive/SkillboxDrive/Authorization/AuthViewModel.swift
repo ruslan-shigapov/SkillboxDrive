@@ -13,7 +13,7 @@ protocol AuthViewModelProtocol {
 }
 
 class AuthViewModel: AuthViewModelProtocol {
-    
+        
     var request: URLRequest? {
         guard var urlComponents = URLComponents(
             string: "https://oauth.yandex.ru/authorize") else { return nil }

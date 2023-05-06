@@ -14,9 +14,12 @@ class AuthViewController: UIViewController {
     @IBOutlet var webView: WKWebView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
+    // MARK: - Public Properties
+    var delegate: AuthViewControllerDelegate!
+    
     // MARK: - Private Properties
     private var viewModel: AuthViewModelProtocol!
-    
+
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +38,13 @@ extension AuthViewController: WKNavigationDelegate {
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
         if let url = navigationAction.request.url {
-            viewModel.getToken(from: url) { [unowned self] in
-                if let tabBarController = self.storyboard?.instantiateViewController(
-                    withIdentifier: "TabBarController") as? UITabBarController {
-                    
-                    self.present(tabBarController, animated: true)
+            viewModel.getToken(from: url) { [weak self] in
+                self?.dismiss(animated: true) {
+                    self?.delegate.tokenWasReceived?()
                 }
             }
-            activityIndicator.stopAnimating()
-            decisionHandler(.allow)
         }
+        activityIndicator.stopAnimating()
+        decisionHandler(.allow)
     }
 }

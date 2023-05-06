@@ -13,34 +13,34 @@ class LoginViewController: UIViewController {
     private var viewModel: LoginViewModelProtocol! {
         didSet {
             viewModel.startPresentation { [unowned self] in
-                if let onboardingVC = self.storyboard?.instantiateViewController(
+                if let onboardingVC = storyboard?.instantiateViewController(
                     withIdentifier: "OnboardingViewController") as? OnboardingViewController {
-                    
-                    self.present(onboardingVC, animated: true)
+                    present(onboardingVC, animated: true)
                 }
+            }
+            viewModel.tokenWasReceived = { [weak self] in
+                self?.performSegue(withIdentifier: "toRecents", sender: nil)
             }
         }
     }
-        
+    
     // MARK: - Override Methods
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel = LoginViewModel()
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let authViewController = segue.destination as? AuthViewController else { return }
+        authViewController.delegate = sender as? AuthViewControllerDelegate
+    }
     
     // MARK: - IB Actions
     @IBAction func enterButtonPressed() {
-        if let _ = UserDefaults.standard.string(forKey: "token") {
-            if let tabBarController = self.storyboard?.instantiateViewController(
-                withIdentifier: "TabBarController") as? UITabBarController {
-                
-                present(tabBarController, animated: true)
-            }
-        } else {
-            if let authViewController = self.storyboard?.instantiateViewController(
-                withIdentifier: "AuthViewController") as? AuthViewController {
-                
-                present(authViewController, animated: true)
+        viewModel.checkToken { [unowned self] isExist in
+            if isExist {
+                performSegue(withIdentifier: "toRecents", sender: nil)
+            } else {
+                performSegue(withIdentifier: "toAuth", sender: viewModel)
             }
         }
     }
