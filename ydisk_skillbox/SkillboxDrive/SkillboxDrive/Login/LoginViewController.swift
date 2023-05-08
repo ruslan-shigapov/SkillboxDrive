@@ -29,13 +29,14 @@ class LoginViewController: UIViewController {
         super.viewDidAppear(animated)
         viewModel = LoginViewModel()
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let authViewController = segue.destination as? AuthViewController else { return }
         authViewController.delegate = sender as? AuthViewControllerDelegate
     }
     
     // MARK: - IB Actions
-    @IBAction func enterButtonPressed() {
+    @IBAction func logOnButtonPressed() {
         viewModel.checkToken { [unowned self] isExist in
             if isExist {
                 performSegue(withIdentifier: "toRecents", sender: nil)

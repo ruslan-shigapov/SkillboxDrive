@@ -25,29 +25,33 @@ class RecentsViewModel: RecentsViewModelProtocol {
         ) { [weak self] result in
             switch result {
             case .success(let response):
-                guard let items = response.items else { return }
-                self?.items = items
+                self?.items = response.items
                 completion(true)
-            case .failure(_):
+            case .failure(let error):
+                print(error.localizedDescription)
                 self?.fetchData()
                 completion(false)
             }
         }
     }
+    
+    func numberOfRows() -> Int {
+        items.count
+    }
+    
+    func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol {
+        ItemCellViewModel(item: items[indexPath.row], fromList: "Recents")
+    }
+    
     private func fetchData() {
         StorageManager.shared.fetchData { [weak self] result in
             switch result {
             case .success(let files):
-                self?.items = Item.getItems(from: files)
+                let filesFromRecents = files.filter { $0.fromList == "Recents" }
+                self?.items = Item.getItems(from: filesFromRecents)
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
-    }
-    func numberOfRows() -> Int {
-        items.count
-    }
-    func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol {
-        ItemCellViewModel(item: items[indexPath.row])
     }
 }

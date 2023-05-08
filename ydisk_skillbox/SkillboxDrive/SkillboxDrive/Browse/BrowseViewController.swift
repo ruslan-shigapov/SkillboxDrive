@@ -9,11 +9,15 @@ import UIKit
 
 class BrowseViewController: UITableViewController {
     
+    // MARK: - IB Outlets
+    @IBOutlet var alertView: UIView!
+    
     // MARK: - Private Properties
     private var viewModel: BrowseViewModelProtocol! {
         didSet {
-            viewModel.fetchResponse { [unowned self] in
-                self.tableView.reloadData()
+            viewModel.fetchResponse { [weak self] isConnected in
+                self?.alertView.frame.size.height = isConnected ? 0 : 40
+                self?.tableView.reloadData()
             }
         }
     }
@@ -50,8 +54,9 @@ class BrowseViewController: UITableViewController {
     
     // MARK: - Private Methods
     @objc private func refresh(sender: UIRefreshControl) {
-        viewModel.fetchResponse { [unowned self] in
-            self.tableView.reloadData()
+        viewModel.fetchResponse { [weak self] isConnected in
+            self?.alertView.frame.size.height = isConnected ? 0 : 40
+            self?.tableView.reloadData()
             sender.endRefreshing()
         }
     }

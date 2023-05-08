@@ -8,14 +8,14 @@
 import Foundation
 
 struct Response: Codable {
-    let items: [Item]?
+    let items: [Item]
 }
 
-struct Item: Codable {
+struct Item: Codable, Equatable {
     let name: String?
     let preview: String?
     let created: String?
-    let size: Int64?
+    let size: Int64
     
     static func getItems(from files: [File]) -> [Item] {
         var items: [Item] = []
@@ -26,7 +26,9 @@ struct Item: Codable {
                 created: file.created,
                 size: file.size
             )
-            items.append(item)
+            if !items.contains(item) {
+                items.append(item)
+            }
         }
         return items
     }

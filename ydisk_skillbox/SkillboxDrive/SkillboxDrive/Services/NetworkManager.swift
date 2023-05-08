@@ -21,7 +21,7 @@ class NetworkManager {
     
     func fetch<T: Decodable>(_ type: T.Type, from url: String, completion: @escaping (Result<T, AFError>) -> Void)  {
         guard let token = UserDefaults.standard.string(forKey: "token") else { return }
-        AF.request(url, headers: ["Authorization": "OAuth \(token)"])
+        AF.request(url, headers: ["Authorization": "OAuth \(token)"]) { $0.timeoutInterval = 3 }
             .validate()
             .responseDecodable(of: T.self) { dataResponse in
                 switch dataResponse.result {
