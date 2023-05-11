@@ -22,15 +22,15 @@ class ItemCell: UITableViewCell {
             infoLabel.text = viewModel.information
             if let _ = viewModel.preview {
                 activityIndicator.startAnimating()
-                viewModel.fetchImage { [weak self] in
-                    guard let imageData = self?.viewModel.imageData else { return }
-                    self?.iconView.image = UIImage(data: imageData)
-                    self?.activityIndicator.stopAnimating()
+                viewModel.fetchImage { [unowned self] in
+                    guard let imageData = viewModel.imageData else { return }
+                    iconView.image = UIImage(data: imageData)
+                    activityIndicator.stopAnimating()
                 }
             } else {
-                iconView.image = UIImage(named: "Folder")
+                iconView.image = UIImage(systemName: "doc")
+                iconView.tintColor = .black
             }
-            viewModel.saveData()
         }
     }
 }

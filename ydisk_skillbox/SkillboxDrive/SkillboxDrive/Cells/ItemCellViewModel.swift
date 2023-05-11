@@ -12,9 +12,8 @@ protocol ItemCellViewModelProtocol {
     var name: String { get }
     var information: String { get }
     var preview: String? { get }
-    init(item: Item, fromList: String)
+    init(item: Item)
     func fetchImage(completion: @escaping () -> Void)
-    func saveData()
 }
 
 class ItemCellViewModel: ItemCellViewModelProtocol {
@@ -44,16 +43,14 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
     }
     
     private let item: Item
-    private let fromList: String
     
-    required init(item: Item, fromList: String) {
+    required init(item: Item) {
         self.item = item
-        self.fromList = fromList
     }
     
     func fetchImage(completion: @escaping () -> Void) {
         guard let previewURL = preview else { return }
-        NetworkManager.shared.fetchData(from: previewURL) { [weak self] result in
+        NetworkManager.shared.fetchImageData(from: previewURL) { [weak self] result in
             switch result {
             case .success(let imageData):
                 self?.imageData = imageData
@@ -62,15 +59,5 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
                 print(error.localizedDescription)
             }
         }
-    }
-    
-    func saveData() {
-        StorageManager.shared.saveData(
-            item.name,
-            item.created,
-            item.size,
-            item.preview,
-            fromList: fromList
-        )
     }
 }

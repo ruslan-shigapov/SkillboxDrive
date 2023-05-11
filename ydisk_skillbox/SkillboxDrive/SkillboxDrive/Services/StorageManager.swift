@@ -15,11 +15,13 @@ class StorageManager {
     
     private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Cache")
-        container.loadPersistentStores(completionHandler: { description, error in
-            if let error = error {
-                fatalError("Unable to load persistent stores: \(error)")
+        container.loadPersistentStores(
+            completionHandler: { description, error in
+                if let error = error {
+                    fatalError("Unable to load persistent stores: \(error)")
+                }
             }
-        })
+        )
         return container
     }()
     
@@ -27,23 +29,32 @@ class StorageManager {
         viewContext = persistentContainer.viewContext
     }
     
-    func saveData(_ name: String?, _ created: String?, _ size: Int64, _ preview: String?, fromList: String) {
+    func saveFile(_ name: String?, _ created: String?, _ size: Int64, _ preview: String?, fromList: String) {
         let file = File(context: viewContext)
         file.name = name
         file.created = created
         file.size = size
         file.preview = preview
-        file.fromList = fromList
+        file.relateTo = fromList
         saveContext()
     }
     
-    func fetchData(completion: (Result<[File], Error>) -> Void) {
+    func fetchFiles(completion: (Result<[File], Error>) -> Void) {
         let fetchRequest = File.fetchRequest()
         do {
             let files = try viewContext.fetch(fetchRequest)
             completion(.success(files))
         } catch let error {
             completion(.failure(error))
+        }
+    }
+    
+    func deleteFiles() {
+        let fetchRequest = File.fetchRequest()
+        guard let files = try? viewContext.fetch(fetchRequest) else { return }
+        if !files.isEmpty {
+            files.forEach { viewContext.delete($0) }
+            saveContext()
         }
     }
     

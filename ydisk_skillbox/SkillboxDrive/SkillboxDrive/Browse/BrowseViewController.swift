@@ -15,7 +15,7 @@ class BrowseViewController: UITableViewController {
     // MARK: - Private Properties
     private var viewModel: BrowseViewModelProtocol! {
         didSet {
-            viewModel.fetchResponse { [weak self] isConnected in
+            viewModel.fetchItems { [weak self] isConnected in
                 self?.alertView.frame.size.height = isConnected ? 0 : 40
                 self?.tableView.reloadData()
             }
@@ -52,9 +52,17 @@ class BrowseViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.numberOfRows() - 1 {
+            viewModel.fetchExtraItems { [weak self] in
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
     // MARK: - Private Methods
     @objc private func refresh(sender: UIRefreshControl) {
-        viewModel.fetchResponse { [weak self] isConnected in
+        viewModel.fetchItems { [weak self] isConnected in
             self?.alertView.frame.size.height = isConnected ? 0 : 40
             self?.tableView.reloadData()
             sender.endRefreshing()

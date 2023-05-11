@@ -12,14 +12,14 @@ class LoginViewController: UIViewController {
     // MARK: - Private Properties
     private var viewModel: LoginViewModelProtocol! {
         didSet {
-            viewModel.startPresentation { [unowned self] in
+            viewModel.startPresentation {
                 if let onboardingVC = storyboard?.instantiateViewController(
                     withIdentifier: "OnboardingViewController") as? OnboardingViewController {
                     present(onboardingVC, animated: true)
                 }
             }
-            viewModel.tokenWasReceived = { [weak self] in
-                self?.performSegue(withIdentifier: "toRecents", sender: nil)
+            viewModel.tokenWasReceived = { [unowned self] in
+                performSegue(withIdentifier: "toRecents", sender: nil)
             }
         }
     }
@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - IB Actions
     @IBAction func logOnButtonPressed() {
-        viewModel.checkToken { [unowned self] isExist in
+        viewModel.checkToken { isExist in
             if isExist {
                 performSegue(withIdentifier: "toRecents", sender: nil)
             } else {

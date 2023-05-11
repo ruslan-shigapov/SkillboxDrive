@@ -11,7 +11,7 @@ struct Response: Codable {
     let items: [Item]
 }
 
-struct Item: Codable, Equatable {
+struct Item: Codable {
     let name: String?
     let preview: String?
     let created: String?
@@ -26,9 +26,7 @@ struct Item: Codable, Equatable {
                 created: file.created,
                 size: file.size
             )
-            if !items.contains(item) {
-                items.append(item)
-            }
+            items.append(item)
         }
         return items
     }

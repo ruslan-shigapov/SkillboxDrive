@@ -20,6 +20,7 @@
 		E485F72F29ADACAB00F84055 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E485F72D29ADACAB00F84055 /* Main.storyboard */; };
 		E485F73129ADACAD00F84055 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E485F73029ADACAD00F84055 /* Assets.xcassets */; };
 		E485F73429ADACAD00F84055 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E485F73229ADACAD00F84055 /* LaunchScreen.storyboard */; };
+		E4ABC99D2A0CDAD0000F1693 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4ABC99C2A0CDACF000F1693 /* DetailsViewModel.swift */; };
 		E4BD7DE72A07CC1F00982490 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BD7DE62A07CC1F00982490 /* ItemCell.swift */; };
 		E4BD7DE92A07CC8B00982490 /* ItemCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BD7DE82A07CC8B00982490 /* ItemCellViewModel.swift */; };
 		E4C8177129C44DBD00AF63FD /* GraphikRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E4C8177029C44DBD00AF63FD /* GraphikRegular.otf */; };
@@ -50,6 +51,7 @@
 		E485F73029ADACAD00F84055 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E485F73329ADACAD00F84055 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E485F73529ADACAD00F84055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4ABC99C2A0CDACF000F1693 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		E4BD7DE62A07CC1F00982490 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		E4BD7DE82A07CC8B00982490 /* ItemCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellViewModel.swift; sourceTree = "<group>"; };
 		E4C8177029C44DBD00AF63FD /* GraphikRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikRegular.otf; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		E4D531B829FEB0670014B2A9 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				E4ABC99C2A0CDACF000F1693 /* DetailsViewModel.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */,
 				E4D8AAAA29F6B7A90046C879 /* RecentsViewModel.swift in Sources */,
 				E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */,
+				E4ABC99D2A0CDAD0000F1693 /* DetailsViewModel.swift in Sources */,
 				E4BD7DE72A07CC1F00982490 /* ItemCell.swift in Sources */,
 				E4D531B429FEAC370014B2A9 /* BrowseViewController.swift in Sources */,
 				E42D29A62A02765A0035F5A9 /* StorageManager.swift in Sources */,

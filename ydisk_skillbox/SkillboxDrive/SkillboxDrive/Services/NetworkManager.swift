@@ -9,21 +9,26 @@ import Foundation
 import Alamofire
 
 enum Link: String {
-    case RecentsURL = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?preview_size=25x22"
-    case BrowseURL = "https://cloud-api.yandex.net/v1/disk/resources/files?preview_size=25x22"
+    case RecentsURL = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?limit=40&preview_size=25x22"
+    case BrowseURL = "https://cloud-api.yandex.net/v1/disk/resources?path=/&limit=20&preview_size=25x22"
     case DetailsURL = ""
 }
 
 class NetworkManager {
+    
     static let shared = NetworkManager()
+        
+    private var token: String {
+        UserDefaults.standard.string(forKey: "token") ?? ""
+    }
         
     private init() {}
     
-    func fetch<T: Decodable>(_ type: T.Type, from url: String, completion: @escaping (Result<T, AFError>) -> Void)  {
-        guard let token = UserDefaults.standard.string(forKey: "token") else { return }
-        AF.request(url, headers: ["Authorization": "OAuth \(token)"]) { $0.timeoutInterval = 3 }
+    func fetchResponse(from url: String, completion: @escaping (Result<Response, AFError>) -> Void) {
+        AF.request(url, headers: ["Authorization": "OAuth \(token)"]
+        ) { $0.timeoutInterval = 4 }
             .validate()
-            .responseDecodable(of: T.self) { dataResponse in
+            .responseDecodable(of: Response.self) { dataResponse in
                 switch dataResponse.result {
                 case .success(let value):
                     completion(.success(value))
@@ -33,8 +38,7 @@ class NetworkManager {
             }
     }
     
-    func fetchData(from url: String, completion: @escaping (Result<Data, AFError>) -> Void) {
-        guard let token = UserDefaults.standard.string(forKey: "token") else { return }
+    func fetchImageData(from url: String, completion: @escaping (Result<Data, AFError>) -> Void) {
         AF.request(url, headers: ["Authorization": "OAuth \(token)"])
             .validate()
             .responseData { dataResponse in

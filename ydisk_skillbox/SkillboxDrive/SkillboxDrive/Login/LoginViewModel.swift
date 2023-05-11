@@ -12,22 +12,21 @@ protocol AuthViewControllerDelegate {
 }
 
 protocol LoginViewModelProtocol: AuthViewControllerDelegate {
-    func startPresentation(completion: @escaping () -> Void)
-    func checkToken(completion: @escaping (Bool) -> Void)
+    func startPresentation(completion: () -> Void)
+    func checkToken(completion: (Bool) -> Void)
 }
 
 class LoginViewModel: LoginViewModelProtocol {
     
     var tokenWasReceived: (() -> Void)?
     
-    func startPresentation(completion: @escaping () -> Void) {
-        let thePresentationWasViewed = UserDefaults.standard.bool(forKey: "presentationWasViewed")
-        if thePresentationWasViewed != true {
+    func startPresentation(completion: () -> Void) {
+        if UserDefaults.standard.bool(forKey: "presentationWasViewed") != true {
             completion()
         }
     }
     
-    func checkToken(completion: @escaping (Bool) -> Void) {
+    func checkToken(completion: (Bool) -> Void) {
         if let _ = UserDefaults.standard.string(forKey: "token") {
             completion(true)
         } else {

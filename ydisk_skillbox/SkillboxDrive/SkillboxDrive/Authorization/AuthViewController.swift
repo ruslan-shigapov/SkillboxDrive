@@ -44,7 +44,10 @@ extension AuthViewController: WKNavigationDelegate {
                 }
             }
         }
-        activityIndicator.stopAnimating()
         decisionHandler(.allow)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        activityIndicator.stopAnimating()
     }
 }

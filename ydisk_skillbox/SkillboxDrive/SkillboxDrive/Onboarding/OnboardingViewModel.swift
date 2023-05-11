@@ -10,7 +10,7 @@ import Foundation
 protocol OnboardingViewModelProtocol {
     var currentPage: OnboardingScreen { get }
     var viewModelDidChange: ((OnboardingViewModelProtocol) -> Void)? { get set }
-    func goToNextPage(completion: @escaping () -> Void)
+    func goToNextPage(completion: () -> Void)
 }
 
 class OnboardingViewModel: OnboardingViewModelProtocol {
@@ -18,7 +18,7 @@ class OnboardingViewModel: OnboardingViewModelProtocol {
     var currentPage: OnboardingScreen = .first
     var viewModelDidChange: ((OnboardingViewModelProtocol) -> Void)?
     
-    func goToNextPage(completion: @escaping () -> Void) {
+    func goToNextPage(completion: () -> Void) {
         if currentPage == .first {
             currentPage = .second
             viewModelDidChange?(self)
