@@ -36,7 +36,6 @@ extension AuthViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-
         if let url = navigationAction.request.url {
             viewModel.getToken(from: url) { [weak self] in
                 self?.dismiss(animated: true) {

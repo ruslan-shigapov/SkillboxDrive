@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E4033BBE29B99BA40069CA13 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BBD29B99BA40069CA13 /* NetworkManager.swift */; };
-		E4033BC329B99D4D0069CA13 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BC229B99D4D0069CA13 /* Response.swift */; };
+		E4033BC329B99D4D0069CA13 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BC229B99D4D0069CA13 /* Item.swift */; };
 		E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */; };
 		E417B67C29F009F80042B6FD /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67B29F009F80042B6FD /* AuthViewController.swift */; };
 		E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67E29F0311D0042B6FD /* RecentsViewController.swift */; };
@@ -37,7 +37,7 @@
 
 /* Begin PBXFileReference section */
 		E4033BBD29B99BA40069CA13 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		E4033BC229B99D4D0069CA13 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		E4033BC229B99D4D0069CA13 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E417B67B29F009F80042B6FD /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E417B67E29F0311D0042B6FD /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				E4D96A1A29EE9B3200C45651 /* OnboardingScreen.swift */,
-				E4033BC229B99D4D0069CA13 /* Response.swift */,
+				E4033BC229B99D4D0069CA13 /* Item.swift */,
 				E4522F7F2A0529FD004E973C /* Cache.xcdatamodeld */,
 			);
 			path = Models;
@@ -336,7 +336,7 @@
 				E4BD7DE92A07CC8B00982490 /* ItemCellViewModel.swift in Sources */,
 				E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */,
 				E485F72A29ADACAB00F84055 /* SceneDelegate.swift in Sources */,
-				E4033BC329B99D4D0069CA13 /* Response.swift in Sources */,
+				E4033BC329B99D4D0069CA13 /* Item.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

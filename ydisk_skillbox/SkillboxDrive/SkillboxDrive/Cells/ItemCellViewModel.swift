@@ -10,8 +10,9 @@ import UIKit
 protocol ItemCellViewModelProtocol {
     var imageData: Data? { get }
     var name: String { get }
-    var information: String { get }
     var preview: String? { get }
+    var information: String { get }
+    var type: String { get }
     init(item: Item)
     func fetchImage(completion: @escaping () -> Void)
 }
@@ -24,22 +25,26 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
         guard let name = item.name else { return "Unknown name" }
         return NSString(string: name).deletingPathExtension
     }
+    var preview: String? {
+        item.preview
+    }
+    var information: String {
+        "\(size)  \(created)"
+    }
     var size: String {
-        String(format: "%.1f", Double(item.size) / 1024) + " kb"
+        guard let size = item.size else { return "0 kb" }
+        return String(format: "%.1f", Double(size) / 1024) + " kb"
     }
     var created: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
         guard let created = item.created else { return "" }
         guard let date = formatter.date(from: created) else { return "" }
-        formatter.dateFormat = "dd.MM.yy  HH:mm"
+        formatter.dateFormat = "dd.MM.yy HH:mm"
         return formatter.string(from: date)
     }
-    var information: String {
-        "\(size)  \(created)"
-    }
-    var preview: String? {
-        item.preview
+    var type: String {
+        item.type ?? ""
     }
     
     private let item: Item

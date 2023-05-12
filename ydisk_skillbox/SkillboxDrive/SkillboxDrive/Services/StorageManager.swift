@@ -29,12 +29,13 @@ class StorageManager {
         viewContext = persistentContainer.viewContext
     }
     
-    func saveFile(_ name: String?, _ created: String?, _ size: Int64, _ preview: String?, fromList: String) {
+    func saveFile(_ name: String?, _ preview: String?, _ created: String?, _ type: String?, _ size: Int64?, fromList: String) {
         let file = File(context: viewContext)
         file.name = name
-        file.created = created
-        file.size = size
         file.preview = preview
+        file.created = created
+        file.type = type
+        file.size = size ?? 0
         file.relateTo = fromList
         saveContext()
     }

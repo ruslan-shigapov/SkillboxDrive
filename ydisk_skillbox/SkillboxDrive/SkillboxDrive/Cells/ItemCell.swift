@@ -26,10 +26,14 @@ class ItemCell: UITableViewCell {
                     guard let imageData = viewModel.imageData else { return }
                     iconView.image = UIImage(data: imageData)
                     activityIndicator.stopAnimating()
-                }
+                }   
             } else {
-                iconView.image = UIImage(systemName: "doc")
-                iconView.tintColor = .black
+                if viewModel.type == "file" {
+                    iconView.image = UIImage(systemName: "doc")
+                    iconView.tintColor = .black
+                } else {
+                    iconView.image = UIImage(named: "Folder")
+                }
             }
         }
     }

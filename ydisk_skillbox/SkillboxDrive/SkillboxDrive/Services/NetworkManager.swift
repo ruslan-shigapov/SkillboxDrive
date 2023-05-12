@@ -9,9 +9,8 @@ import Foundation
 import Alamofire
 
 enum Link: String {
-    case RecentsURL = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?limit=40&preview_size=25x22"
-    case BrowseURL = "https://cloud-api.yandex.net/v1/disk/resources?path=/&limit=20&preview_size=25x22"
-    case DetailsURL = ""
+    case Recents = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?limit=40&preview_size=25x22"
+    case Browse = "https://cloud-api.yandex.net/v1/disk/resources?path=/&limit=20&preview_size=25x22"
 }
 
 class NetworkManager {
@@ -24,11 +23,11 @@ class NetworkManager {
         
     private init() {}
     
-    func fetchResponse(from url: String, completion: @escaping (Result<Response, AFError>) -> Void) {
+    func fetch<T: Decodable>(_ type: T.Type, from url: String, completion: @escaping (Result<T, AFError>) -> Void) {
         AF.request(url, headers: ["Authorization": "OAuth \(token)"]
         ) { $0.timeoutInterval = 4 }
             .validate()
-            .responseDecodable(of: Response.self) { dataResponse in
+            .responseDecodable(of: T.self) { dataResponse in
                 switch dataResponse.result {
                 case .success(let value):
                     completion(.success(value))

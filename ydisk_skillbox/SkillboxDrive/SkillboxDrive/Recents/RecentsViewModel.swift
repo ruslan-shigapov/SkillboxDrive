@@ -19,14 +19,17 @@ class RecentsViewModel: RecentsViewModelProtocol {
     private var items: [Item] = [] 
     
     func fetchItems(completion: @escaping (Bool) -> Void) {
-        NetworkManager.shared.fetchResponse(from: Link.RecentsURL.rawValue) { [weak self] result in
+        NetworkManager.shared.fetch(
+            ItemList.self,
+            from: Link.Recents.rawValue
+        ) { [weak self] result in
             switch result {
-            case .success(let response):
-                self?.items = response.items
+            case .success(let itemList):
+                self?.items = itemList.items
                 self?.saveData()
                 completion(true)
             case .failure(let error):
-                print(error.localizedDescription)
+                print(error)
                 self?.fetchData()
                 completion(false)
             }
@@ -62,9 +65,10 @@ class RecentsViewModel: RecentsViewModelProtocol {
         for item in items {
             StorageManager.shared.saveFile(
                 item.name,
-                item.created,
-                item.size,
                 item.preview,
+                item.created,
+                item.type,
+                item.size,
                 fromList: "Recents"
             )
         }

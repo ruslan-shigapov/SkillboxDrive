@@ -9,7 +9,7 @@ import Foundation
 
 protocol BrowseViewModelProtocol {
     func fetchItems(completion: @escaping (Bool) -> Void)
-    func fetchExtraItems(completion: @escaping () -> Void)
+    func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void)
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
@@ -21,10 +21,14 @@ class BrowseViewModel: BrowseViewModelProtocol {
     private var offset = 20
     
     func fetchItems(completion: @escaping (Bool) -> Void) {
-        NetworkManager.shared.fetchResponse(from: Link.BrowseURL.rawValue) { [weak self] result in
+        NetworkManager.shared.fetch(
+            Item.self,
+            from: Link.Browse.rawValue
+        ) { [weak self] result in
             switch result {
-            case .success(let response):
-                self?.items = response.items
+            case .success(let item):
+                guard let items = item._embedded?.items else { return }
+                self?.items = items
                 self?.saveData()
                 completion(true)
             case .failure(let error):
@@ -35,18 +39,22 @@ class BrowseViewModel: BrowseViewModelProtocol {
         }
     }
     
-    func fetchExtraItems(completion: @escaping () -> Void) {
-        NetworkManager.shared.fetchResponse(
-            from: Link.BrowseURL.rawValue + "&offset=\(offset)"
-        ) { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.offset += 20
-                self?.items.append(contentsOf: response.items)
-                self?.saveData()
-                completion()
-            case .failure(let error):
-                print(error.localizedDescription)
+    func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void) {
+        if items.count == offset, indexPath.row == items.count - 1 {
+            NetworkManager.shared.fetch(
+                Item.self,
+                from: Link.Browse.rawValue + "&offset=\(offset)"
+            ) { [weak self] result in
+                switch result {
+                case .success(let item):
+                    self?.offset += 20
+                    guard let items = item._embedded?.items else { return }
+                    self?.items.append(contentsOf: items)
+                    self?.saveData()
+                    completion()
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
     }
@@ -79,9 +87,10 @@ class BrowseViewModel: BrowseViewModelProtocol {
         for item in items {
             StorageManager.shared.saveFile(
                 item.name,
-                item.created,
-                item.size,
                 item.preview,
+                item.created,
+                item.type,
+                item.size,
                 fromList: "Browse"
             )
         }
