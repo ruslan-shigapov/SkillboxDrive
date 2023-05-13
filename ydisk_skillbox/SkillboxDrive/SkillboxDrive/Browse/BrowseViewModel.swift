@@ -29,7 +29,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
             case .success(let item):
                 guard let items = item._embedded?.items else { return }
                 self?.items = items
-                self?.saveData()
+                self?.updateCache()
                 completion(true)
             case .failure(let error):
                 print(error)
@@ -50,7 +50,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
                     self?.offset += 20
                     guard let items = item._embedded?.items else { return }
                     self?.items.append(contentsOf: items)
-                    self?.saveData()
+                    self?.updateCache()
                     completion()
                 case .failure(let error):
                     print(error)
@@ -83,7 +83,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
         }
     }
     
-    private func saveData() {
+    private func updateCache() {
         for item in items {
             StorageManager.shared.saveFile(
                 item.name,

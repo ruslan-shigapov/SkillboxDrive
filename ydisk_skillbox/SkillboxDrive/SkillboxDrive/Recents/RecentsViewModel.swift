@@ -26,7 +26,7 @@ class RecentsViewModel: RecentsViewModelProtocol {
             switch result {
             case .success(let itemList):
                 self?.items = itemList.items
-                self?.saveData()
+                self?.updateCache()
                 completion(true)
             case .failure(let error):
                 print(error)
@@ -60,7 +60,7 @@ class RecentsViewModel: RecentsViewModelProtocol {
         }
     }
     
-    private func saveData() {
+    private func updateCache() {
         StorageManager.shared.deleteFiles()
         for item in items {
             StorageManager.shared.saveFile(

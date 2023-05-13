@@ -11,23 +11,22 @@ class StorageManager {
     
     static let shared = StorageManager()
     
-    private let viewContext: NSManagedObjectContext
-    
     private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Cache")
         container.loadPersistentStores(
             completionHandler: { description, error in
-                if let error = error {
+                if let error = error as NSError? {
                     fatalError("Unable to load persistent stores: \(error)")
                 }
             }
         )
         return container
     }()
-    
-    private init() {
-        viewContext = persistentContainer.viewContext
+    private var viewContext: NSManagedObjectContext {
+        persistentContainer.viewContext
     }
+    
+    private init() {}
     
     func saveFile(_ name: String?, _ preview: String?, _ created: String?, _ type: String?, _ size: Int64?, fromList: String) {
         let file = File(context: viewContext)

@@ -12,9 +12,11 @@ protocol ItemCellViewModelProtocol {
     var name: String { get }
     var preview: String? { get }
     var information: String { get }
+    var created: String { get }
     var type: String { get }
     init(item: Item)
     func fetchImage(completion: @escaping () -> Void)
+    func setupUI(completion: (Bool) -> Void)
 }
 
 class ItemCellViewModel: ItemCellViewModelProtocol {
@@ -63,6 +65,14 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    func setupUI(completion: (Bool) -> Void) {
+        if item.type == "file" {
+            completion(true)
+        } else {
+            completion(false)
         }
     }
 }

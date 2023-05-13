@@ -13,6 +13,7 @@
 		E417B67C29F009F80042B6FD /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67B29F009F80042B6FD /* AuthViewController.swift */; };
 		E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67E29F0311D0042B6FD /* RecentsViewController.swift */; };
 		E42D29A62A02765A0035F5A9 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42D29A52A02765A0035F5A9 /* StorageManager.swift */; };
+		E42FE3C42A0F935D00A94CD1 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42FE3C32A0F935D00A94CD1 /* DetailsViewController.swift */; };
 		E4522F812A0529FD004E973C /* Cache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4522F7F2A0529FD004E973C /* Cache.xcdatamodeld */; };
 		E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72729ADACAB00F84055 /* AppDelegate.swift */; };
 		E485F72A29ADACAB00F84055 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72929ADACAB00F84055 /* SceneDelegate.swift */; };
@@ -42,6 +43,7 @@
 		E417B67B29F009F80042B6FD /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E417B67E29F0311D0042B6FD /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
 		E42D29A52A02765A0035F5A9 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		E42FE3C32A0F935D00A94CD1 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		E4522F802A0529FD004E973C /* Cache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cache.xcdatamodel; sourceTree = "<group>"; };
 		E485F72429ADACAB00F84055 /* SkillboxDrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillboxDrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E485F72729ADACAB00F84055 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 		E4D531B829FEB0670014B2A9 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				E42FE3C32A0F935D00A94CD1 /* DetailsViewController.swift */,
 				E4ABC99C2A0CDACF000F1693 /* DetailsViewModel.swift */,
 			);
 			path = Details;
@@ -328,6 +331,7 @@
 				E4BD7DE72A07CC1F00982490 /* ItemCell.swift in Sources */,
 				E4D531B429FEAC370014B2A9 /* BrowseViewController.swift in Sources */,
 				E42D29A62A02765A0035F5A9 /* StorageManager.swift in Sources */,
+				E42FE3C42A0F935D00A94CD1 /* DetailsViewController.swift in Sources */,
 				E4D96A1B29EE9B3200C45651 /* OnboardingScreen.swift in Sources */,
 				E4D8AAA429F6B7820046C879 /* OnboardingViewModel.swift in Sources */,
 				E4D8AAA629F6B78F0046C879 /* LoginViewModel.swift in Sources */,

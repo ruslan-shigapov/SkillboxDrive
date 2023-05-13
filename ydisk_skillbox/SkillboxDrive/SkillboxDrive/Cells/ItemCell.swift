@@ -19,19 +19,25 @@ class ItemCell: UITableViewCell {
     var viewModel: ItemCellViewModelProtocol! {
         didSet {
             nameLabel.text = viewModel.name
-            infoLabel.text = viewModel.information
-            if let _ = viewModel.preview {
-                activityIndicator.startAnimating()
-                viewModel.fetchImage { [unowned self] in
-                    guard let imageData = viewModel.imageData else { return }
-                    iconView.image = UIImage(data: imageData)
-                    activityIndicator.stopAnimating()
-                }   
-            } else {
-                if viewModel.type == "file" {
-                    iconView.image = UIImage(systemName: "doc")
-                    iconView.tintColor = .black
+            viewModel.setupUI { isFile in
+                if isFile {
+                    accessoryType = .disclosureIndicator
+                    infoLabel.text = viewModel.information
+                    if let _ = viewModel.preview {
+                        activityIndicator.startAnimating()
+                        viewModel.fetchImage { [unowned self] in
+                            guard let imageData = viewModel.imageData else { return }
+                            iconView.image = UIImage(data: imageData)
+                            activityIndicator.stopAnimating()
+                        }
+                    } else {
+                        accessoryType = .none
+                        iconView.image = UIImage(systemName: "doc")
+                        iconView.tintColor = .black
+                    }
                 } else {
+                    accessoryType = .disclosureIndicator
+                    infoLabel.text = viewModel.created
                     iconView.image = UIImage(named: "Folder")
                 }
             }
