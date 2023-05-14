@@ -11,6 +11,7 @@ import Alamofire
 enum Link: String {
     case Recents = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?limit=40&preview_size=25x22"
     case Browse = "https://cloud-api.yandex.net/v1/disk/resources?path=/&limit=20&preview_size=25x22"
+    case Details = "https://cloud-api.yandex.net/v1/disk/resources/download?path="
 }
 
 class NetworkManager {
@@ -37,7 +38,7 @@ class NetworkManager {
             }
     }
     
-    func fetchImageData(from url: String, completion: @escaping (Result<Data, AFError>) -> Void) {
+    func fetchData(from url: String, completion: @escaping (Result<Data, AFError>) -> Void) {
         AF.request(url, headers: ["Authorization": "OAuth \(token)"])
             .validate()
             .responseData { dataResponse in

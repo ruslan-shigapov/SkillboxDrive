@@ -51,7 +51,9 @@ class RecentsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailsViewModel = viewModel.getDetailsViewModel(at: indexPath)
-        performSegue(withIdentifier: "toDetails", sender: detailsViewModel)
+        viewModel.checkItem(from: detailsViewModel) {
+            performSegue(withIdentifier: "toDetails", sender: detailsViewModel)
+        }
     }
     
     // MARK: - Private Methods

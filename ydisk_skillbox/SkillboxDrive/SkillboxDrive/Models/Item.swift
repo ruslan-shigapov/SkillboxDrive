@@ -16,6 +16,7 @@ struct Item: Codable {
     let name: String?
     let preview: String?
     let created: String?
+    let path: String?
     let type: String?
     let size: Int64?
     
@@ -27,6 +28,7 @@ struct Item: Codable {
                 name: file.name,
                 preview: file.preview,
                 created: file.created,
+                path: nil,
                 type: file.type,
                 size: file.size
             )
@@ -34,4 +36,8 @@ struct Item: Codable {
         }
         return items
     }
+}
+
+struct ItemLink: Codable {
+    let href: String?
 }

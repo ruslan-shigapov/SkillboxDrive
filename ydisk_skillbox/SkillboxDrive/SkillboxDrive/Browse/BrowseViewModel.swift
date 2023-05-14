@@ -13,6 +13,7 @@ protocol BrowseViewModelProtocol {
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
+    func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void)
 }
 
 class BrowseViewModel: BrowseViewModelProtocol {
@@ -33,7 +34,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
                 completion(true)
             case .failure(let error):
                 print(error)
-                self?.fetchData()
+                self?.fetchCache()
                 completion(false)
             }
         }
@@ -71,7 +72,13 @@ class BrowseViewModel: BrowseViewModelProtocol {
         DetailsViewModel(item: items[indexPath.row])
     }
     
-    private func fetchData() {
+    func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void) {
+        if viewModel.preview != nil || viewModel.type == "dir" {
+            completion()
+        }
+    }
+    
+    private func fetchCache() {
         StorageManager.shared.fetchFiles { [unowned self] result in
             switch result {
             case .success(let files):

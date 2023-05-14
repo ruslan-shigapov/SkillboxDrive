@@ -12,6 +12,7 @@ protocol RecentsViewModelProtocol {
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
+    func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void)
 }
 
 class RecentsViewModel: RecentsViewModelProtocol {
@@ -30,7 +31,7 @@ class RecentsViewModel: RecentsViewModelProtocol {
                 completion(true)
             case .failure(let error):
                 print(error)
-                self?.fetchData()
+                self?.fetchCache()
                 completion(false)
             }
         }
@@ -48,7 +49,13 @@ class RecentsViewModel: RecentsViewModelProtocol {
         DetailsViewModel(item: items[indexPath.row])
     }
     
-    private func fetchData() {
+    func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void) {
+        if viewModel.preview != nil {
+            completion()
+        }
+    }
+    
+    private func fetchCache() {
         StorageManager.shared.fetchFiles { [unowned self] result in
             switch result {
             case .success(let files):

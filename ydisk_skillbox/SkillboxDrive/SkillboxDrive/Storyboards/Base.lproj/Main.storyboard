@@ -383,9 +383,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Asb-ae-ciD">
-                                <rect key="frame" x="186.66666666666666" y="416" width="20" height="20"/>
-                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1dA-qW-AOI">
+                                <rect key="frame" x="0.0" y="208.66666666666663" width="393" height="435"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="435" id="D9k-gn-TXi"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Asb-ae-ciD">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3h-HY-sHV">
                                 <rect key="frame" x="25" y="55" width="25" height="25"/>
@@ -395,6 +401,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button" image="BackArrow"/>
+                                <connections>
+                                    <action selector="backButtonPressed" destination="NM2-8X-h6q" eventType="touchUpInside" id="5NB-5G-FPb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5r-vg-xak">
                                 <rect key="frame" x="343" y="55" width="25" height="25"/>
@@ -404,6 +413,9 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button" image="Edit"/>
+                                <connections>
+                                    <action selector="editButtonPressed" destination="NM2-8X-h6q" eventType="touchUpInside" id="Kg2-F5-6Ub"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="xvX-J1-44s">
                                 <rect key="frame" x="96.666666666666686" y="55" width="200" height="37"/>
@@ -426,22 +438,28 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZH-Sm-CP0">
-                                <rect key="frame" x="343" y="787" width="25" height="25"/>
+                                <rect key="frame" x="343" y="797" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="4ig-dK-39i"/>
                                     <constraint firstAttribute="width" secondItem="yZH-Sm-CP0" secondAttribute="height" multiplier="1:1" id="9Cp-Qi-XLf"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button" image="Trash"/>
+                                <connections>
+                                    <action selector="deleteButtonPressed" destination="NM2-8X-h6q" eventType="touchUpInside" id="b2O-Cu-lbR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2z-ZR-Xdl">
-                                <rect key="frame" x="25" y="787" width="25" height="25"/>
+                                <rect key="frame" x="25" y="797" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="DOu-qw-lTZ"/>
                                     <constraint firstAttribute="width" secondItem="Q2z-ZR-Xdl" secondAttribute="height" multiplier="1:1" id="Pux-Mm-tgM"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button" image="ExternalLink"/>
+                                <connections>
+                                    <action selector="shareButtonPressed" destination="NM2-8X-h6q" eventType="touchUpInside" id="wai-cW-uxY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gtq-bv-G2D"/>
@@ -453,12 +471,15 @@
                             <constraint firstItem="Asb-ae-ciD" firstAttribute="centerY" secondItem="gtq-bv-G2D" secondAttribute="centerY" id="Bzn-IZ-glv"/>
                             <constraint firstItem="Q2z-ZR-Xdl" firstAttribute="leading" secondItem="gtq-bv-G2D" secondAttribute="leading" constant="25" id="CKX-uy-BB6"/>
                             <constraint firstItem="xvX-J1-44s" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="l3h-HY-sHV" secondAttribute="trailing" constant="10" id="DsS-GO-XbK"/>
+                            <constraint firstItem="1dA-qW-AOI" firstAttribute="leading" secondItem="gtq-bv-G2D" secondAttribute="leading" id="GHV-Ht-oTB"/>
                             <constraint firstItem="e5r-vg-xak" firstAttribute="top" secondItem="LEt-yV-rSg" secondAttribute="top" constant="55" id="GnT-KP-sbF"/>
-                            <constraint firstItem="gtq-bv-G2D" firstAttribute="bottom" secondItem="Q2z-ZR-Xdl" secondAttribute="bottom" constant="40" id="M4d-Bn-gqc"/>
-                            <constraint firstItem="gtq-bv-G2D" firstAttribute="bottom" secondItem="yZH-Sm-CP0" secondAttribute="bottom" constant="40" id="POS-QT-CdD"/>
+                            <constraint firstItem="gtq-bv-G2D" firstAttribute="bottom" secondItem="Q2z-ZR-Xdl" secondAttribute="bottom" constant="30" id="M4d-Bn-gqc"/>
+                            <constraint firstItem="gtq-bv-G2D" firstAttribute="bottom" secondItem="yZH-Sm-CP0" secondAttribute="bottom" constant="30" id="POS-QT-CdD"/>
                             <constraint firstItem="Asb-ae-ciD" firstAttribute="centerX" secondItem="gtq-bv-G2D" secondAttribute="centerX" id="ScM-9I-lQd"/>
+                            <constraint firstItem="1dA-qW-AOI" firstAttribute="centerY" secondItem="gtq-bv-G2D" secondAttribute="centerY" id="eia-T8-RS6"/>
                             <constraint firstItem="gtq-bv-G2D" firstAttribute="trailing" secondItem="yZH-Sm-CP0" secondAttribute="trailing" constant="25" id="jP8-Ew-2bc"/>
                             <constraint firstItem="yZH-Sm-CP0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Q2z-ZR-Xdl" secondAttribute="trailing" constant="220" id="jZw-Vk-NmU"/>
+                            <constraint firstItem="gtq-bv-G2D" firstAttribute="trailing" secondItem="1dA-qW-AOI" secondAttribute="trailing" id="pw0-a4-h0R"/>
                             <constraint firstItem="xvX-J1-44s" firstAttribute="top" secondItem="LEt-yV-rSg" secondAttribute="top" constant="55" id="rXy-XV-MR6"/>
                             <constraint firstItem="l3h-HY-sHV" firstAttribute="top" secondItem="LEt-yV-rSg" secondAttribute="top" constant="55" id="xWK-27-blj"/>
                             <constraint firstItem="l3h-HY-sHV" firstAttribute="leading" secondItem="gtq-bv-G2D" secondAttribute="leading" constant="25" id="yYJ-S3-nmA"/>
@@ -467,6 +488,9 @@
                     <navigationItem key="navigationItem" id="akA-8e-lYO"/>
                     <connections>
                         <outlet property="activityIndicator" destination="Asb-ae-ciD" id="s5i-32-EIR"/>
+                        <outlet property="imageView" destination="1dA-qW-AOI" id="Tf5-2u-7mK"/>
+                        <outlet property="infoLabel" destination="PUo-8f-6Va" id="UZ7-2F-3UH"/>
+                        <outlet property="nameLabel" destination="dsp-5v-e68" id="SrV-NH-Xiq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cM7-4j-BmE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
