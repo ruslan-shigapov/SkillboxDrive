@@ -24,12 +24,11 @@ class NetworkManager {
         
     private init() {}
     
-    func fetch<T: Decodable>(_ type: T.Type, from url: String, completion: @escaping (Result<T, AFError>) -> Void) {
-        AF.request(url, headers: ["Authorization": "OAuth \(token)"]
-        ) { $0.timeoutInterval = 4 }
+    func fetch<T: Decodable>(_ type: T.Type, from url: URL, completion: @escaping (Result<T, AFError>) -> Void) {
+        AF.request(url, headers: ["Authorization": "OAuth \(token)"]) { $0.timeoutInterval = 5 }
             .validate()
-            .responseDecodable(of: T.self) { dataResponse in
-                switch dataResponse.result {
+            .responseDecodable(of: T.self) { response in
+                switch response.result {
                 case .success(let value):
                     completion(.success(value))
                 case .failure(let error):
@@ -38,13 +37,13 @@ class NetworkManager {
             }
     }
     
-    func fetchData(from url: String, completion: @escaping (Result<Data, AFError>) -> Void) {
+    func fetchData(from url: URL, completion: @escaping (Result<Data, AFError>) -> Void) {
         AF.request(url, headers: ["Authorization": "OAuth \(token)"])
             .validate()
-            .responseData { dataResponse in
-                switch dataResponse.result {
-                case .success(let imageData):
-                    completion(.success(imageData))
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))
                 }

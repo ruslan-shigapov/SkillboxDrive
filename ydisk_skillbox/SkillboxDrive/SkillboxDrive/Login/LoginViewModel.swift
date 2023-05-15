@@ -13,7 +13,7 @@ protocol AuthViewControllerDelegate {
 
 protocol LoginViewModelProtocol: AuthViewControllerDelegate {
     func startPresentation(completion: () -> Void)
-    func checkToken(completion: (Bool) -> Void)
+    func checkToken(completion: (_ isExist: Bool) -> Void)
 }
 
 class LoginViewModel: LoginViewModelProtocol {
@@ -26,8 +26,8 @@ class LoginViewModel: LoginViewModelProtocol {
         }
     }
     
-    func checkToken(completion: (Bool) -> Void) {
-        if let _ = UserDefaults.standard.string(forKey: "token") {
+    func checkToken(completion: (_ isExist: Bool) -> Void) {
+        if UserDefaults.standard.string(forKey: "token") != nil {
             completion(true)
         } else {
             completion(false)

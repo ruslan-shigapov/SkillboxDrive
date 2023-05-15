@@ -23,7 +23,7 @@ class ItemCell: UITableViewCell {
                 if isFile {
                     accessoryType = .disclosureIndicator
                     infoLabel.text = viewModel.information
-                    if let _ = viewModel.preview {
+                    if viewModel.preview != nil {
                         activityIndicator.startAnimating()
                         viewModel.fetchImage { [unowned self] in
                             guard let imageData = viewModel.imageData else { return }

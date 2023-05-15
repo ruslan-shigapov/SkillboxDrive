@@ -21,11 +21,9 @@ class BrowseViewModel: BrowseViewModelProtocol {
     private var items: [Item] = []
     private var offset = 20
     
-    func fetchItems(completion: @escaping (Bool) -> Void) {
-        NetworkManager.shared.fetch(
-            Item.self,
-            from: Link.Browse.rawValue
-        ) { [weak self] result in
+    func fetchItems(completion: @escaping (_ isConnected: Bool) -> Void) {
+        guard let url =  URL(string: Link.Browse.rawValue) else { return }
+        NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
             switch result {
             case .success(let item):
                 guard let items = item._embedded?.items else { return }
@@ -42,10 +40,8 @@ class BrowseViewModel: BrowseViewModelProtocol {
     
     func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void) {
         if items.count == offset, indexPath.row == items.count - 1 {
-            NetworkManager.shared.fetch(
-                Item.self,
-                from: Link.Browse.rawValue + "&offset=\(offset)"
-            ) { [weak self] result in
+            guard let url = URL(string: Link.Recents.rawValue + "&offset=\(offset)") else { return }
+            NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
                 switch result {
                 case .success(let item):
                     self?.offset += 20
@@ -79,7 +75,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
     }
     
     private func fetchCache() {
-        StorageManager.shared.fetchFiles { [unowned self] result in
+        StorageManager.shared.fetchFiles { result in
             switch result {
             case .success(let files):
                 let filesFromBrowse = files.filter { $0.relateTo == "Browse" }

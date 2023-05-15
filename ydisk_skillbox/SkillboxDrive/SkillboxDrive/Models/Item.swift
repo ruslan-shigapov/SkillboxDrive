@@ -39,5 +39,5 @@ struct Item: Codable {
 }
 
 struct ItemLink: Codable {
-    let href: String?
+    let href: String
 }

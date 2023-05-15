@@ -15,8 +15,8 @@ class RecentsViewController: UITableViewController {
     // MARK: - Private Properties
     private var viewModel: RecentsViewModelProtocol! {
         didSet {
-            viewModel.fetchItems { [weak self] isConnected in
-                self?.updateUI(isConnected)
+            viewModel.fetchItems { [weak self] in
+                self?.updateUI()
             }
         }
     }
@@ -58,15 +58,15 @@ class RecentsViewController: UITableViewController {
     
     // MARK: - Private Methods
     @objc private func refresh(sender: UIRefreshControl) {
-        viewModel.fetchItems { [weak self] isConnected in
-            self?.updateUI(isConnected)
+        viewModel.fetchItems { [weak self] in
+            self?.updateUI()
             sender.endRefreshing()
         }
     }
     
-    private func updateUI(_ isConnected: Bool) {
-        alertView.frame.size.height = isConnected ? 0 : 40
-        alertView.isHidden = isConnected ? true : false
+    private func updateUI() {
+        alertView.frame.size.height = viewModel.isConnected ? 0 : 40
+        alertView.isHidden = viewModel.isConnected ? true : false
         tableView.reloadData()
     }
 }

@@ -15,7 +15,7 @@ protocol DetailsViewModelProtocol {
     var path: String { get }
     var type: String { get }
     init(item: Item)
-    func downloadItem(completion: @escaping () -> Void)
+    func fetchLink(completion: @escaping () -> Void)
 }
 
 class DetailsViewModel: DetailsViewModelProtocol {
@@ -45,35 +45,34 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     private let item: Item
-    private var link: String?
     
     required init(item: Item) {
         self.item = item
     }
     
-    func downloadItem(completion: @escaping () -> Void) {
-        fetchLink()
-        guard let link else { return }
-        NetworkManager.shared.fetchData(from: link) { [weak self] result in
+    func fetchLink(completion: @escaping () -> Void) {
+        guard var urlComponents = URLComponents(string: Link.Details.rawValue) else { return }
+        urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
+        guard let url = urlComponents.url else { return }
+        NetworkManager.shared.fetch(ItemLink.self, from: url) { [unowned self] result in
             switch result {
-            case .success(let itemData):
-                self?.itemData = itemData
-                completion()
+            case .success(let link):
+                fetchData(from: link.href) {
+                    completion()
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
     
-    private func fetchLink() {
-        NetworkManager.shared.fetch(
-            ItemLink.self,
-            from: Link.Details.rawValue + "\(path)"
-        ) { [weak self] result in
+    private func fetchData(from url: String, completion: @escaping () -> Void) {
+        guard let url = URL(string: url) else { return }
+        NetworkManager.shared.fetchData(from: url) { [unowned self] result in
             switch result {
-            case .success(let link):
-//                print(link.href) TODO: Format URL
-                self?.link = link.href
+            case .success(let data):
+                itemData = data
+                completion()
             case .failure(let error):
                 print(error.localizedDescription)
             }

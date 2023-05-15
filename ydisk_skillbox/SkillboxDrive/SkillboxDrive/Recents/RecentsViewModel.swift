@@ -8,7 +8,8 @@
 import Foundation
 
 protocol RecentsViewModelProtocol {
-    func fetchItems(completion: @escaping (Bool) -> Void)
+    var isConnected: Bool { get }
+    func fetchItems(completion: @escaping () -> Void)
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
@@ -17,22 +18,24 @@ protocol RecentsViewModelProtocol {
 
 class RecentsViewModel: RecentsViewModelProtocol {
     
-    private var items: [Item] = [] 
+    var isConnected = false
+
+    private var items: [Item] = []
     
-    func fetchItems(completion: @escaping (Bool) -> Void) {
-        NetworkManager.shared.fetch(
-            ItemList.self,
-            from: Link.Recents.rawValue
-        ) { [weak self] result in
+    func fetchItems(completion: @escaping () -> Void) {
+        guard let url = URL(string: Link.Recents.rawValue) else { return }
+        NetworkManager.shared.fetch(ItemList.self, from: url) { [unowned self] result in
             switch result {
             case .success(let itemList):
-                self?.items = itemList.items
-                self?.updateCache()
-                completion(true)
+                isConnected = true
+                items = itemList.items
+                updateCache()
+                completion()
             case .failure(let error):
+                isConnected = false
+                fetchCache()
                 print(error)
-                self?.fetchCache()
-                completion(false)
+                completion()
             }
         }
     }
@@ -50,13 +53,13 @@ class RecentsViewModel: RecentsViewModelProtocol {
     }
     
     func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void) {
-        if viewModel.preview != nil {
+        if viewModel.preview != nil, isConnected == true {
             completion()
         }
     }
     
     private func fetchCache() {
-        StorageManager.shared.fetchFiles { [unowned self] result in
+        StorageManager.shared.fetchFiles { result in
             switch result {
             case .success(let files):
                 let filesFromRecents = files.filter { $0.relateTo == "Recents" }

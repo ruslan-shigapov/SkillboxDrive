@@ -16,21 +16,12 @@ class DetailsViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     
     // MARK: - Public Properties
-    var viewModel: DetailsViewModelProtocol! {
-        didSet {
-            viewModel.downloadItem { [weak self] in
-                guard let imageData = self?.viewModel.itemData else { return }
-                self?.imageView.image = UIImage(data: imageData)
-                self?.activityIndicator.stopAnimating()
-            }
-        }
-    }
+    var viewModel: DetailsViewModelProtocol!
 
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = viewModel.name
-        infoLabel.text = viewModel.created
+        setupUI()
     }
     
     // MARK: - IB Actions
@@ -48,5 +39,15 @@ class DetailsViewController: UIViewController {
     
     @IBAction func shareButtonPressed() {
         
+    }
+    
+    private func setupUI() {
+        nameLabel.text = viewModel.name
+        infoLabel.text = viewModel.created
+        viewModel.fetchLink { [unowned self] in
+            guard let imageData = viewModel.itemData else { return }
+            imageView.image = UIImage(data: imageData)
+            activityIndicator.stopAnimating()
+        }
     }
 }

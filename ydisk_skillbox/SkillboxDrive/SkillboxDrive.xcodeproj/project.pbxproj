@@ -14,7 +14,6 @@
 		E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67E29F0311D0042B6FD /* RecentsViewController.swift */; };
 		E42D29A62A02765A0035F5A9 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42D29A52A02765A0035F5A9 /* StorageManager.swift */; };
 		E42FE3C42A0F935D00A94CD1 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42FE3C32A0F935D00A94CD1 /* DetailsViewController.swift */; };
-		E4522F812A0529FD004E973C /* Cache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4522F7F2A0529FD004E973C /* Cache.xcdatamodeld */; };
 		E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72729ADACAB00F84055 /* AppDelegate.swift */; };
 		E485F72A29ADACAB00F84055 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72929ADACAB00F84055 /* SceneDelegate.swift */; };
 		E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72B29ADACAB00F84055 /* LoginViewController.swift */; };
@@ -26,6 +25,7 @@
 		E4BD7DE92A07CC8B00982490 /* ItemCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BD7DE82A07CC8B00982490 /* ItemCellViewModel.swift */; };
 		E4C8177129C44DBD00AF63FD /* GraphikRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E4C8177029C44DBD00AF63FD /* GraphikRegular.otf */; };
 		E4C8177729C4587100AF63FD /* GraphikLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = E4C8177629C4587100AF63FD /* GraphikLight.otf */; };
+		E4D3E7732A124EC700AEE9EB /* Cache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E4D3E7712A124EC700AEE9EB /* Cache.xcdatamodeld */; };
 		E4D531B429FEAC370014B2A9 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D531B329FEAC370014B2A9 /* BrowseViewController.swift */; };
 		E4D531B629FEAC9D0014B2A9 /* BrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D531B529FEAC9D0014B2A9 /* BrowseViewModel.swift */; };
 		E4D8AAA429F6B7820046C879 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D8AAA329F6B7820046C879 /* OnboardingViewModel.swift */; };
@@ -44,7 +44,6 @@
 		E417B67E29F0311D0042B6FD /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
 		E42D29A52A02765A0035F5A9 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		E42FE3C32A0F935D00A94CD1 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
-		E4522F802A0529FD004E973C /* Cache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cache.xcdatamodel; sourceTree = "<group>"; };
 		E485F72429ADACAB00F84055 /* SkillboxDrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillboxDrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E485F72729ADACAB00F84055 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E485F72929ADACAB00F84055 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +57,7 @@
 		E4BD7DE82A07CC8B00982490 /* ItemCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCellViewModel.swift; sourceTree = "<group>"; };
 		E4C8177029C44DBD00AF63FD /* GraphikRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikRegular.otf; sourceTree = "<group>"; };
 		E4C8177629C4587100AF63FD /* GraphikLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GraphikLight.otf; sourceTree = "<group>"; };
+		E4D3E7722A124EC700AEE9EB /* Cache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Cache.xcdatamodel; sourceTree = "<group>"; };
 		E4D531B329FEAC370014B2A9 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		E4D531B529FEAC9D0014B2A9 /* BrowseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewModel.swift; sourceTree = "<group>"; };
 		E4D8AAA329F6B7820046C879 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 			children = (
 				E4D96A1A29EE9B3200C45651 /* OnboardingScreen.swift */,
 				E4033BC229B99D4D0069CA13 /* Item.swift */,
-				E4522F7F2A0529FD004E973C /* Cache.xcdatamodeld */,
+				E4D3E7712A124EC700AEE9EB /* Cache.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -320,7 +320,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4522F812A0529FD004E973C /* Cache.xcdatamodeld in Sources */,
 				E4033BBE29B99BA40069CA13 /* NetworkManager.swift in Sources */,
 				E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */,
 				E4D531B629FEAC9D0014B2A9 /* BrowseViewModel.swift in Sources */,
@@ -329,6 +328,7 @@
 				E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */,
 				E4ABC99D2A0CDAD0000F1693 /* DetailsViewModel.swift in Sources */,
 				E4BD7DE72A07CC1F00982490 /* ItemCell.swift in Sources */,
+				E4D3E7732A124EC700AEE9EB /* Cache.xcdatamodeld in Sources */,
 				E4D531B429FEAC370014B2A9 /* BrowseViewController.swift in Sources */,
 				E42D29A62A02765A0035F5A9 /* StorageManager.swift in Sources */,
 				E42FE3C42A0F935D00A94CD1 /* DetailsViewController.swift in Sources */,
@@ -589,12 +589,12 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		E4522F7F2A0529FD004E973C /* Cache.xcdatamodeld */ = {
+		E4D3E7712A124EC700AEE9EB /* Cache.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				E4522F802A0529FD004E973C /* Cache.xcdatamodel */,
+				E4D3E7722A124EC700AEE9EB /* Cache.xcdatamodel */,
 			);
-			currentVersion = E4522F802A0529FD004E973C /* Cache.xcdatamodel */;
+			currentVersion = E4D3E7722A124EC700AEE9EB /* Cache.xcdatamodel */;
 			path = Cache.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
