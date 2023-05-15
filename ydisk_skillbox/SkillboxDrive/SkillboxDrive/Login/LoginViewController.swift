@@ -37,12 +37,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - IB Actions
     @IBAction func logOnButtonPressed() {
-        viewModel.checkToken { isExist in
-            if isExist {
-                performSegue(withIdentifier: "toRecents", sender: nil)
-            } else {
-                performSegue(withIdentifier: "toAuth", sender: viewModel)
-            }
-        }
+        viewModel.tokenIsExist
+        ? performSegue(withIdentifier: "toRecents", sender: nil)
+        : performSegue(withIdentifier: "toAuth", sender: viewModel)
     }
 }

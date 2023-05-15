@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PDFKit
 
 class DetailsViewController: UIViewController {
     
@@ -14,6 +15,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var infoLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var pdfView: PDFView!
     
     // MARK: - Public Properties
     var viewModel: DetailsViewModelProtocol!
@@ -41,12 +43,18 @@ class DetailsViewController: UIViewController {
         
     }
     
+    // MARK: - Private Methods
     private func setupUI() {
         nameLabel.text = viewModel.name
         infoLabel.text = viewModel.created
         viewModel.fetchLink { [unowned self] in
-            guard let imageData = viewModel.itemData else { return }
-            imageView.image = UIImage(data: imageData)
+//            imageView.isHidden = false
+            guard let itemData = viewModel.itemData else { return }
+//            imageView.image = UIImage(data: itemData)
+            pdfView.isHidden = false
+            guard let document = PDFDocument(data: itemData) else { return }
+            pdfView.document = document
+            pdfView.autoScales = true
             activityIndicator.stopAnimating()
         }
     }
