@@ -9,18 +9,20 @@ import Foundation
 
 protocol DetailsViewModelProtocol {
     var itemData: Data? { get }
+    var request: URLRequest? { get }
     var name: String { get }
     var preview: String? { get }
     var created: String { get }
     var path: String { get }
-    var type: String { get }
+    var itemType: ItemType { get }
     init(item: Item)
-    func fetchLink(completion: @escaping () -> Void)
+    func fetchItem(completion: @escaping () -> Void)
 }
 
 class DetailsViewModel: DetailsViewModelProtocol {
     
     var itemData: Data?
+    var request: URLRequest?
     
     var name: String {
         guard let name = item.name else { return "Unknown name" }
@@ -40,8 +42,15 @@ class DetailsViewModel: DetailsViewModelProtocol {
     var path: String {
         item.path ?? ""
     }
-    var type: String {
-        item.type ?? ""
+    var itemType: ItemType {
+        let pathExtension = NSString(string: path).pathExtension
+        if ["jpg", "png", "jpeg", "gif", "bmp"].contains(pathExtension) {
+            return .image
+        } else if pathExtension == "pdf" {
+            return .pdf
+        } else {
+            return .document
+        }
     }
     
     private let item: Item
@@ -50,14 +59,15 @@ class DetailsViewModel: DetailsViewModelProtocol {
         self.item = item
     }
     
-    func fetchLink(completion: @escaping () -> Void) {
+    func fetchItem(completion: @escaping () -> Void) {
         guard var urlComponents = URLComponents(string: Link.Details.rawValue) else { return }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
         NetworkManager.shared.fetch(ItemLink.self, from: url) { [unowned self] result in
             switch result {
             case .success(let link):
-                fetchData(from: link.href) {
+                guard let url = URL(string: link.href) else { return }
+                fetchItemData(from: url) {
                     completion()
                 }
             case .failure(let error):
@@ -66,16 +76,21 @@ class DetailsViewModel: DetailsViewModelProtocol {
         }
     }
     
-    private func fetchData(from url: String, completion: @escaping () -> Void) {
-        guard let url = URL(string: url) else { return }
-        NetworkManager.shared.fetchData(from: url) { [unowned self] result in
-            switch result {
-            case .success(let data):
-                itemData = data
-                completion()
-            case .failure(let error):
-                print(error.localizedDescription)
+    private func fetchItemData(from url: URL, completion: @escaping () -> Void) {
+        switch itemType {
+        case .image, .pdf:
+            NetworkManager.shared.fetchData(from: url) { [unowned self] result in
+                switch result {
+                case .success(let data):
+                    itemData = data
+                    completion()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
+        case .document:
+            request = URLRequest(url: url)
+            completion()
         }
     }
 }

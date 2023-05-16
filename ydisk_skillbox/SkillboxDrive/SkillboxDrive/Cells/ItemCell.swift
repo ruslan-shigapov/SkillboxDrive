@@ -25,7 +25,7 @@ class ItemCell: UITableViewCell {
                     infoLabel.text = viewModel.information
                     if viewModel.preview != nil {
                         activityIndicator.startAnimating()
-                        viewModel.fetchImage { [unowned self] in
+                        viewModel.fetchImageData { [unowned self] in
                             guard let imageData = viewModel.imageData else { return }
                             iconView.image = UIImage(data: imageData)
                             activityIndicator.stopAnimating()

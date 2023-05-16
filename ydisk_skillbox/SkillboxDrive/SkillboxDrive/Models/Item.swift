@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct ItemList: Codable {
-    let items: [Item]
-}
-
 struct Item: Codable {
     let _embedded: ItemList?
     let name: String?
@@ -38,6 +34,14 @@ struct Item: Codable {
     }
 }
 
+struct ItemList: Codable {
+    let items: [Item]
+}
+
 struct ItemLink: Codable {
     let href: String
+}
+
+enum ItemType {
+    case image, pdf, document
 }

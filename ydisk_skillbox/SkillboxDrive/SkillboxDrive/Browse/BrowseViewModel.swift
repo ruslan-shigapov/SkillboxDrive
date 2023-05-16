@@ -21,7 +21,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
     private var items: [Item] = []
     private var offset = 20
     
-    func fetchItems(completion: @escaping (_ isConnected: Bool) -> Void) {
+    func fetchItems(completion: @escaping (Bool) -> Void) {
         guard let url =  URL(string: Link.Browse.rawValue) else { return }
         NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
             switch result {
@@ -69,7 +69,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
     }
     
     func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void) {
-        if viewModel.preview != nil || viewModel.type == "dir" {
+        if viewModel.preview != nil {
             completion()
         }
     }

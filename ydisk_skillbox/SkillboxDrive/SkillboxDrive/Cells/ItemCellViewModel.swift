@@ -15,7 +15,7 @@ protocol ItemCellViewModelProtocol {
     var created: String { get }
     var type: String { get }
     init(item: Item)
-    func fetchImage(completion: @escaping () -> Void)
+    func fetchImageData(completion: @escaping () -> Void)
     func setupUI(completion: (Bool) -> Void)
 }
 
@@ -55,7 +55,7 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
         self.item = item
     }
     
-    func fetchImage(completion: @escaping () -> Void) {
+    func fetchImageData(completion: @escaping () -> Void) {
         guard let url = URL(string: preview ?? "") else { return }
         NetworkManager.shared.fetchData(from: url) { [unowned self] result in
             switch result {
