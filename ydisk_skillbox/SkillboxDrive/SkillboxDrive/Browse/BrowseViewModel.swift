@@ -22,7 +22,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
     private var offset = 20
     
     func fetchItems(completion: @escaping (Bool) -> Void) {
-        guard let url =  URL(string: Link.Browse.rawValue) else { return }
+        guard let url =  URL(string: Link.toBrowse.rawValue) else { return }
         NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
             switch result {
             case .success(let item):
@@ -40,7 +40,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
     
     func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void) {
         if items.count == offset, indexPath.row == items.count - 1 {
-            guard let url = URL(string: Link.Recents.rawValue + "&offset=\(offset)") else { return }
+            guard let url = URL(string: Link.toRecents.rawValue + "&offset=\(offset)") else { return }
             NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
                 switch result {
                 case .success(let item):

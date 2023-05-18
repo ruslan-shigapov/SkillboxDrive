@@ -20,6 +20,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet var webView: WKWebView!
     
     // MARK: - Public Properties
+    var delegate: DetailsViewControllerDelegate!
     var viewModel: DetailsViewModelProtocol!
     
     // MARK: - Override Methods
@@ -30,12 +31,16 @@ class DetailsViewController: UIViewController {
     
     // MARK: - IB Actions
     @IBAction func backButtonPressed() {
-        dismiss(animated: true)
+        dismiss(animated: true) { [weak self] in
+            self?.delegate.backButtonWasPressed?()
+        }
     }
     
     @IBAction func editButtonPressed() {
-        showEditAlert { newName in
-            
+        showEditAlert { [weak self] name in
+            self?.viewModel.renameItem(to: name) {
+                self?.nameLabel.text = name
+            }
         }
     }
     
@@ -57,20 +62,26 @@ class DetailsViewController: UIViewController {
                 imageView.isHidden = false
                 guard let imageData = viewModel.itemData else { return }
                 imageView.image = UIImage(data: imageData)
+                activityIndicator.stopAnimating()
             case .pdf:
                 pdfView.isHidden = false
                 guard let pdfData = viewModel.itemData else { return }
                 guard let document = PDFDocument(data: pdfData) else { return }
                 pdfView.document = document
                 pdfView.autoScales = true
+                activityIndicator.stopAnimating()
             case .document:
                 webView.isHidden = false
                 guard let request = viewModel.request else { return }
                 webView.load(request)
+                webView.navigationDelegate = self
             }
-            activityIndicator.stopAnimating()
         }
     }
+}
+
+// MARK: - Alert Controllers
+extension DetailsViewController {
     
     private func showEditAlert(completion: @escaping (String) -> Void) {
         let alert = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
@@ -93,8 +104,10 @@ class DetailsViewController: UIViewController {
         let title = "This file will be moved to the trash"
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
-            // Action
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] _ in
+            viewModel.deleteItem {
+                // dismiss
+            }
         }
         alert.addAction(cancelAction)
         alert.addAction(deleteAction)
@@ -110,9 +123,19 @@ class DetailsViewController: UIViewController {
         let shareLinkAction = UIAlertAction(title: "Link", style: .default) { _ in
             // Action
         }
+        // Buttons color ?
         alert.addAction(cancelAction)
         alert.addAction(shareFileAction)
         alert.addAction(shareLinkAction)
         present(alert, animated: true)
     }
 }
+
+// MARK: - WKNavigationDelegate
+extension DetailsViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        activityIndicator.stopAnimating()
+    }
+}
+

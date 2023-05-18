@@ -13,13 +13,11 @@ class StorageManager {
     
     private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Cache")
-        container.loadPersistentStores(
-            completionHandler: { description, error in
-                if let error = error as NSError? {
-                    fatalError("Unable to load persistent stores: \(error)")
-                }
+        container.loadPersistentStores { _, error in
+            if let error = error {
+                fatalError("Core Data loading error: \(error)")
             }
-        )
+        }
         return container
     }()
     private var viewContext: NSManagedObjectContext {
@@ -56,10 +54,12 @@ class StorageManager {
     
     func deleteFiles() {
         let fetchRequest = File.fetchRequest()
-        guard let files = try? viewContext.fetch(fetchRequest) else { return }
-        if !files.isEmpty {
+        do {
+            let files = try viewContext.fetch(fetchRequest)
             files.forEach { viewContext.delete($0) }
             saveContext()
+        } catch {
+            viewContext.rollback()
         }
     }
     

@@ -7,8 +7,12 @@
 
 import Foundation
 
-protocol RecentsViewModelProtocol {
-    var isConnected: Bool { get }
+protocol DetailsViewControllerDelegate {
+    var backButtonWasPressed: (() -> Void)? { get set }
+}
+
+protocol RecentsViewModelProtocol: DetailsViewControllerDelegate {
+    var networkIsConnected: Bool { get }
     func fetchItems(completion: @escaping () -> Void)
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
@@ -18,22 +22,23 @@ protocol RecentsViewModelProtocol {
 
 class RecentsViewModel: RecentsViewModelProtocol {
     
-    var isConnected = false
+    var backButtonWasPressed: (() -> Void)?
+    var networkIsConnected = false
 
     private var items: [Item] = []
     
     func fetchItems(completion: @escaping () -> Void) {
-        guard let url = URL(string: Link.Recents.rawValue) else { return }
-        NetworkManager.shared.fetch(ItemList.self, from: url) { [unowned self] result in
+        guard let url = URL(string: Link.toRecents.rawValue) else { return }
+        NetworkManager.shared.fetch(ItemList.self, from: url) { [weak self] result in
             switch result {
             case .success(let itemList):
-                isConnected = true
-                items = itemList.items
-                updateCache()
+                self?.networkIsConnected = true
+                self?.items = itemList.items
+                self?.updateCache()
                 completion()
             case .failure(let error):
-                isConnected = false
-                fetchCache()
+                self?.networkIsConnected = false
+                self?.fetchCache()
                 print(error)
                 completion()
             }
@@ -53,7 +58,7 @@ class RecentsViewModel: RecentsViewModelProtocol {
     }
     
     func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void) {
-        if viewModel.preview != nil, isConnected == true {
+        if viewModel.preview != nil, networkIsConnected == true {
             completion()
         }
     }

@@ -17,12 +17,15 @@ protocol DetailsViewModelProtocol {
     var itemType: ItemType { get }
     init(item: Item)
     func fetchItem(completion: @escaping () -> Void)
+    func deleteItem(completion: @escaping () -> Void)
+    func renameItem(to name: String, completion: @escaping () -> Void)
 }
 
 class DetailsViewModel: DetailsViewModelProtocol {
     
     var itemData: Data?
     var request: URLRequest?
+    var deleted = false
     
     var name: String {
         guard let name = item.name else { return "Unknown name" }
@@ -60,14 +63,13 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func fetchItem(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.Details.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toDetails.rawValue) else { return }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.fetch(ItemLink.self, from: url) { [unowned self] result in
+        NetworkManager.shared.fetch(ItemLink.self, from: url) { [weak self] result in
             switch result {
             case .success(let link):
-                guard let url = URL(string: link.href) else { return }
-                fetchItemData(from: url) {
+                self?.fetchItemData(from: link.href) {
                     completion()
                 }
             case .failure(let error):
@@ -76,19 +78,57 @@ class DetailsViewModel: DetailsViewModelProtocol {
         }
     }
     
-    private func fetchItemData(from url: URL, completion: @escaping () -> Void) {
+    func deleteItem(completion: @escaping () -> Void) {
+        guard var urlComponents = URLComponents(string: Link.toDelete.rawValue) else { return }
+        urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
+        guard let url = urlComponents.url else { return }
+        NetworkManager.shared.sendRequest(to: url, byMethod: .delete) { result in
+            switch result {
+            case .success(_):
+                completion()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func renameItem(to name: String, completion: @escaping () -> Void) {
+        guard var urlComponents = URLComponents(string: Link.toEdit.rawValue) else { return }
+        urlComponents.queryItems = [
+            URLQueryItem(name: "from", value: path),
+            URLQueryItem(name: "path", value: changePath(by: name))
+        ]
+        guard let url = urlComponents.url else { return }
+        NetworkManager.shared.sendRequest(to: url, byMethod: .post) { result in
+            switch result {
+            case .success(_):
+                completion()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func changePath(by name: String) -> String {
+        guard let fullName = path.split(separator: "/").last else { return "" }
+        let nameToChange = NSString(string: String(fullName)).deletingPathExtension
+        return path.replacingOccurrences(of: nameToChange, with: name)
+    }
+    
+    private func fetchItemData(from url: String, completion: @escaping () -> Void) {
         switch itemType {
         case .image, .pdf:
-            NetworkManager.shared.fetchData(from: url) { [unowned self] result in
+            NetworkManager.shared.fetchData(from: url) { [weak self] result in
                 switch result {
                 case .success(let data):
-                    itemData = data
+                    self?.itemData = data
                     completion()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         case .document:
+            guard let url = URL(string: url) else { return }
             request = URLRequest(url: url)
             completion()
         }

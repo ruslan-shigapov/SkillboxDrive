@@ -56,11 +56,11 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
     }
     
     func fetchImageData(completion: @escaping () -> Void) {
-        guard let url = URL(string: preview ?? "") else { return }
-        NetworkManager.shared.fetchData(from: url) { [unowned self] result in
+        guard let url = preview else { return }
+        NetworkManager.shared.fetchData(from: url) { [weak self] result in
             switch result {
             case .success(let imageData):
-                self.imageData = imageData
+                self?.imageData = imageData
                 completion()
             case .failure(let error):
                 print(error.localizedDescription)
@@ -68,7 +68,7 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
         }
     }
     
-    func setupUI(completion: (_ isFile: Bool) -> Void) {
+    func setupUI(completion: (Bool) -> Void) {
         if type == "file" {
             completion(true)
         } else {

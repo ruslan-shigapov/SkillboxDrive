@@ -18,6 +18,11 @@ class RecentsViewController: UITableViewController {
             viewModel.fetchItems { [weak self] in
                 self?.updateUI()
             }
+            viewModel.backButtonWasPressed = { [weak self] in
+                self?.viewModel.fetchItems {
+                    self?.updateUI()
+                }
+            }
         }
     }
     
@@ -33,6 +38,7 @@ class RecentsViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let detailsViewController = segue.destination as? DetailsViewController else { return }
         detailsViewController.viewModel = sender as? DetailsViewModelProtocol
+        detailsViewController.delegate = viewModel as DetailsViewControllerDelegate
     }
     
     // MARK: - Table view data source
@@ -65,8 +71,8 @@ class RecentsViewController: UITableViewController {
     }
     
     private func updateUI() {
-        alertView.frame.size.height = viewModel.isConnected ? 0 : 40
-        alertView.isHidden = viewModel.isConnected ? true : false
+        alertView.frame.size.height = viewModel.networkIsConnected ? 0 : 40
+        alertView.isHidden = viewModel.networkIsConnected ? true : false
         tableView.reloadData()
     }
 }

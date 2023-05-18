@@ -9,10 +9,10 @@ import Foundation
 
 protocol AuthViewControllerDelegate {
     var tokenWasReceived: (() -> Void)? { get set }
-    var tokenIsExist: Bool { get }
 }
 
 protocol LoginViewModelProtocol: AuthViewControllerDelegate {
+    var tokenIsExist: Bool { get }
     func startPresentation(completion: () -> Void)
 }
 
