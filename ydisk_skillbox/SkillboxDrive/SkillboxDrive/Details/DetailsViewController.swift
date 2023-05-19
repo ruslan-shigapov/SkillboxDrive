@@ -56,33 +56,31 @@ class DetailsViewController: UIViewController {
     private func setupUI() {
         nameLabel.text = viewModel.name
         infoLabel.text = viewModel.created
-        viewModel.fetchItem { [unowned self] in
-            switch viewModel.itemType {
+        viewModel.fetchItem { [weak self] in
+            switch self?.viewModel.itemType {
             case .image:
-                imageView.isHidden = false
-                guard let imageData = viewModel.itemData else { return }
-                imageView.image = UIImage(data: imageData)
-                activityIndicator.stopAnimating()
+                self?.imageView.isHidden = false
+                guard let imageData = self?.viewModel.itemData else { return }
+                self?.imageView.image = UIImage(data: imageData)
+                self?.activityIndicator.stopAnimating()
             case .pdf:
-                pdfView.isHidden = false
-                guard let pdfData = viewModel.itemData else { return }
+                self?.pdfView.isHidden = false
+                guard let pdfData = self?.viewModel.itemData else { return }
                 guard let document = PDFDocument(data: pdfData) else { return }
-                pdfView.document = document
-                pdfView.autoScales = true
-                activityIndicator.stopAnimating()
+                self?.pdfView.document = document
+                self?.pdfView.autoScales = true
+                self?.activityIndicator.stopAnimating()
             case .document:
-                webView.isHidden = false
-                guard let request = viewModel.request else { return }
-                webView.load(request)
-                webView.navigationDelegate = self
+                self?.webView.isHidden = false
+                guard let request = self?.viewModel.request else { return }
+                self?.webView.load(request)
+                self?.webView.navigationDelegate = self
+            case .none: return
             }
         }
     }
-}
 
-// MARK: - Alert Controllers
-extension DetailsViewController {
-    
+    // MARK: - Alert Controllers    
     private func showEditAlert(completion: @escaping (String) -> Void) {
         let alert = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
         alert.setValue(
@@ -100,9 +98,9 @@ extension DetailsViewController {
         }
         alert.addAction(cancelAction)
         alert.addAction(doneAction)
-        alert.addTextField { [unowned self] textField in
+        alert.addTextField { [weak self] textField in
             textField.placeholder = "Name"
-            textField.text = viewModel.name
+            textField.text = self?.viewModel.name
         }
         present(alert, animated: true)
     }
@@ -124,22 +122,28 @@ extension DetailsViewController {
     private func showShareAlert() {
         let alert = UIAlertController(title: "Share this", message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let shareFileAction = UIAlertAction(title: "File", style: .default) { [unowned self] _ in
-            guard let itemData = viewModel.itemData else { return }
+        let shareFileAction = UIAlertAction(title: "File", style: .default) { [weak self] _ in
+            guard let itemData = self?.viewModel.itemData else { return }
             let shareController = UIActivityViewController(activityItems: [itemData], applicationActivities: nil)
-            present(shareController, animated: true)
+            self?.present(shareController, animated: true)
         }
-        let shareLinkAction = UIAlertAction(title: "Link", style: .default) { [unowned self] _ in
-            viewModel.shareItemLink { link in
+        let shareLinkAction = UIAlertAction(title: "Link", style: .default) { [weak self] _ in
+            self?.viewModel.shareItemLink { link in
+                guard let link else { return }
                 let shareController = UIActivityViewController(activityItems: [link], applicationActivities: nil)
-                self.present(shareController, animated: true)
+                self?.present(shareController, animated: true)
             }
         }
         shareFileAction.setValue(UIColor.black, forKey: "titleTextColor")
         shareLinkAction.setValue(UIColor.black, forKey: "titleTextColor")
         alert.addAction(cancelAction)
-        alert.addAction(shareFileAction)
-        alert.addAction(shareLinkAction)
+        switch viewModel.itemType {
+        case .image, .pdf:
+            alert.addAction(shareFileAction)
+            alert.addAction(shareLinkAction)
+        case .document:
+            alert.addAction(shareLinkAction)
+        }
         present(alert, animated: true)
     }
 }

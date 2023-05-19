@@ -19,7 +19,7 @@ protocol DetailsViewModelProtocol {
     init(item: Item)
     func fetchItem(completion: @escaping () -> Void)
     func deleteItem(completion: @escaping () -> Void)
-    func shareItemLink(completion: @escaping (String) -> Void)
+    func shareItemLink(completion: @escaping (String?) -> Void)
     func renameItem(to name: String, completion: @escaping () -> Void)
 }
 
@@ -80,7 +80,7 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func deleteItem(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toDelete.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toItem.rawValue) else { return }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
         NetworkManager.shared.sendRequest(with: Empty.self, to: url, byMethod: .delete) { result in
@@ -93,24 +93,15 @@ class DetailsViewModel: DetailsViewModelProtocol {
         }
     }
     
-    func shareItemLink(completion: @escaping (String) -> Void) {
+    func shareItemLink(completion: @escaping (String?) -> Void) {
         guard var urlComponents = URLComponents(string: Link.toShare.rawValue) else { return }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.sendRequest(with: ItemLink.self, to: url, byMethod: .put) { [unowned self] result in
+        NetworkManager.shared.sendRequest(with: ItemLink.self, to: url, byMethod: .put) { [weak self] result in
             switch result {
             case .success(_):
-                guard var urlComponents = URLComponents(string: Link.toDelete.rawValue) else { return }
-                urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
-                guard let url = urlComponents.url else { return }
-                NetworkManager.shared.fetch(Item.self, from: url) { result in
-                    switch result {
-                    case .success(let item):
-                        guard let link = item.public_url else { return }
-                        completion(link)
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                    }
+                self?.fetchItemLink { itemLink in
+                    completion(itemLink)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -157,6 +148,20 @@ class DetailsViewModel: DetailsViewModelProtocol {
             guard let url = URL(string: url) else { return }
             request = URLRequest(url: url)
             completion()
+        }
+    }
+    
+    private func fetchItemLink(completion: @escaping (String?) -> Void) {
+        guard var urlComponents = URLComponents(string: Link.toItem.rawValue) else { return }
+        urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
+        guard let url = urlComponents.url else { return }
+        NetworkManager.shared.fetch(Item.self, from: url) { result in
+            switch result {
+            case .success(let item):
+                completion(item.public_url)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }

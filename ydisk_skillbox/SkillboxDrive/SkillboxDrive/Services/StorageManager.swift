@@ -20,6 +20,7 @@ class StorageManager {
         }
         return container
     }()
+    
     private var viewContext: NSManagedObjectContext {
         persistentContainer.viewContext
     }

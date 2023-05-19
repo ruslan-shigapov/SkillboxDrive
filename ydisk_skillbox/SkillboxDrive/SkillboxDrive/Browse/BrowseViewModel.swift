@@ -7,50 +7,59 @@
 
 import Foundation
 
-protocol BrowseViewModelProtocol {
-    func fetchItems(completion: @escaping (Bool) -> Void)
+protocol BrowseViewModelProtocol: DetailsViewControllerDelegate {
+    var networkIsConnected: Bool { get }
+    func fetchItems(completion: @escaping () -> Void)
     func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void)
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
     func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void)
+    func checkDirectory(completion: () -> Void)
 }
 
 class BrowseViewModel: BrowseViewModelProtocol {
     
+    var backButtonWasPressed: (() -> Void)?
+    var networkIsConnected = false
+    
     private var items: [Item] = []
     private var offset = 20
     
-    func fetchItems(completion: @escaping (Bool) -> Void) {
+    func fetchItems(completion: @escaping () -> Void) {
         guard let url =  URL(string: Link.toBrowse.rawValue) else { return }
         NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
             switch result {
             case .success(let item):
-                guard let items = item._embedded?.items else { return }
-                self?.items = items
+                self?.networkIsConnected = true
+                self?.items = item._embedded?.items ?? []
                 self?.updateCache()
-                completion(true)
+                completion()
             case .failure(let error):
-                print(error)
+                self?.networkIsConnected = false
                 self?.fetchCache()
-                completion(false)
+                print(error.localizedDescription)
+                completion()
             }
         }
     }
     
     func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void) {
         if items.count == offset, indexPath.row == items.count - 1 {
-            guard let url = URL(string: Link.toRecents.rawValue + "&offset=\(offset)") else { return }
+            guard var urlComponents = URLComponents(string: Link.toRecents.rawValue) else { return }
+            urlComponents.queryItems = [URLQueryItem(name: "offset", value: String(offset))]
+            guard let url = urlComponents.url else { return }
             NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
                 switch result {
                 case .success(let item):
                     self?.offset += 20
-                    guard let items = item._embedded?.items else { return }
-                    self?.items.append(contentsOf: items)
+                    self?.items.append(contentsOf: item._embedded?.items ?? [])
                     self?.updateCache()
                     completion()
                 case .failure(let error):
-                    print(error)
+                    self?.networkIsConnected = false
+                    print(error.localizedDescription)
+                    completion()
                 }
             }
         }
@@ -69,7 +78,13 @@ class BrowseViewModel: BrowseViewModelProtocol {
     }
     
     func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void) {
-        if viewModel.preview != nil {
+        if viewModel.preview != nil, networkIsConnected == true {
+            completion()
+        }
+    }
+    
+    func checkDirectory(completion: () -> Void) {
+        if items.isEmpty {
             completion()
         }
     }

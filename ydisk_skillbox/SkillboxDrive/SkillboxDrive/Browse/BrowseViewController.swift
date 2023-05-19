@@ -15,8 +15,8 @@ class BrowseViewController: UITableViewController {
     // MARK: - Private Properties
     private var viewModel: BrowseViewModelProtocol! {
         didSet {
-            viewModel.fetchItems { [unowned self] isConnected in
-                updateUI(isConnected)
+            viewModel.fetchItems { [weak self] in
+                self?.updateUI()
             }
         }
     }
@@ -31,7 +31,9 @@ class BrowseViewController: UITableViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        guard let detailsViewController = segue.destination as? DetailsViewController else { return }
+        detailsViewController.viewModel = sender as? DetailsViewModelProtocol
+        detailsViewController.delegate = viewModel as DetailsViewControllerDelegate
     }
     
     // MARK: - Table view data source
@@ -49,25 +51,48 @@ class BrowseViewController: UITableViewController {
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let detailsViewModel = viewModel.getDetailsViewModel(at: indexPath)
+        viewModel.checkItem(from: detailsViewModel) {
+            performSegue(withIdentifier: "toDetails", sender: detailsViewModel)
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        viewModel.fetchExtraItems(afterRowAt: indexPath) {
-            tableView.reloadData()
+        viewModel.fetchExtraItems(afterRowAt: indexPath) { [weak self] in
+            self?.updateUI()
         }
     }
     
     // MARK: - Private Methods
     @objc private func refresh(sender: UIRefreshControl) {
-        viewModel.fetchItems { [unowned self] isConnected in
-            updateUI(isConnected)
+        viewModel.fetchItems { [weak self] in
+            self?.updateUI()
             sender.endRefreshing()
         }
     }
     
-    private func updateUI(_ isConnected: Bool) {
-        alertView.frame.size.height = isConnected ? 0 : 40
-        alertView.isHidden = isConnected ? true : false
+    private func updateUI() {
+        alertView.frame.size.height = viewModel.networkIsConnected ? 0 : 40
+        alertView.isHidden = viewModel.networkIsConnected ? true : false
         tableView.reloadData()
+        viewModel.checkDirectory {
+            showAlert()
+        }
+    }
+    
+    // MARK: - Alert Controllers
+    func showAlert() {
+        let title = "The directory doesn't contain files"
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.setValue(
+            NSAttributedString(
+                string: title,
+                attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .light)]
+            ),
+            forKey: "attributedTitle"
+        )
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
 }

@@ -37,8 +37,8 @@ extension AuthViewController: WKNavigationDelegate {
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url {
-            viewModel.getToken(from: url) { [weak self] in
-                self?.dismiss(animated: true) {
+            viewModel.getToken(from: url) {
+                dismiss(animated: true) { [weak self] in
                     self?.delegate.tokenWasReceived?()
                 }
             }

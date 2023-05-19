@@ -8,21 +8,18 @@
 import UIKit
 
 protocol ItemCellViewModelProtocol {
-    var imageData: Data? { get }
     var name: String { get }
     var preview: String? { get }
     var information: String { get }
     var created: String { get }
     var type: String { get }
     init(item: Item)
-    func fetchImageData(completion: @escaping () -> Void)
+    func fetchImageData(completion: @escaping (Data) -> Void)
     func setupUI(completion: (Bool) -> Void)
 }
 
 class ItemCellViewModel: ItemCellViewModelProtocol {
-    
-    var imageData: Data?
-    
+        
     var name: String {
         guard let name = item.name else { return "Unknown name" }
         return NSString(string: name).deletingPathExtension
@@ -55,13 +52,12 @@ class ItemCellViewModel: ItemCellViewModelProtocol {
         self.item = item
     }
     
-    func fetchImageData(completion: @escaping () -> Void) {
+    func fetchImageData(completion: @escaping (Data) -> Void) {
         guard let url = preview else { return }
-        NetworkManager.shared.fetchData(from: url) { [weak self] result in
+        NetworkManager.shared.fetchData(from: url) { result in
             switch result {
             case .success(let imageData):
-                self?.imageData = imageData
-                completion()
+                completion(imageData)
             case .failure(let error):
                 print(error.localizedDescription)
             }

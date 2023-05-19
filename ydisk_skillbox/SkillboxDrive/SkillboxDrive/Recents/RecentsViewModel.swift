@@ -39,7 +39,7 @@ class RecentsViewModel: RecentsViewModelProtocol {
             case .failure(let error):
                 self?.networkIsConnected = false
                 self?.fetchCache()
-                print(error)
+                print(error.localizedDescription)
                 completion()
             }
         }
