@@ -85,6 +85,13 @@ extension DetailsViewController {
     
     private func showEditAlert(completion: @escaping (String) -> Void) {
         let alert = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
+        alert.setValue(
+            NSAttributedString(
+                string: "Rename",
+                attributes: [.font: UIFont.systemFont(ofSize: 17, weight: .medium)]
+            ),
+            forKey: "attributedTitle"
+        )
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let doneAction = UIAlertAction(title: "Done", style: .default) { _ in
             guard let newValue = alert.textFields?.first?.text else { return }
@@ -106,7 +113,7 @@ extension DetailsViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] _ in
             viewModel.deleteItem {
-                // dismiss
+                self.backButtonPressed()
             }
         }
         alert.addAction(cancelAction)
@@ -117,13 +124,19 @@ extension DetailsViewController {
     private func showShareAlert() {
         let alert = UIAlertController(title: "Share this", message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let shareFileAction = UIAlertAction(title: "File", style: .default) { _ in
-            // Action
+        let shareFileAction = UIAlertAction(title: "File", style: .default) { [unowned self] _ in
+            guard let itemData = viewModel.itemData else { return }
+            let shareController = UIActivityViewController(activityItems: [itemData], applicationActivities: nil)
+            present(shareController, animated: true)
         }
-        let shareLinkAction = UIAlertAction(title: "Link", style: .default) { _ in
-            // Action
+        let shareLinkAction = UIAlertAction(title: "Link", style: .default) { [unowned self] _ in
+            viewModel.shareItemLink { link in
+                let shareController = UIActivityViewController(activityItems: [link], applicationActivities: nil)
+                self.present(shareController, animated: true)
+            }
         }
-        // Buttons color ?
+        shareFileAction.setValue(UIColor.black, forKey: "titleTextColor")
+        shareLinkAction.setValue(UIColor.black, forKey: "titleTextColor")
         alert.addAction(cancelAction)
         alert.addAction(shareFileAction)
         alert.addAction(shareLinkAction)

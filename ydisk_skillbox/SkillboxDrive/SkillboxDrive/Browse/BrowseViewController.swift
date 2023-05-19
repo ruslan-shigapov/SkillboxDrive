@@ -15,8 +15,8 @@ class BrowseViewController: UITableViewController {
     // MARK: - Private Properties
     private var viewModel: BrowseViewModelProtocol! {
         didSet {
-            viewModel.fetchItems { [weak self] isConnected in
-                self?.updateUI(isConnected)
+            viewModel.fetchItems { [unowned self] isConnected in
+                updateUI(isConnected)
             }
         }
     }
@@ -52,15 +52,15 @@ class BrowseViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        viewModel.fetchExtraItems(afterRowAt: indexPath) { [weak self] in
-            self?.tableView.reloadData()
+        viewModel.fetchExtraItems(afterRowAt: indexPath) {
+            tableView.reloadData()
         }
     }
     
     // MARK: - Private Methods
     @objc private func refresh(sender: UIRefreshControl) {
-        viewModel.fetchItems { [weak self] isConnected in
-            self?.updateUI(isConnected)
+        viewModel.fetchItems { [unowned self] isConnected in
+            updateUI(isConnected)
             sender.endRefreshing()
         }
     }

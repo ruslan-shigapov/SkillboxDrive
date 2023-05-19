@@ -14,6 +14,7 @@ enum Link: String {
     case toDetails = "https://cloud-api.yandex.net/v1/disk/resources/download"
     case toEdit = "https://cloud-api.yandex.net/v1/disk/resources/move"
     case toDelete = "https://cloud-api.yandex.net/v1/disk/resources"
+    case toShare = "https://cloud-api.yandex.net/v1/disk/resources/publish"
 }
 
 class NetworkManager {
@@ -55,12 +56,13 @@ class NetworkManager {
             }
     }
     
-    func sendRequest(to url: URL,
-                     byMethod method: HTTPMethod,
-                     completion: @escaping (Result<ItemLink, AFError>) -> Void) {
+    func sendRequest<T: Decodable>(with type: T.Type,
+                                   to url: URL,
+                                   byMethod method: HTTPMethod,
+                                   completion: @escaping (Result<T, AFError>) -> Void) {
         AF.request(url, method: method, headers: headers)
             .validate()
-            .responseDecodable(of: ItemLink.self) { response in
+            .responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let value):
                     completion(.success(value))

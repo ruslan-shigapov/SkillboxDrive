@@ -368,7 +368,7 @@
                     </refreshControl>
                     <connections>
                         <outlet property="alertView" destination="QpI-Y4-W7M" id="e3U-P7-acp"/>
-                        <segue destination="NM2-8X-h6q" kind="presentation" identifier="toDetails" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="nbE-ne-IFj"/>
+                        <segue destination="NM2-8X-h6q" kind="presentation" identifier="toDetails" modalPresentationStyle="fullScreen" id="nbE-ne-IFj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8e-2g-n1r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

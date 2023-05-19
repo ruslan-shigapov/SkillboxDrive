@@ -15,12 +15,12 @@ class RecentsViewController: UITableViewController {
     // MARK: - Private Properties
     private var viewModel: RecentsViewModelProtocol! {
         didSet {
-            viewModel.fetchItems { [weak self] in
-                self?.updateUI()
+            viewModel.fetchItems { [unowned self] in
+                updateUI()
             }
-            viewModel.backButtonWasPressed = { [weak self] in
-                self?.viewModel.fetchItems {
-                    self?.updateUI()
+            viewModel.backButtonWasPressed = { [unowned self] in
+                viewModel.fetchItems {
+                    self.updateUI()
                 }
             }
         }
@@ -64,8 +64,8 @@ class RecentsViewController: UITableViewController {
     
     // MARK: - Private Methods
     @objc private func refresh(sender: UIRefreshControl) {
-        viewModel.fetchItems { [weak self] in
-            self?.updateUI()
+        viewModel.fetchItems { [unowned self] in
+            updateUI()
             sender.endRefreshing()
         }
     }

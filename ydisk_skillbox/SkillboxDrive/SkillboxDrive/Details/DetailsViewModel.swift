@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol DetailsViewModelProtocol {
     var itemData: Data? { get }
@@ -18,6 +19,7 @@ protocol DetailsViewModelProtocol {
     init(item: Item)
     func fetchItem(completion: @escaping () -> Void)
     func deleteItem(completion: @escaping () -> Void)
+    func shareItemLink(completion: @escaping (String) -> Void)
     func renameItem(to name: String, completion: @escaping () -> Void)
 }
 
@@ -25,8 +27,7 @@ class DetailsViewModel: DetailsViewModelProtocol {
     
     var itemData: Data?
     var request: URLRequest?
-    var deleted = false
-    
+
     var name: String {
         guard let name = item.name else { return "Unknown name" }
         return NSString(string: name).deletingPathExtension
@@ -82,10 +83,35 @@ class DetailsViewModel: DetailsViewModelProtocol {
         guard var urlComponents = URLComponents(string: Link.toDelete.rawValue) else { return }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.sendRequest(to: url, byMethod: .delete) { result in
+        NetworkManager.shared.sendRequest(with: Empty.self, to: url, byMethod: .delete) { result in
             switch result {
             case .success(_):
                 completion()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func shareItemLink(completion: @escaping (String) -> Void) {
+        guard var urlComponents = URLComponents(string: Link.toShare.rawValue) else { return }
+        urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
+        guard let url = urlComponents.url else { return }
+        NetworkManager.shared.sendRequest(with: ItemLink.self, to: url, byMethod: .put) { [unowned self] result in
+            switch result {
+            case .success(_):
+                guard var urlComponents = URLComponents(string: Link.toDelete.rawValue) else { return }
+                urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
+                guard let url = urlComponents.url else { return }
+                NetworkManager.shared.fetch(Item.self, from: url) { result in
+                    switch result {
+                    case .success(let item):
+                        guard let link = item.public_url else { return }
+                        completion(link)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -99,7 +125,7 @@ class DetailsViewModel: DetailsViewModelProtocol {
             URLQueryItem(name: "path", value: changePath(by: name))
         ]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.sendRequest(to: url, byMethod: .post) { result in
+        NetworkManager.shared.sendRequest(with: ItemLink.self, to: url, byMethod: .post) { result in
             switch result {
             case .success(_):
                 completion()

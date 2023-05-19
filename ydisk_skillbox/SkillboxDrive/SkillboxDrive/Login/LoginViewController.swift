@@ -18,8 +18,8 @@ class LoginViewController: UIViewController {
                     present(onboardingVC, animated: true)
                 }
             }
-            viewModel.tokenWasReceived = { [weak self] in
-                self?.performSegue(withIdentifier: "toRecents", sender: nil)
+            viewModel.tokenWasReceived = { [unowned self] in
+                performSegue(withIdentifier: "toRecents", sender: nil)
             }
         }
     }
