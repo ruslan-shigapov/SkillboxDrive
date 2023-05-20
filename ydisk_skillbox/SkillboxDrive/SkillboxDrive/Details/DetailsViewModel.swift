@@ -11,6 +11,7 @@ import Alamofire
 protocol DetailsViewModelProtocol {
     var itemData: Data? { get }
     var request: URLRequest? { get }
+    var imageIsZoomed: Bool { get set } 
     var name: String { get }
     var preview: String? { get }
     var created: String { get }
@@ -27,6 +28,7 @@ class DetailsViewModel: DetailsViewModelProtocol {
     
     var itemData: Data?
     var request: URLRequest?
+    var imageIsZoomed = false
 
     var name: String {
         guard let name = item.name else { return "Unknown name" }

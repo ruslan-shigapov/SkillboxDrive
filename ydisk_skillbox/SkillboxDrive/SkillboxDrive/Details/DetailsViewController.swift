@@ -18,6 +18,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var pdfView: PDFView!
     @IBOutlet var webView: WKWebView!
+    @IBOutlet var imageViewHeight: NSLayoutConstraint!
     
     // MARK: - Public Properties
     var delegate: DetailsViewControllerDelegate!
@@ -27,6 +28,9 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(zoomView))
+        tap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(tap)
     }
     
     // MARK: - IB Actions
@@ -78,6 +82,13 @@ class DetailsViewController: UIViewController {
             case .none: return
             }
         }
+    }
+
+    @objc private func zoomView() {
+        viewModel.imageIsZoomed.toggle()
+        imageViewHeight.constant = viewModel.imageIsZoomed
+        ? view.safeAreaLayoutGuide.layoutFrame.height
+        : 450
     }
 
     // MARK: - Alert Controllers    
@@ -156,3 +167,10 @@ extension DetailsViewController: WKNavigationDelegate {
     }
 }
 
+// MARK: - UIScrollViewDelegate
+extension DetailsViewController: UIScrollViewDelegate {
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        imageView
+    }
+}

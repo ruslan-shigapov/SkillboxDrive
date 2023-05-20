@@ -152,7 +152,7 @@
         <!--Profile-->
         <scene sceneID="7rU-sD-TiO">
             <objects>
-                <viewController id="3ls-tU-CG6" sceneMemberID="viewController">
+                <viewController id="3ls-tU-CG6" customClass="ProfileViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8cf-UJ-o5Q">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,10 +384,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCj-U6-sM4">
-                                <rect key="frame" x="0.0" y="176" width="393" height="500"/>
+                                <rect key="frame" x="0.0" y="201" width="393" height="450"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="500" id="cWf-cT-Bym"/>
+                                    <constraint firstAttribute="height" constant="450" id="lpd-9D-0qU"/>
                                 </constraints>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -395,25 +395,23 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1O-JP-Jqs" customClass="PDFView">
-                                <rect key="frame" x="0.0" y="176" width="393" height="500"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="201" width="393" height="450"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="500" id="7So-ir-2ok" userLabel="height = 500"/>
+                                    <constraint firstAttribute="height" constant="450" id="NeN-Dd-fYK"/>
                                 </constraints>
                             </view>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1dA-qW-AOI">
-                                <rect key="frame" x="0.0" y="176" width="393" height="500"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="0.0" y="201" width="393" height="450"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="500" id="D9k-gn-TXi" userLabel="height = 500"/>
+                                    <constraint firstAttribute="height" constant="450" id="vV3-Q3-QBa"/>
                                 </constraints>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Asb-ae-ciD">
                                 <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
-                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3h-HY-sHV">
-                                <rect key="frame" x="25" y="60" width="25" height="25"/>
+                                <rect key="frame" x="25" y="70" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="Opl-eC-HA9"/>
                                     <constraint firstAttribute="width" secondItem="l3h-HY-sHV" secondAttribute="height" multiplier="1:1" id="WT6-N5-nbv"/>
@@ -425,7 +423,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5r-vg-xak">
-                                <rect key="frame" x="343" y="60" width="25" height="25"/>
+                                <rect key="frame" x="343" y="70" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="e5r-vg-xak" secondAttribute="height" multiplier="1:1" id="azg-Gm-gMt"/>
                                     <constraint firstAttribute="height" constant="25" id="rkZ-BI-Cu5"/>
@@ -437,7 +435,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="xvX-J1-44s">
-                                <rect key="frame" x="96.666666666666686" y="60" width="200" height="37"/>
+                                <rect key="frame" x="96.666666666666686" y="70" width="200" height="37"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsp-5v-e68">
                                         <rect key="frame" x="76.666666666666671" y="0.0" width="46.666666666666671" height="17"/>
@@ -491,7 +489,7 @@
                             <constraint firstItem="Q2z-ZR-Xdl" firstAttribute="leading" secondItem="gtq-bv-G2D" secondAttribute="leading" constant="25" id="CKX-uy-BB6"/>
                             <constraint firstItem="xvX-J1-44s" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="l3h-HY-sHV" secondAttribute="trailing" constant="10" id="DsS-GO-XbK"/>
                             <constraint firstItem="1dA-qW-AOI" firstAttribute="leading" secondItem="gtq-bv-G2D" secondAttribute="leading" id="GHV-Ht-oTB"/>
-                            <constraint firstItem="e5r-vg-xak" firstAttribute="top" secondItem="LEt-yV-rSg" secondAttribute="top" constant="60" id="GnT-KP-sbF"/>
+                            <constraint firstItem="e5r-vg-xak" firstAttribute="top" secondItem="LEt-yV-rSg" secondAttribute="top" constant="70" id="GnT-KP-sbF"/>
                             <constraint firstItem="Y1O-JP-Jqs" firstAttribute="centerY" secondItem="gtq-bv-G2D" secondAttribute="centerY" id="H3I-VS-h3M"/>
                             <constraint firstItem="gtq-bv-G2D" firstAttribute="trailing" secondItem="Y1O-JP-Jqs" secondAttribute="trailing" id="Lrh-ge-gPg"/>
                             <constraint firstItem="gtq-bv-G2D" firstAttribute="bottom" secondItem="Q2z-ZR-Xdl" secondAttribute="bottom" constant="30" id="M4d-Bn-gqc"/>
@@ -505,8 +503,8 @@
                             <constraint firstItem="yZH-Sm-CP0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Q2z-ZR-Xdl" secondAttribute="trailing" constant="220" id="jZw-Vk-NmU"/>
                             <constraint firstItem="gtq-bv-G2D" firstAttribute="trailing" secondItem="bCj-U6-sM4" secondAttribute="trailing" id="kUA-ch-Itk"/>
                             <constraint firstItem="gtq-bv-G2D" firstAttribute="trailing" secondItem="1dA-qW-AOI" secondAttribute="trailing" id="pw0-a4-h0R"/>
-                            <constraint firstItem="xvX-J1-44s" firstAttribute="top" secondItem="LEt-yV-rSg" secondAttribute="top" constant="60" id="rXy-XV-MR6"/>
-                            <constraint firstItem="l3h-HY-sHV" firstAttribute="top" secondItem="LEt-yV-rSg" secondAttribute="top" constant="60" id="xWK-27-blj"/>
+                            <constraint firstItem="xvX-J1-44s" firstAttribute="top" secondItem="LEt-yV-rSg" secondAttribute="top" constant="70" id="rXy-XV-MR6"/>
+                            <constraint firstItem="l3h-HY-sHV" firstAttribute="top" secondItem="LEt-yV-rSg" secondAttribute="top" constant="70" id="xWK-27-blj"/>
                             <constraint firstItem="l3h-HY-sHV" firstAttribute="leading" secondItem="gtq-bv-G2D" secondAttribute="leading" constant="25" id="yYJ-S3-nmA"/>
                         </constraints>
                     </view>
@@ -514,6 +512,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="Asb-ae-ciD" id="s5i-32-EIR"/>
                         <outlet property="imageView" destination="1dA-qW-AOI" id="Tf5-2u-7mK"/>
+                        <outlet property="imageViewHeight" destination="vV3-Q3-QBa" id="6qa-Q9-5fJ"/>
                         <outlet property="infoLabel" destination="PUo-8f-6Va" id="UZ7-2F-3UH"/>
                         <outlet property="nameLabel" destination="dsp-5v-e68" id="SrV-NH-Xiq"/>
                         <outlet property="pdfView" destination="Y1O-JP-Jqs" id="crf-fm-EnZ"/>

@@ -51,6 +51,9 @@ class BrowseViewController: UITableViewController {
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Go to other folders
+        
         let detailsViewModel = viewModel.getDetailsViewModel(at: indexPath)
         viewModel.checkItem(from: detailsViewModel) {
             performSegue(withIdentifier: "toDetails", sender: detailsViewModel)
