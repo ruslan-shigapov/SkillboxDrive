@@ -12,6 +12,7 @@
 		E4033BC529B9A1A80069CA13 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4033BC429B9A1A80069CA13 /* OnboardingViewController.swift */; };
 		E417A8242A18CEEB00C3E69E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417A8232A18CEEB00C3E69E /* ProfileViewModel.swift */; };
 		E417A8262A18CF8300C3E69E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417A8252A18CF8300C3E69E /* ProfileViewController.swift */; };
+		E417A8292A18E2FB00C3E69E /* ALProgressView in Frameworks */ = {isa = PBXBuildFile; productRef = E417A8282A18E2FB00C3E69E /* ALProgressView */; };
 		E417B67C29F009F80042B6FD /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67B29F009F80042B6FD /* AuthViewController.swift */; };
 		E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67E29F0311D0042B6FD /* RecentsViewController.swift */; };
 		E42D29A62A02765A0035F5A9 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42D29A52A02765A0035F5A9 /* StorageManager.swift */; };
@@ -77,6 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4E5F0D329FD386C00241D8F /* Alamofire in Frameworks */,
+				E417A8292A18E2FB00C3E69E /* ALProgressView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +267,7 @@
 			name = SkillboxDrive;
 			packageProductDependencies = (
 				E4E5F0D229FD386C00241D8F /* Alamofire */,
+				E417A8282A18E2FB00C3E69E /* ALProgressView */,
 			);
 			productName = SkillboxDrive;
 			productReference = E485F72429ADACAB00F84055 /* SkillboxDrive.app */;
@@ -296,6 +299,7 @@
 			mainGroup = E485F71B29ADACAB00F84055;
 			packageReferences = (
 				E4E5F0D129FD386B00241D8F /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E417A8272A18E2FA00C3E69E /* XCRemoteSwiftPackageReference "ALProgressView" */,
 			);
 			productRefGroup = E485F72529ADACAB00F84055 /* Products */;
 			projectDirPath = "";
@@ -578,6 +582,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E417A8272A18E2FA00C3E69E /* XCRemoteSwiftPackageReference "ALProgressView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alxrguz/ALProgressView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		E4E5F0D129FD386B00241D8F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -589,6 +601,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E417A8282A18E2FB00C3E69E /* ALProgressView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E417A8272A18E2FA00C3E69E /* XCRemoteSwiftPackageReference "ALProgressView" */;
+			productName = ALProgressView;
+		};
 		E4E5F0D229FD386C00241D8F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E4E5F0D129FD386B00241D8F /* XCRemoteSwiftPackageReference "Alamofire" */;
