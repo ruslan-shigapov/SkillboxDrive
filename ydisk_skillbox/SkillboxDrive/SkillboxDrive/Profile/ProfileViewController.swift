@@ -19,33 +19,36 @@ class ProfileViewController: UIViewController {
     @IBOutlet var availableMemoryLabel: UILabel!
     
     private lazy var progressRing = ALProgressRing()
-    private let capacity = 20
-    private let usedMemory = 4
-    private let availableMemory = 16
+    private var viewModel: ProfileViewModelProtocol! {
+        didSet {
+            viewModel.fetchDiskInfo { [weak self] in
+                self?.capacityLabel.text = self?.viewModel.totalSpaceInfo
+                self?.usedMemoryLabel.text = self?.viewModel.usedSpaceInfo
+                self?.availableMemoryLabel.text = self?.viewModel.availableSpaceInfo
+                self?.progressRing.setProgress(self?.viewModel.progress ?? 0, animated: true)
+            }
+        }
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        viewModel = ProfileViewModel()
         setupUI()
         setupConstraints()
-        setupProgressRing()
     }
     
     @IBAction func exitButtonPressed(_ sender: UIBarButtonItem) {
         showLogOutAlert()
     }
-    
-    // Fetch data
-    
+        
     private func setupUI() {
         progressView.addSubview(progressRing)
+        setupProgressRing()
         publishedFilesButton.layer.cornerRadius = 10
         publishedFilesButton.layer.shadowOpacity = 0.3
         publishedFilesButton.layer.shadowColor = UIColor.black.cgColor
         publishedFilesButton.layer.shadowRadius = 12
         circleViews.forEach { $0.layer.cornerRadius = $0.frame.width / 2 }
-        capacityLabel.text = "\(capacity) GB"
-        usedMemoryLabel.text = "\(usedMemory) GB - used"
-        availableMemoryLabel.text = "\(availableMemory) GB - available"
     }
     
     private func setupConstraints() {
@@ -57,8 +60,6 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupProgressRing() {
-        let progress = Float(usedMemory) / Float(capacity)
-        progressRing.setProgress(progress, animated: true)
         progressRing.startColor = circleViews[0].backgroundColor ?? .systemPink
         progressRing.endColor = circleViews[0].backgroundColor ?? .systemPink
         progressRing.grooveColor = circleViews[1].backgroundColor ?? .systemGray
