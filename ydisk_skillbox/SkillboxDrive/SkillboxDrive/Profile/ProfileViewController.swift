@@ -10,6 +10,7 @@ import ALProgressView
 
 class ProfileViewController: UIViewController {
 
+    // MARK: - IB Outlets
     @IBOutlet var progressView: UIView!
     @IBOutlet var publishedFilesButton: UIView!
     @IBOutlet var circleViews: [UIView]!
@@ -18,6 +19,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet var usedMemoryLabel: UILabel!
     @IBOutlet var availableMemoryLabel: UILabel!
     
+    // MARK: - Private Properties
     private lazy var progressRing = ALProgressRing()
     private var viewModel: ProfileViewModelProtocol! {
         didSet {
@@ -30,6 +32,7 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    // MARK: - Override Methods
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewModel = ProfileViewModel()
@@ -37,10 +40,16 @@ class ProfileViewController: UIViewController {
         setupConstraints()
     }
     
+    // MARK: - IB Actions
     @IBAction func exitButtonPressed(_ sender: UIBarButtonItem) {
         showLogOutAlert()
     }
-        
+      
+    @IBAction func publishedFilesButtonPressed() {
+        performSegue(withIdentifier: "toPublished", sender: nil)
+    }
+    
+    // MARK: - Private Methods
     private func setupUI() {
         progressView.addSubview(progressRing)
         setupProgressRing()

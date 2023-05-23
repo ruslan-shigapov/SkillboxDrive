@@ -28,7 +28,6 @@ class RecentsViewModel: RecentsViewModelProtocol {
     private var items: [Item] = []
     
     func fetchItems(completion: @escaping () -> Void) {
-        guard let url = URL(string: Link.toRecents.rawValue) else { return }
         guard var urlComponents = URLComponents(string: Link.toRecents.rawValue) else { return }
         urlComponents.queryItems = [
             URLQueryItem(name: "limit", value: "30"),

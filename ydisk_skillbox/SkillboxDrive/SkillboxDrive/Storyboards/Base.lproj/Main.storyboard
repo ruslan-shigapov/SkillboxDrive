@@ -200,7 +200,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Kx-GO-OkJ">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Kx-GO-OkJ" customClass="UIControl">
                                 <rect key="frame" x="16" y="503.66666666666674" width="361" height="45"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ForwardArrow" translatesAutoresizingMaskIntoConstraints="NO" id="U5y-rh-I0I">
@@ -226,6 +226,9 @@
                                     <constraint firstItem="U5y-rh-I0I" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OOT-HE-Yib" secondAttribute="trailing" constant="8" symbolic="YES" id="P7f-nk-S3X"/>
                                     <constraint firstAttribute="trailing" secondItem="U5y-rh-I0I" secondAttribute="trailing" constant="15" id="ZA2-lt-8ls"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="publishedFilesButtonPressed" destination="3ls-tU-CG6" eventType="touchUpInside" id="aIu-qM-py8"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLg-TU-Ecz">
                                 <rect key="frame" x="76.666666666666686" y="94" width="240" height="240"/>
@@ -851,13 +854,20 @@
                             <outlet property="delegate" destination="SgQ-X8-DPg" id="3zE-kB-HYC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Published files" id="MvF-t5-Yir"/>
+                    <navigationItem key="navigationItem" title="Published files" id="MvF-t5-Yir">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="BackArrow" id="aj7-FH-9wx">
+                            <color key="tintColor" systemColor="systemGrayColor"/>
+                            <connections>
+                                <action selector="backButtonPressed:" destination="SgQ-X8-DPg" id="pPW-0Q-lIy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="MAA-9L-vnt">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <outlet property="alertView" destination="J6t-8R-Usz" id="l8y-qR-j3D"/>
+                        <outlet property="alertView" destination="J6t-8R-Usz" id="RZO-9Q-sAv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jac-P7-YgK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -872,6 +882,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NYu-ke-PKH">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="17"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

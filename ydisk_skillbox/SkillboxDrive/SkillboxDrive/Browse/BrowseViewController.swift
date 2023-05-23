@@ -114,13 +114,17 @@ class BrowseViewController: UITableViewController {
         activityIndicator.stopAnimating()
         tableView.reloadData()
         viewModel.checkDirectory {
-            let contentView = UIView()
-            tableView.backgroundView = contentView
-            contentView.addSubview(stackView)
-            setupConstraints(on: contentView)
+            setupBackgroundView()
         }
     }
     
+    private func setupBackgroundView() {
+        let contentView = UIView()
+        tableView.backgroundView = contentView
+        contentView.addSubview(stackView)
+        setupConstraints(on: contentView)
+    }
+
     private func setupConstraints(on view: UIView) {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor,

@@ -30,7 +30,6 @@ class BrowseViewModel: BrowseViewModelProtocol {
         guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
         urlComponents.queryItems = [
             URLQueryItem(name: "path", value: "/"),
-            URLQueryItem(name: "limit", value: "20"),
             URLQueryItem(name: "preview_size", value: "25x25")
         ]
         guard let url = urlComponents.url else { return }
@@ -51,11 +50,10 @@ class BrowseViewModel: BrowseViewModelProtocol {
     }
     
     func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void) {
-        if items.count == offset, indexPath.row == items.count - 1 {
+        if items.count == offset, indexPath.row == (items.count - 1) {
             guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
             urlComponents.queryItems = [
                 URLQueryItem(name: "path", value: "/"),
-                URLQueryItem(name: "limit", value: "20"),
                 URLQueryItem(name: "preview_size", value: "25x25"),
                 URLQueryItem(name: "offset", value: String(offset))
             ]
