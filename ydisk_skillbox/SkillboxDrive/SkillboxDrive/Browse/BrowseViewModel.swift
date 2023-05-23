@@ -14,7 +14,7 @@ protocol BrowseViewModelProtocol: DetailsViewControllerDelegate {
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
-    func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void)
+    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: () -> Void)
     func checkDirectory(completion: () -> Void)
 }
 
@@ -27,7 +27,13 @@ class BrowseViewModel: BrowseViewModelProtocol {
     private var offset = 20
     
     func fetchItems(completion: @escaping () -> Void) {
-        guard let url =  URL(string: Link.toBrowse.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
+        urlComponents.queryItems = [
+            URLQueryItem(name: "path", value: "/"),
+            URLQueryItem(name: "limit", value: "20"),
+            URLQueryItem(name: "preview_size", value: "25x25")
+        ]
+        guard let url = urlComponents.url else { return }
         NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
             switch result {
             case .success(let item):
@@ -46,8 +52,13 @@ class BrowseViewModel: BrowseViewModelProtocol {
     
     func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void) {
         if items.count == offset, indexPath.row == items.count - 1 {
-            guard var urlComponents = URLComponents(string: Link.toRecents.rawValue) else { return }
-            urlComponents.queryItems = [URLQueryItem(name: "offset", value: String(offset))]
+            guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
+            urlComponents.queryItems = [
+                URLQueryItem(name: "path", value: "/"),
+                URLQueryItem(name: "limit", value: "20"),
+                URLQueryItem(name: "preview_size", value: "25x25"),
+                URLQueryItem(name: "offset", value: String(offset))
+            ]
             guard let url = urlComponents.url else { return }
             NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
                 switch result {
@@ -77,7 +88,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
         DetailsViewModel(item: items[indexPath.row])
     }
     
-    func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void) {
+    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: () -> Void) {
         if viewModel.preview != nil, networkIsConnected == true {
             completion()
         }

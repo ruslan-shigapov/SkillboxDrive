@@ -81,7 +81,7 @@ class ProfileViewController: UIViewController {
         let alert = UIAlertController(title: "Exit", message: "Are you sure?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .cancel) { _ in
             
-            // Action
+            // TODO: - Quit action
             
         }
         let noAction = UIAlertAction(title: "No", style: .destructive)

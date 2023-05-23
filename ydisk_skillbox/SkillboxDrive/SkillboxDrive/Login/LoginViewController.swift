@@ -12,7 +12,7 @@ class LoginViewController: UIViewController {
     // MARK: - Private Properties
     private var viewModel: LoginViewModelProtocol! {
         didSet {
-            viewModel.startPresentation {
+            viewModel.showPresentation {
                 if let onboardingVC = storyboard?.instantiateViewController(
                     withIdentifier: "OnboardingViewController") as? OnboardingViewController {
                     present(onboardingVC, animated: true)
@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - IB Actions
-    @IBAction func logOnButtonPressed() {
+    @IBAction func loginButtonPressed() {
         viewModel.tokenIsExist
         ? performSegue(withIdentifier: "toRecents", sender: nil)
         : performSegue(withIdentifier: "toAuth", sender: viewModel)

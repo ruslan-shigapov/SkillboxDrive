@@ -24,6 +24,10 @@ class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = AuthViewModel()
+        setupWebView()
+    }
+    
+    private func setupWebView() {
         guard let request = viewModel.request else { return }
         webView.load(request)
         webView.navigationDelegate = self

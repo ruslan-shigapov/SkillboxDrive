@@ -44,14 +44,14 @@
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Log On"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Log In"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="logOnButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Gr-mK-GnL"/>
+                                    <action selector="loginButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Gr-mK-GnL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -834,6 +834,7 @@
                                         <constraint firstItem="xbN-S6-K9P" firstAttribute="top" secondItem="rML-dH-8VB" secondAttribute="top" constant="11" id="9A4-Cx-M59"/>
                                         <constraint firstItem="xbN-S6-K9P" firstAttribute="leading" secondItem="rML-dH-8VB" secondAttribute="leading" constant="18" id="ANJ-hk-ZDL"/>
                                         <constraint firstItem="zGH-a5-Yq0" firstAttribute="top" secondItem="rML-dH-8VB" secondAttribute="top" constant="7" id="NcP-Jb-ISa"/>
+                                        <constraint firstAttribute="trailing" secondItem="zGH-a5-Yq0" secondAttribute="trailing" constant="18" id="Re7-gX-K8b"/>
                                         <constraint firstAttribute="bottom" secondItem="zGH-a5-Yq0" secondAttribute="bottom" constant="7" id="nAz-r9-o9y"/>
                                     </constraints>
                                 </tableViewCellContentView>

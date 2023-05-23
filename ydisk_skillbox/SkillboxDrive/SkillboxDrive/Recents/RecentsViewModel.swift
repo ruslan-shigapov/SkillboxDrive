@@ -17,7 +17,7 @@ protocol RecentsViewModelProtocol: DetailsViewControllerDelegate {
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
-    func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void)
+    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: () -> Void)
 }
 
 class RecentsViewModel: RecentsViewModelProtocol {
@@ -29,6 +29,12 @@ class RecentsViewModel: RecentsViewModelProtocol {
     
     func fetchItems(completion: @escaping () -> Void) {
         guard let url = URL(string: Link.toRecents.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toRecents.rawValue) else { return }
+        urlComponents.queryItems = [
+            URLQueryItem(name: "limit", value: "30"),
+            URLQueryItem(name: "preview_size", value: "25x25")
+        ]
+        guard let url = urlComponents.url else { return }
         NetworkManager.shared.fetch(ItemList.self, from: url) { [weak self] result in
             switch result {
             case .success(let itemList):
@@ -57,7 +63,7 @@ class RecentsViewModel: RecentsViewModelProtocol {
         DetailsViewModel(item: items[indexPath.row])
     }
     
-    func checkItem(from viewModel: DetailsViewModelProtocol, completion: () -> Void) {
+    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: () -> Void) {
         if viewModel.preview != nil, networkIsConnected == true {
             completion()
         }

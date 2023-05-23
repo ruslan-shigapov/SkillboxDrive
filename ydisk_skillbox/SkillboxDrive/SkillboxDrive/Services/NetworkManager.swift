@@ -9,9 +9,8 @@ import Foundation
 import Alamofire
 
 enum Link: String {
-    case toRecents = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded?limit=30&preview_size=25x25"
-    case toBrowse = "https://cloud-api.yandex.net/v1/disk/resources?path=/&limit=20&preview_size=25x25"
-    case toItem = "https://cloud-api.yandex.net/v1/disk/resources"
+    case toRecents = "https://cloud-api.yandex.net/v1/disk/resources/last-uploaded"
+    case toBrowse = "https://cloud-api.yandex.net/v1/disk/resources"
     case toDetails = "https://cloud-api.yandex.net/v1/disk/resources/download"
     case toEdit = "https://cloud-api.yandex.net/v1/disk/resources/move"
     case toShare = "https://cloud-api.yandex.net/v1/disk/resources/publish"

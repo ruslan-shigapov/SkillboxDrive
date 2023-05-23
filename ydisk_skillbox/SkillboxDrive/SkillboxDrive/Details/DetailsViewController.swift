@@ -28,9 +28,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(zoomView))
-        tap.numberOfTapsRequired = 2
-        view.addGestureRecognizer(tap)
+        setupDoubleTap()
     }
     
     // MARK: - IB Actions
@@ -82,6 +80,12 @@ class DetailsViewController: UIViewController {
             case .none: return
             }
         }
+    }
+    
+    private func setupDoubleTap() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(zoomView))
+        tap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(tap)
     }
 
     @objc private func zoomView() {

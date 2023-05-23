@@ -13,7 +13,7 @@ protocol AuthViewControllerDelegate {
 
 protocol LoginViewModelProtocol: AuthViewControllerDelegate {
     var tokenIsExist: Bool { get }
-    func startPresentation(completion: () -> Void)
+    func showPresentation(completion: () -> Void)
 }
 
 class LoginViewModel: LoginViewModelProtocol {
@@ -24,7 +24,7 @@ class LoginViewModel: LoginViewModelProtocol {
         UserDefaults.standard.string(forKey: "token") != nil
     }
     
-    func startPresentation(completion: () -> Void) {
+    func showPresentation(completion: () -> Void) {
         if UserDefaults.standard.bool(forKey: "presentationWasViewed") != true {
             completion()
         }

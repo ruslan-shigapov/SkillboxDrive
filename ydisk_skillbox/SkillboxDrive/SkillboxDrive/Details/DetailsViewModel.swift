@@ -82,7 +82,7 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func deleteItem(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toItem.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
         NetworkManager.shared.sendRequest(with: Empty.self, to: url, byMethod: .delete) { result in
@@ -154,7 +154,7 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     private func fetchItemLink(completion: @escaping (String?) -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toItem.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
         NetworkManager.shared.fetch(Item.self, from: url) { result in
