@@ -41,7 +41,11 @@ class BrowseViewController: UITableViewController {
         didSet {
             viewModel.fetchItems { [weak self] in
                 self?.updateUI()
-                self?.activityIndicator.stopAnimating()
+            }
+            viewModel.backButtonWasPressed = { [weak self] in
+                self?.viewModel.fetchItems {
+                    self?.updateUI()
+                }
             }
         }
     }
@@ -80,12 +84,11 @@ class BrowseViewController: UITableViewController {
             if isFile {
                 performSegue(withIdentifier: "toDetails", sender: detailsViewModel)
             } else {
-//                tableView.backgroundView = activityIndicator
-//                viewModel.fetchItems { [weak self] in
-//                    self?.updateUI()
-//                    self?.activityIndicator.stopAnimating()
-//                    self?.tableView.backgroundView = nil
-//                }
+                tableView.backgroundView = activityIndicator
+                viewModel.fetchItems { [weak self] in
+                    self?.backButton.tintColor = .systemGray
+                    self?.updateUI()
+                }
             }
         }
     }
@@ -100,11 +103,17 @@ class BrowseViewController: UITableViewController {
     
     // MARK: - IB Actions
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
-        
+        viewModel.goToBackScreen {
+            tableView.backgroundView = activityIndicator
+            viewModel.fetchItems { [weak self] in
+                self?.updateUI()
+            }
+        }
     }
     
     // MARK: - Private Methods
     private func setupUI() {
+        backButton.tintColor = .white
         tableView.separatorStyle = .none
         tableView.refreshControl?.addTarget(
             self,
@@ -124,7 +133,11 @@ class BrowseViewController: UITableViewController {
     private func updateUI() {
         alertView.frame.size.height = viewModel.networkIsConnected ? 0 : 40
         alertView.isHidden = viewModel.networkIsConnected ? true : false
+        activityIndicator.stopAnimating()
         tableView.reloadData()
+        viewModel.checkRootDirectory {
+            backButton.tintColor = .white
+        }
         viewModel.checkDirectory {
             setupBackgroundView()
         }

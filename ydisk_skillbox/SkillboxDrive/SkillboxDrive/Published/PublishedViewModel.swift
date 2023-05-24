@@ -116,6 +116,7 @@ class PublishedViewModel: PublishedViewModelProtocol {
     }
     
     private func updateCache() {
+        StorageManager.shared.deleteFiles()
         for item in items {
             StorageManager.shared.saveFile(
                 item.name,

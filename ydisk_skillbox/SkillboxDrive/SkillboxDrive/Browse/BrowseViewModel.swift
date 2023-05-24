@@ -15,7 +15,9 @@ protocol BrowseViewModelProtocol: DetailsViewControllerDelegate {
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
     func checkTransition(by viewModel: DetailsViewModelProtocol, completion: (Bool) -> Void)
+    func goToBackScreen(completion: () -> Void)
     func checkDirectory(completion: () -> Void)
+    func checkRootDirectory(completion: () -> Void)
 }
 
 class BrowseViewModel: BrowseViewModelProtocol {
@@ -64,7 +66,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
                 case .success(let item):
                     self?.offset += 20
                     self?.items.append(contentsOf: item._embedded?.items ?? [])
-                    self?.updateCache()
+                    self?.addCache()
                     completion()
                 case .failure(let error):
                     self?.networkIsConnected = false
@@ -96,8 +98,22 @@ class BrowseViewModel: BrowseViewModelProtocol {
         }
     }
     
+    func goToBackScreen(completion: () -> Void) {
+        path.removeLast()
+        let pathComponents = path.components(separatedBy: "/")
+        path = pathComponents.dropLast().joined(separator: "/")
+        path += "/"
+        completion()
+    }
+    
     func checkDirectory(completion: () -> Void) {
         if items.isEmpty {
+            completion()
+        }
+    }
+    
+    func checkRootDirectory(completion: () -> Void) {
+        if path == "/" {
             completion()
         }
     }
@@ -115,6 +131,20 @@ class BrowseViewModel: BrowseViewModelProtocol {
     }
     
     private func updateCache() {
+        StorageManager.shared.deleteFiles()
+        for item in items {
+            StorageManager.shared.saveFile(
+                item.name,
+                item.preview,
+                item.created,
+                item.type,
+                item.size,
+                fromList: "Browse"
+            )
+        }
+    }
+    
+    private func addCache() {
         for item in items {
             StorageManager.shared.saveFile(
                 item.name,

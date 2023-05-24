@@ -644,7 +644,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cM7-4j-BmE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3904.5801526717555" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="3970" y="367"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hEh-3r-2ms">
@@ -755,13 +755,22 @@
                             <outlet property="delegate" destination="zgz-qe-fbw" id="qF4-dk-WCn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Browse" id="KVW-aS-KBT"/>
+                    <navigationItem key="navigationItem" title="Browse" id="KVW-aS-KBT">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="BackArrow" id="4Hy-US-y3a">
+                            <color key="tintColor" systemColor="systemGrayColor"/>
+                            <connections>
+                                <action selector="backButtonPressed:" destination="zgz-qe-fbw" id="ifH-M1-4tn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="h7K-OO-Azx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
                         <outlet property="alertView" destination="AHR-o6-zac" id="TBb-2r-UTv"/>
+                        <outlet property="backButton" destination="4Hy-US-y3a" id="rM8-5c-1Yh"/>
+                        <segue destination="NM2-8X-h6q" kind="presentation" identifier="toDetails" modalPresentationStyle="fullScreen" id="zhT-w9-qVn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QNj-Kt-0s9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -910,6 +919,9 @@
             <point key="canvasLocation" x="1619" y="1522"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="zhT-w9-qVn"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="AppLogo" width="115" height="115"/>
         <image name="AppName" width="193" height="24"/>
