@@ -89,9 +89,9 @@ class ProfileViewController: UIViewController {
     private func showExitAlert() {
         let alert = UIAlertController(title: "Exit", message: "Are you sure?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .cancel) { _ in
-            
-            // TODO: - Quit action
-            
+            self.dismiss(animated: true) {
+                UserDefaults.standard.removeObject(forKey: "token")
+            }
         }
         let noAction = UIAlertAction(title: "No", style: .destructive)
         alert.addAction(yesAction)
