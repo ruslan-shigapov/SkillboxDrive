@@ -15,6 +15,8 @@
 		E417A8292A18E2FB00C3E69E /* ALProgressView in Frameworks */ = {isa = PBXBuildFile; productRef = E417A8282A18E2FB00C3E69E /* ALProgressView */; };
 		E417B67C29F009F80042B6FD /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67B29F009F80042B6FD /* AuthViewController.swift */; };
 		E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E417B67E29F0311D0042B6FD /* RecentsViewController.swift */; };
+		E428A0572A1D354800DAF106 /* PublishedItemCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428A0562A1D354800DAF106 /* PublishedItemCellViewModel.swift */; };
+		E428A0592A1D35A500DAF106 /* PublishedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E428A0582A1D35A500DAF106 /* PublishedItemCell.swift */; };
 		E42D29A62A02765A0035F5A9 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42D29A52A02765A0035F5A9 /* StorageManager.swift */; };
 		E42FE3C42A0F935D00A94CD1 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42FE3C32A0F935D00A94CD1 /* DetailsViewController.swift */; };
 		E485F72829ADACAB00F84055 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E485F72729ADACAB00F84055 /* AppDelegate.swift */; };
@@ -50,6 +52,8 @@
 		E417A8252A18CF8300C3E69E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E417B67B29F009F80042B6FD /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		E417B67E29F0311D0042B6FD /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
+		E428A0562A1D354800DAF106 /* PublishedItemCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedItemCellViewModel.swift; sourceTree = "<group>"; };
+		E428A0582A1D35A500DAF106 /* PublishedItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedItemCell.swift; sourceTree = "<group>"; };
 		E42D29A52A02765A0035F5A9 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		E42FE3C32A0F935D00A94CD1 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		E485F72429ADACAB00F84055 /* SkillboxDrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillboxDrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +239,8 @@
 			children = (
 				E4BD7DE62A07CC1F00982490 /* ItemCell.swift */,
 				E4BD7DE82A07CC8B00982490 /* ItemCellViewModel.swift */,
+				E428A0582A1D35A500DAF106 /* PublishedItemCell.swift */,
+				E428A0562A1D354800DAF106 /* PublishedItemCellViewModel.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -353,6 +359,7 @@
 				E4D531B629FEAC9D0014B2A9 /* BrowseViewModel.swift in Sources */,
 				E485F72C29ADACAB00F84055 /* LoginViewController.swift in Sources */,
 				E4D8AAAA29F6B7A90046C879 /* RecentsViewModel.swift in Sources */,
+				E428A0592A1D35A500DAF106 /* PublishedItemCell.swift in Sources */,
 				E417B67F29F0311D0042B6FD /* RecentsViewController.swift in Sources */,
 				E4ABC99D2A0CDAD0000F1693 /* DetailsViewModel.swift in Sources */,
 				E4BD7DE72A07CC1F00982490 /* ItemCell.swift in Sources */,
@@ -362,6 +369,7 @@
 				E42FE3C42A0F935D00A94CD1 /* DetailsViewController.swift in Sources */,
 				E4D96A1B29EE9B3200C45651 /* OnboardingScreen.swift in Sources */,
 				E4D8AAA429F6B7820046C879 /* OnboardingViewModel.swift in Sources */,
+				E428A0572A1D354800DAF106 /* PublishedItemCellViewModel.swift in Sources */,
 				E4AFFAC02A1BD2A500C3015C /* PublishedViewModel.swift in Sources */,
 				E4D8AAA629F6B78F0046C879 /* LoginViewModel.swift in Sources */,
 				E417A8262A18CF8300C3E69E /* ProfileViewController.swift in Sources */,

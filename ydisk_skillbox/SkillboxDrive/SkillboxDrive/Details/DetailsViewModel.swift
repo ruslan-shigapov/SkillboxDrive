@@ -16,6 +16,7 @@ protocol DetailsViewModelProtocol {
     var preview: String? { get }
     var created: String { get }
     var path: String { get }
+    var type: String { get }
     var itemType: ItemType { get }
     init(item: Item)
     func fetchItem(completion: @escaping () -> Void)
@@ -47,6 +48,9 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     var path: String {
         item.path ?? ""
+    }
+    var type: String {
+        item.type ?? ""
     }
     var itemType: ItemType {
         let pathExtension = NSString(string: path).pathExtension

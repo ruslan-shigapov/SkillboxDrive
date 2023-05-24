@@ -11,6 +11,7 @@ class BrowseViewController: UITableViewController {
     
     // MARK: - IB Outlets
     @IBOutlet var alertView: UIView!
+    @IBOutlet var backButton: UIBarButtonItem!
     
     // MARK: - Private Properties
     private lazy var activityIndicator: UIActivityIndicatorView = {
@@ -40,6 +41,7 @@ class BrowseViewController: UITableViewController {
         didSet {
             viewModel.fetchItems { [weak self] in
                 self?.updateUI()
+                self?.activityIndicator.stopAnimating()
             }
         }
     }
@@ -73,12 +75,18 @@ class BrowseViewController: UITableViewController {
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        // TODO: - Go to other folders
-        
         let detailsViewModel = viewModel.getDetailsViewModel(at: indexPath)
-        viewModel.checkTransition(by: detailsViewModel) {
-            performSegue(withIdentifier: "toDetails", sender: detailsViewModel)
+        viewModel.checkTransition(by: detailsViewModel) { isFile in
+            if isFile {
+                performSegue(withIdentifier: "toDetails", sender: detailsViewModel)
+            } else {
+//                tableView.backgroundView = activityIndicator
+//                viewModel.fetchItems { [weak self] in
+//                    self?.updateUI()
+//                    self?.activityIndicator.stopAnimating()
+//                    self?.tableView.backgroundView = nil
+//                }
+            }
         }
     }
     
@@ -88,6 +96,11 @@ class BrowseViewController: UITableViewController {
         viewModel.fetchExtraItems(afterRowAt: indexPath) { [weak self] in
             self?.updateUI()
         }
+    }
+    
+    // MARK: - IB Actions
+    @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
+        
     }
     
     // MARK: - Private Methods
@@ -111,7 +124,6 @@ class BrowseViewController: UITableViewController {
     private func updateUI() {
         alertView.frame.size.height = viewModel.networkIsConnected ? 0 : 40
         alertView.isHidden = viewModel.networkIsConnected ? true : false
-        activityIndicator.stopAnimating()
         tableView.reloadData()
         viewModel.checkDirectory {
             setupBackgroundView()

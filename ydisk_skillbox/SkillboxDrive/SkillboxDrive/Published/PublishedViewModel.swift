@@ -7,17 +7,23 @@
 
 import Foundation
 
-protocol PublishedViewModelProtocol {
+protocol PublishedItemCellDelegate {
+    var deleteButtonWasPressed: ((PublishedItemCellViewModelProtocol) -> Void)? { get set }
+}
+
+protocol PublishedViewModelProtocol: PublishedItemCellDelegate {
     var networkIsConnected: Bool { get }
     func fetchItems(completion: @escaping () -> Void)
     func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void)
     func numberOfRows() -> Int
-    func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
+    func getPublishedItemCellViewModel(at indexPath: IndexPath) -> PublishedItemCellViewModelProtocol
     func checkDirectory(completion: () -> Void)
+    func deletePublished(_ item: PublishedItemCellViewModelProtocol, completion: @escaping () -> Void)
 }
 
 class PublishedViewModel: PublishedViewModelProtocol {
     
+    var deleteButtonWasPressed: ((PublishedItemCellViewModelProtocol) -> Void)?
     var networkIsConnected = false
 
     private var items: [Item] = []
@@ -73,13 +79,27 @@ class PublishedViewModel: PublishedViewModelProtocol {
         items.count
     }
     
-    func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol {
-        ItemCellViewModel(item: items[indexPath.row])
+    func getPublishedItemCellViewModel(at indexPath: IndexPath) -> PublishedItemCellViewModelProtocol {
+        PublishedItemCellViewModel(item: items[indexPath.row])
     }
     
     func checkDirectory(completion: () -> Void) {
         if items.isEmpty {
             completion()
+        }
+    }
+    
+    func deletePublished(_ item: PublishedItemCellViewModelProtocol, completion: @escaping () -> Void) {
+        guard var urlComponents = URLComponents(string: Link.toUnpublish.rawValue) else { return }
+        urlComponents.queryItems = [URLQueryItem(name: "path", value: item.path)]
+        guard let url = urlComponents.url else { return }
+        NetworkManager.shared.sendRequest(with: ItemLink.self, to: url, byMethod: .put) { result in
+            switch result {
+            case .success(_):
+                completion()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
     

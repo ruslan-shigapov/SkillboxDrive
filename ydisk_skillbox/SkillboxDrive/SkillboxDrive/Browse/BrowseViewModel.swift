@@ -14,7 +14,7 @@ protocol BrowseViewModelProtocol: DetailsViewControllerDelegate {
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
-    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: () -> Void)
+    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: (Bool) -> Void)
     func checkDirectory(completion: () -> Void)
 }
 
@@ -25,11 +25,12 @@ class BrowseViewModel: BrowseViewModelProtocol {
     
     private var items: [Item] = []
     private var offset = 20
+    private var path = "/"
     
     func fetchItems(completion: @escaping () -> Void) {
         guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
         urlComponents.queryItems = [
-            URLQueryItem(name: "path", value: "/"),
+            URLQueryItem(name: "path", value: path),
             URLQueryItem(name: "preview_size", value: "25x25")
         ]
         guard let url = urlComponents.url else { return }
@@ -53,7 +54,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
         if items.count == offset, indexPath.row == (items.count - 1) {
             guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
             urlComponents.queryItems = [
-                URLQueryItem(name: "path", value: "/"),
+                URLQueryItem(name: "path", value: path),
                 URLQueryItem(name: "preview_size", value: "25x25"),
                 URLQueryItem(name: "offset", value: String(offset))
             ]
@@ -86,9 +87,12 @@ class BrowseViewModel: BrowseViewModelProtocol {
         DetailsViewModel(item: items[indexPath.row])
     }
     
-    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: () -> Void) {
-        if viewModel.preview != nil, networkIsConnected == true {
-            completion()
+    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: (Bool) -> Void) {
+        if viewModel.preview != nil, networkIsConnected {
+            completion(true)
+        } else if viewModel.type == "dir", networkIsConnected {
+            path += "\(viewModel.name)/"
+            completion(false)
         }
     }
     

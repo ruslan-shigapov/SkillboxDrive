@@ -24,6 +24,7 @@ class RecentsViewController: UITableViewController {
         didSet {
             viewModel.fetchItems { [weak self] in
                 self?.updateUI()
+                self?.activityIndicator.stopAnimating()
             }
             viewModel.backButtonWasPressed = { [weak self] in
                 self?.viewModel.fetchItems {
@@ -71,7 +72,11 @@ class RecentsViewController: UITableViewController {
     // MARK: - Private Methods
     private func setupUI() {
         tableView.separatorStyle = .none
-        tableView.refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        tableView.refreshControl?.addTarget(
+            self,
+            action: #selector(refresh(sender:)),
+            for: .valueChanged
+        )
         tableView.backgroundView = activityIndicator
     }
     
@@ -85,7 +90,6 @@ class RecentsViewController: UITableViewController {
     private func updateUI() {
         alertView.frame.size.height = viewModel.networkIsConnected ? 0 : 40
         alertView.isHidden = viewModel.networkIsConnected ? true : false
-        activityIndicator.stopAnimating()
         tableView.reloadData()
     }
 }

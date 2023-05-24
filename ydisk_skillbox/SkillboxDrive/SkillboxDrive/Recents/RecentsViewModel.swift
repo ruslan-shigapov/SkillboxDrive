@@ -63,7 +63,7 @@ class RecentsViewModel: RecentsViewModelProtocol {
     }
     
     func checkTransition(by viewModel: DetailsViewModelProtocol, completion: () -> Void) {
-        if viewModel.preview != nil, networkIsConnected == true {
+        if viewModel.preview != nil, networkIsConnected {
             completion()
         }
     }

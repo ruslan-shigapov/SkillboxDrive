@@ -28,9 +28,10 @@ class AuthViewController: UIViewController {
     }
     
     private func setupWebView() {
-        guard let request = viewModel.request else { return }
-        webView.load(request)
         webView.navigationDelegate = self
+        if let request = viewModel.request {
+            webView.load(request)
+        }
     }
 }
 

@@ -9,6 +9,7 @@ import UIKit
 
 class PublishedViewController: UITableViewController {
 
+    // MARK: - IB Outlets
     @IBOutlet var alertView: UIView!
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
@@ -18,6 +19,7 @@ class PublishedViewController: UITableViewController {
         return activityIndicator
     }()
     
+    // MARK: - Private Properties
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -38,25 +40,37 @@ class PublishedViewController: UITableViewController {
         didSet {
             viewModel.fetchItems { [weak self] in
                 self?.updateUI()
+                self?.activityIndicator.stopAnimating()
+            }
+            viewModel.deleteButtonWasPressed = { [weak self] viewModel in
+                self?.showDeleteAlert(to: viewModel)
             }
         }
     }
     
+    // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = PublishedViewModel()
         setupUI()
     }
     
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
-        guard let cell = cell as? ItemCell else { return UITableViewCell() }
-        cell.viewModel = viewModel.getItemCellViewModel(at: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "publishedItem", for: indexPath)
+        guard let cell = cell as? PublishedItemCell else { return UITableViewCell() }
+        cell.viewModel = viewModel.getPublishedItemCellViewModel(at: indexPath)
+        cell.delegate = viewModel as PublishedItemCellDelegate
         return cell
+    }
+    
+    // MARK: - Table view delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView,
@@ -67,10 +81,12 @@ class PublishedViewController: UITableViewController {
         }
     }
     
+    // MARK: - IB Actions
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
     
+    // MARK: - Private Methods
     private func setupUI() {
         tableView.separatorStyle = .none
         tableView.refreshControl?.addTarget(
@@ -91,7 +107,6 @@ class PublishedViewController: UITableViewController {
     private func updateUI() {
         alertView.frame.size.height = viewModel.networkIsConnected ? 0 : 40
         alertView.isHidden = viewModel.networkIsConnected ? true : false
-        activityIndicator.stopAnimating()
         tableView.reloadData()
         viewModel.checkDirectory {
             setupBackgroundView()
@@ -115,5 +130,21 @@ class PublishedViewController: UITableViewController {
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.widthAnchor.constraint(equalToConstant: 180).isActive = true
         stackView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+    
+    // MARK: - Alert Controllers
+    private func showDeleteAlert(to item: PublishedItemCellViewModelProtocol) {
+        let alert = UIAlertController(title: item.name, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] _ in
+            viewModel.deletePublished(item) { [weak self] in
+                self?.viewModel.fetchItems {
+                    self?.updateUI()
+                }
+            }
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        present(alert, animated: true)
     }
 }

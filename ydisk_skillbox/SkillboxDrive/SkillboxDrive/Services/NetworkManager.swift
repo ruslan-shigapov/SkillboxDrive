@@ -16,6 +16,7 @@ enum Link: String {
     case toShare = "https://cloud-api.yandex.net/v1/disk/resources/publish"
     case toDiskInfo = "https://cloud-api.yandex.net/v1/disk/"
     case toPublished = "https://cloud-api.yandex.net/v1/disk/resources/public"
+    case toUnpublish = "https://cloud-api.yandex.net/v1/disk/resources/unpublish"
 }
 
 class NetworkManager {
