@@ -36,6 +36,17 @@ class PublishedViewController: UITableViewController {
         return stackView
     }()
     
+    private lazy var refreshButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Refresh", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Graphik-Semibold", size: 16)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0.9608833194, green: 0.7450240254, blue: 0.7262871265, alpha: 1)
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(updateData), for: .touchUpInside)
+        return button
+    }()
+    
     private var viewModel: PublishedViewModelProtocol! {
         didSet {
             viewModel.fetchItems { [weak self] in
@@ -104,6 +115,13 @@ class PublishedViewController: UITableViewController {
         }
     }
     
+    @objc private func updateData() {
+        tableView.backgroundView = activityIndicator
+        viewModel.fetchItems { [weak self] in
+            self?.updateUI()
+        }
+    }
+    
     private func updateUI() {
         alertView.frame.size.height = viewModel.networkIsConnected ? 0 : 40
         alertView.isHidden = viewModel.networkIsConnected ? true : false
@@ -117,9 +135,7 @@ class PublishedViewController: UITableViewController {
         let contentView = UIView()
         tableView.backgroundView = contentView
         contentView.addSubview(stackView)
-        
-        // TODO: - Add button
-        
+        contentView.addSubview(refreshButton)
         setupConstraints(on: contentView)
     }
     
@@ -130,13 +146,23 @@ class PublishedViewController: UITableViewController {
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.widthAnchor.constraint(equalToConstant: 180).isActive = true
         stackView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        refreshButton.translatesAutoresizingMaskIntoConstraints = false
+        refreshButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                              constant: -92).isActive = true
+        refreshButton.widthAnchor.constraint(equalTo: view.widthAnchor,
+                                             multiplier: 0.814249).isActive = true
+        refreshButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        refreshButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     // MARK: - Alert Controllers
     private func showDeleteAlert(to item: PublishedItemCellViewModelProtocol) {
         let alert = UIAlertController(title: item.name, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] _ in
+        let deleteAction = UIAlertAction(
+            title: "Delete publication",
+            style: .destructive
+        ) { [unowned self] _ in
             viewModel.deletePublished(item) { [weak self] in
                 self?.viewModel.fetchItems {
                     self?.updateUI()
