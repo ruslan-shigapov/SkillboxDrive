@@ -35,7 +35,7 @@ class NetworkManager {
     func fetch<T: Decodable>(_ type: T.Type,
                              from url: URL,
                              completion: @escaping (Result<T, AFError>) -> Void) {
-        AF.request(url, headers: headers) { $0.timeoutInterval = 5 }
+        AF.request(url, headers: headers) { $0.timeoutInterval = 3 }
             .validate()
             .responseDecodable(of: T.self) { response in
                 switch response.result {
