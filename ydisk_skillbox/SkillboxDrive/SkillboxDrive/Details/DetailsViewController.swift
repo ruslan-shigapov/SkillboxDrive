@@ -97,16 +97,27 @@ class DetailsViewController: UIViewController {
 
     // MARK: - Alert Controllers    
     private func showEditAlert(completion: @escaping (String) -> Void) {
-        let alert = UIAlertController(title: "Rename", message: nil, preferredStyle: .alert)
+        let title = Constants.Text.rename
+        let alert = UIAlertController(
+            title: title,
+            message: nil,
+            preferredStyle: .alert
+        )
         alert.setValue(
             NSAttributedString(
-                string: "Rename",
+                string: title,
                 attributes: [.font: UIFont.systemFont(ofSize: 17, weight: .medium)]
             ),
             forKey: "attributedTitle"
         )
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let doneAction = UIAlertAction(title: "Done", style: .default) { _ in
+        let cancelAction = UIAlertAction(
+            title: Constants.Text.cancel,
+            style: .cancel
+        )
+        let doneAction = UIAlertAction(
+            title: Constants.Text.done,
+            style: .default
+        ) { _ in
             guard let newValue = alert.textFields?.first?.text else { return }
             guard !newValue.isEmpty else { return }
             completion(newValue)
@@ -114,17 +125,27 @@ class DetailsViewController: UIViewController {
         alert.addAction(cancelAction)
         alert.addAction(doneAction)
         alert.addTextField { [weak self] textField in
-            textField.placeholder = "Name"
+            textField.placeholder = Constants.Text.placeholder
             textField.text = self?.viewModel.name
         }
         present(alert, animated: true)
     }
     
     private func showDeleteAlert() {
-        let title = "This file will be moved to the trash"
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] _ in
+        let title = Constants.Text.deleteAlert
+        let alert = UIAlertController(
+            title: title,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let cancelAction = UIAlertAction(
+            title: Constants.Text.cancel,
+            style: .cancel
+        )
+        let deleteAction = UIAlertAction(
+            title: Constants.Text.delete,
+            style: .destructive
+        ) { [unowned self] _ in
             viewModel.deleteItem {
                 self.backButtonPressed()
             }
@@ -135,17 +156,36 @@ class DetailsViewController: UIViewController {
     }
     
     private func showShareAlert() {
-        let alert = UIAlertController(title: "Share this", message: nil, preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let shareFileAction = UIAlertAction(title: "File", style: .default) { [weak self] _ in
+        let alert = UIAlertController(
+            title: Constants.Text.share,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let cancelAction = UIAlertAction(
+            title: Constants.Text.cancel,
+            style: .cancel
+        )
+        let shareFileAction = UIAlertAction(
+            title: Constants.Text.withFile,
+            style: .default
+        ) { [weak self] _ in
             guard let itemData = self?.viewModel.itemData else { return }
-            let shareController = UIActivityViewController(activityItems: [itemData], applicationActivities: nil)
+            let shareController = UIActivityViewController(
+                activityItems: [itemData],
+                applicationActivities: nil
+            )
             self?.present(shareController, animated: true)
         }
-        let shareLinkAction = UIAlertAction(title: "Link", style: .default) { [weak self] _ in
+        let shareLinkAction = UIAlertAction(
+            title: Constants.Text.withLink,
+            style: .default
+        ) { [weak self] _ in
             self?.viewModel.shareItemLink { link in
                 guard let link else { return }
-                let shareController = UIActivityViewController(activityItems: [link], applicationActivities: nil)
+                let shareController = UIActivityViewController(
+                    activityItems: [link],
+                    applicationActivities: nil
+                )
                 self?.present(shareController, animated: true)
             }
         }

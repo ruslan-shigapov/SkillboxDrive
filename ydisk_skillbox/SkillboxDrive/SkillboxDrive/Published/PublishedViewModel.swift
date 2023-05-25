@@ -30,7 +30,9 @@ class PublishedViewModel: PublishedViewModelProtocol {
     private var offset = 20
 
     func fetchItems(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toPublished.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toPublished.rawValue) else {
+            return
+        }
         urlComponents.queryItems = [
             URLQueryItem(name: "preview_size", value: "25x25")
         ]
@@ -51,9 +53,12 @@ class PublishedViewModel: PublishedViewModelProtocol {
         }
     }
     
-    func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void) {
+    func fetchExtraItems(afterRowAt indexPath: IndexPath,
+                         completion: @escaping () -> Void) {
         if items.count == offset, indexPath.row == (items.count - 1) {
-            guard var urlComponents = URLComponents(string: Link.toPublished.rawValue) else { return }
+            guard var urlComponents = URLComponents(string: Link.toPublished.rawValue) else {
+                return
+            }
             urlComponents.queryItems = [
                 URLQueryItem(name: "preview_size", value: "25x25"),
                 URLQueryItem(name: "offset", value: String(offset))
@@ -89,11 +94,16 @@ class PublishedViewModel: PublishedViewModelProtocol {
         }
     }
     
-    func deletePublished(_ item: PublishedItemCellViewModelProtocol, completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toUnpublish.rawValue) else { return }
+    func deletePublished(_ item: PublishedItemCellViewModelProtocol,
+                         completion: @escaping () -> Void) {
+        guard var urlComponents = URLComponents(string: Link.toUnpublish.rawValue) else {
+            return
+        }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: item.path)]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.sendRequest(with: ItemLink.self, to: url, byMethod: .put) { result in
+        NetworkManager.shared.sendRequest(with: ItemLink.self,
+                                          to: url,
+                                          byMethod: .put) { result in
             switch result {
             case .success(_):
                 completion()

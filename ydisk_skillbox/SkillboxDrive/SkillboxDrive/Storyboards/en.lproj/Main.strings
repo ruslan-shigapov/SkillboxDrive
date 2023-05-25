@@ -1,0 +1,93 @@
+
+/* Class = "UILabel"; text = "Information"; ObjectID = "0Zd-VT-EKc"; */
+"0Zd-VT-EKc.text" = "Information";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "0du-i0-lDe"; */
+"0du-i0-lDe.text" = "Name";
+
+/* Class = "UILabel"; text = "Information"; ObjectID = "37d-6r-Ekx"; */
+"37d-6r-Ekx.text" = "Information";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "4Hy-US-y3a"; */
+"4Hy-US-y3a.title" = "Item";
+
+/* Class = "UINavigationItem"; title = "Profile"; ObjectID = "58N-Nf-u0S"; */
+"58N-Nf-u0S.title" = "Profile";
+
+/* Class = "UILabel"; text = "Information"; ObjectID = "68d-HY-9Xw"; */
+"68d-HY-9Xw.text" = "Information";
+
+/* Class = "UIButton"; configuration.title = "Next"; ObjectID = "6Em-2Y-PDL"; */
+"6Em-2Y-PDL.configuration.title" = "Next";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "6Em-2Y-PDL"; */
+"6Em-2Y-PDL.normalTitle" = "Button";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "7fy-ob-JJf"; */
+"7fy-ob-JJf.title" = "Item";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "DGW-R4-Hzv"; */
+"DGW-R4-Hzv.text" = "Description";
+
+/* Class = "UINavigationItem"; title = "Browse"; ObjectID = "KVW-aS-KBT"; */
+"KVW-aS-KBT.title" = "Browse";
+
+/* Class = "UINavigationItem"; title = "Published files"; ObjectID = "MvF-t5-Yir"; */
+"MvF-t5-Yir.title" = "Published files";
+
+/* Class = "UILabel"; text = "There is no Internet connection"; ObjectID = "N9p-tT-sZf"; */
+"N9p-tT-sZf.text" = "There is no Internet connection";
+
+/* Class = "UILabel"; text = "Published files"; ObjectID = "OOT-HE-Yib"; */
+"OOT-HE-Yib.text" = "Published files";
+
+/* Class = "UILabel"; text = "Information"; ObjectID = "PUo-8f-6Va"; */
+"PUo-8f-6Va.text" = "Information";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Q2z-ZR-Xdl"; */
+"Q2z-ZR-Xdl.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "There is no Internet connection"; ObjectID = "S8B-si-Cqa"; */
+"S8B-si-Cqa.text" = "There is no Internet connection";
+
+/* Class = "UIButton"; configuration.title = "Log In"; ObjectID = "SUP-Ie-AcT"; */
+"SUP-Ie-AcT.configuration.title" = "Log In";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "SUP-Ie-AcT"; */
+"SUP-Ie-AcT.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "TC3-GV-u5M"; */
+"TC3-GV-u5M.text" = "Name";
+
+/* Class = "UILabel"; text = "There is no Internet connection"; ObjectID = "W5m-l7-hOa"; */
+"W5m-l7-hOa.text" = "There is no Internet connection";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "aQZ-df-BnT"; */
+"aQZ-df-BnT.text" = "Name";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "aj7-FH-9wx"; */
+"aj7-FH-9wx.title" = "Item";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "dsp-5v-e68"; */
+"dsp-5v-e68.text" = "Name";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "e5r-vg-xak"; */
+"e5r-vg-xak.normalTitle" = "Button";
+
+/* Class = "UINavigationItem"; title = "Recents"; ObjectID = "i5j-HH-bwx"; */
+"i5j-HH-bwx.title" = "Recents";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "l3h-HY-sHV"; */
+"l3h-HY-sHV.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "0 GB"; ObjectID = "ql2-66-FsX"; */
+"ql2-66-FsX.text" = "0 GB";
+
+/* Class = "UILabel"; text = "0 GB - used"; ObjectID = "wLn-yH-Rqe"; */
+"wLn-yH-Rqe.text" = "0 GB - used";
+
+/* Class = "UILabel"; text = "0 GB - available"; ObjectID = "x75-gL-OKX"; */
+"x75-gL-OKX.text" = "0 GB - available";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "yZH-Sm-CP0"; */
+"yZH-Sm-CP0.normalTitle" = "Button";

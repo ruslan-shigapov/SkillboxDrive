@@ -24,7 +24,9 @@ class NetworkManager {
     static let shared = NetworkManager()
         
     private var headers: HTTPHeaders {
-        guard let token = UserDefaults.standard.string(forKey: "token") else { return [:] }
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            return [:]
+        }
         return ["Authorization": "OAuth \(token)"]
     }
         
@@ -45,7 +47,8 @@ class NetworkManager {
             }
     }
     
-    func fetchData(from url: String, completion: @escaping (Result<Data, AFError>) -> Void) {
+    func fetchData(from url: String,
+                   completion: @escaping (Result<Data, AFError>) -> Void) {
         AF.request(url, headers: headers)
             .validate()
             .responseData { response in

@@ -32,7 +32,7 @@ class DetailsViewModel: DetailsViewModelProtocol {
     var imageIsZoomed = false
 
     var name: String {
-        guard let name = item.name else { return "Unknown name" }
+        guard let name = item.name else { return Constants.Text.unknownItemName }
         return NSString(string: name).deletingPathExtension
     }
     var preview: String? {
@@ -70,7 +70,9 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func fetchItem(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toDetails.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toDetails.rawValue) else {
+            return
+        }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
         NetworkManager.shared.fetch(ItemLink.self, from: url) { [weak self] result in
@@ -86,10 +88,16 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func deleteItem(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else {
+            return
+        }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.sendRequest(with: Empty.self, to: url, byMethod: .delete) { result in
+        NetworkManager.shared.sendRequest(
+            with: Empty.self,
+            to: url,
+            byMethod: .delete
+        ) { result in
             switch result {
             case .success(_):
                 completion()
@@ -100,10 +108,16 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func shareItemLink(completion: @escaping (String?) -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toShare.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toShare.rawValue) else {
+            return
+        }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.sendRequest(with: ItemLink.self, to: url, byMethod: .put) { [weak self] result in
+        NetworkManager.shared.sendRequest(
+            with: ItemLink.self,
+            to: url,
+            byMethod: .put
+        ) { [weak self] result in
             switch result {
             case .success(_):
                 self?.fetchItemLink { itemLink in
@@ -116,13 +130,19 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func renameItem(to name: String, completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toEdit.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toEdit.rawValue) else {
+            return
+        }
         urlComponents.queryItems = [
             URLQueryItem(name: "from", value: path),
             URLQueryItem(name: "path", value: changePath(by: name))
         ]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.sendRequest(with: ItemLink.self, to: url, byMethod: .post) { result in
+        NetworkManager.shared.sendRequest(
+            with: ItemLink.self,
+            to: url,
+            byMethod: .post
+        ) { result in
             switch result {
             case .success(_):
                 completion()
@@ -158,7 +178,9 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     private func fetchItemLink(completion: @escaping (String?) -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else {
+            return
+        }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
         NetworkManager.shared.fetch(Item.self, from: url) { result in

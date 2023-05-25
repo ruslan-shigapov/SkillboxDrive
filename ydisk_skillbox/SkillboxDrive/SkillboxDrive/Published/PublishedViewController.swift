@@ -28,7 +28,7 @@ class PublishedViewController: UITableViewController {
         let imageView = UIImageView(image: UIImage(named: "EmptyFolder"))
         stackView.addArrangedSubview(imageView)
         let label = UILabel()
-        label.text = "The directory doesn't contain files"
+        label.text = Constants.Text.emptyDirectory
         label.font = UIFont(name: "Graphik-Regular", size: 17)
         label.textAlignment = .center
         label.numberOfLines = 2
@@ -38,7 +38,7 @@ class PublishedViewController: UITableViewController {
     
     private lazy var refreshButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Refresh", for: .normal)
+        button.setTitle(Constants.Text.refresh, for: .normal)
         button.titleLabel?.font = UIFont(name: "Graphik-Semibold", size: 16)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = #colorLiteral(red: 0.9608833194, green: 0.7450240254, blue: 0.7262871265, alpha: 1)
@@ -67,12 +67,17 @@ class PublishedViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows()
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "publishedItem", for: indexPath)
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "publishedItem",
+            for: indexPath
+        )
         guard let cell = cell as? PublishedItemCell else { return UITableViewCell() }
         cell.viewModel = viewModel.getPublishedItemCellViewModel(at: indexPath)
         cell.delegate = viewModel as PublishedItemCellDelegate
@@ -80,7 +85,8 @@ class PublishedViewController: UITableViewController {
     }
     
     // MARK: - Table view delegate
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView,
+                            didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -157,10 +163,17 @@ class PublishedViewController: UITableViewController {
     
     // MARK: - Alert Controllers
     private func showDeleteAlert(to item: PublishedItemCellViewModelProtocol) {
-        let alert = UIAlertController(title: item.name, message: nil, preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let alert = UIAlertController(
+            title: item.name,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let cancelAction = UIAlertAction(
+            title: Constants.Text.cancel,
+            style: .cancel
+        )
         let deleteAction = UIAlertAction(
-            title: "Delete publication",
+            title: Constants.Text.deletePublication,
             style: .destructive
         ) { [unowned self] _ in
             viewModel.deletePublished(item) { [weak self] in

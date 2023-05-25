@@ -18,13 +18,13 @@ protocol ProfileViewModelProtocol {
 class ProfileViewModel: ProfileViewModelProtocol {
     
     var totalSpaceInfo: String {
-        "\(convertToGB(totalSpace)) GB"
+        String(convertToGB(totalSpace)) + Constants.Text.totalSpace
     }
     var usedSpaceInfo: String {
-        "\(convertToGB(usedSpace)) GB - used"
+        String(convertToGB(usedSpace)) + Constants.Text.usedSpace
     }
     var availableSpaceInfo: String {
-        "\(convertToGB(totalSpace) - convertToGB(usedSpace)) GB - available"
+        String(convertToGB(totalSpace) - convertToGB(usedSpace)) + Constants.Text.availableSpace
     }
     var progress: Float {
         Float(usedSpace ?? 0) / Float(totalSpace ?? 0)

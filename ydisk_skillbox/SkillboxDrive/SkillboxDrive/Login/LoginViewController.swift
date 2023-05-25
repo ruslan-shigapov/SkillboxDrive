@@ -31,7 +31,9 @@ class LoginViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let authViewController = segue.destination as? AuthViewController else { return }
+        guard let authViewController = segue.destination as? AuthViewController else {
+            return
+        }
         authViewController.delegate = sender as? AuthViewControllerDelegate
     }
     

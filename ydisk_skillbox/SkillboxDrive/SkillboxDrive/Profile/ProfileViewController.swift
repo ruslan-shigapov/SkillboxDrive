@@ -27,7 +27,10 @@ class ProfileViewController: UIViewController {
                 self?.capacityLabel.text = self?.viewModel.totalSpaceInfo
                 self?.usedMemoryLabel.text = self?.viewModel.usedSpaceInfo
                 self?.availableMemoryLabel.text = self?.viewModel.availableSpaceInfo
-                self?.progressRing.setProgress(self?.viewModel.progress ?? 0, animated: true)
+                self?.progressRing.setProgress(
+                    self?.viewModel.progress ?? 0,
+                    animated: true
+                )
             }
         }
     }
@@ -76,9 +79,16 @@ class ProfileViewController: UIViewController {
     
     // MARK: - Alert Controllers
     private func showLogOutAlert() {
-        let alert = UIAlertController(title: "Profile", message: nil, preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let logOutAction = UIAlertAction(title: "Log Out", style: .destructive) { [unowned self] _ in
+        let alert = UIAlertController(
+            title: Constants.Text.profile,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        let cancelAction = UIAlertAction(title: Constants.Text.cancel, style: .cancel)
+        let logOutAction = UIAlertAction(
+            title: Constants.Text.logOut,
+            style: .destructive
+        ) { [unowned self] _ in
             showExitAlert()
         }
         alert.addAction(cancelAction)
@@ -87,13 +97,17 @@ class ProfileViewController: UIViewController {
     }
     
     private func showExitAlert() {
-        let alert = UIAlertController(title: "Exit", message: "Are you sure?", preferredStyle: .alert)
-        let yesAction = UIAlertAction(title: "Yes", style: .cancel) { _ in
+        let alert = UIAlertController(
+            title: Constants.Text.exit,
+            message: Constants.Text.confirmation,
+            preferredStyle: .alert
+        )
+        let yesAction = UIAlertAction(title: Constants.Text.yes, style: .cancel) { _ in
             self.dismiss(animated: true) {
                 UserDefaults.standard.removeObject(forKey: "token")
             }
         }
-        let noAction = UIAlertAction(title: "No", style: .destructive)
+        let noAction = UIAlertAction(title: Constants.Text.no, style: .destructive)
         alert.addAction(yesAction)
         alert.addAction(noAction)
         present(alert, animated: true)

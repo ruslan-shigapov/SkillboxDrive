@@ -20,7 +20,7 @@ protocol PublishedItemCellViewModelProtocol {
 class PublishedItemCellViewModel: PublishedItemCellViewModelProtocol {
     
     var name: String {
-        guard let name = item.name else { return "Unknown name" }
+        guard let name = item.name else { return Constants.Text.unknownItemName }
         return NSString(string: name).deletingPathExtension
     }
     var preview: String? {
@@ -30,8 +30,8 @@ class PublishedItemCellViewModel: PublishedItemCellViewModelProtocol {
         "\(size)  \(created)"
     }
     var size: String {
-        guard let size = item.size else { return "0 kb" }
-        return String(format: "%.1f", Double(size) / 1024) + " kb"
+        guard let size = item.size else { return Constants.Text.unknownItemSize }
+        return String(format: "%.1f", Double(size) / 1024) + Constants.Text.itemSize
     }
     var created: String {
         let formatter = DateFormatter()

@@ -29,7 +29,7 @@ class BrowseViewController: UITableViewController {
         let imageView = UIImageView(image: UIImage(named: "EmptyFolder"))
         stackView.addArrangedSubview(imageView)
         let label = UILabel()
-        label.text = "The directory doesn't contain files"
+        label.text = Constants.Text.emptyDirectory
         label.font = UIFont(name: "Graphik-Regular", size: 17)
         label.textAlignment = .center
         label.numberOfLines = 2
@@ -59,17 +59,21 @@ class BrowseViewController: UITableViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let detailsViewController = segue.destination as? DetailsViewController else { return }
+        guard let detailsViewController = segue.destination as? DetailsViewController else {
+            return
+        }
         detailsViewController.viewModel = sender as? DetailsViewModelProtocol
         detailsViewController.delegate = viewModel as DetailsViewControllerDelegate
     }
     
     // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows()
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
         guard let cell = cell as? ItemCell else { return UITableViewCell() }
         cell.viewModel = viewModel.getItemCellViewModel(at: indexPath)

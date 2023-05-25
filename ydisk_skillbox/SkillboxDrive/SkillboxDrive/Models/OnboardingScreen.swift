@@ -18,11 +18,11 @@ enum OnboardingScreen: Int {
     var description: String {
         switch self {
         case .first:
-            return "Now all your documents is in one place"
+            return Constants.Text.firstOnboardingScreen
         case .second:
-            return "Access to files without the Internet"
+            return Constants.Text.secondOnboardingScreen
         case .third:
-            return "Share your files with other people"
+            return Constants.Text.thirdOnboardingScreen
         }
     }
 }

@@ -28,7 +28,9 @@ class RecentsViewModel: RecentsViewModelProtocol {
     private var items: [Item] = []
     
     func fetchItems(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toRecents.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toRecents.rawValue) else {
+            return
+        }
         urlComponents.queryItems = [
             URLQueryItem(name: "limit", value: "30"),
             URLQueryItem(name: "preview_size", value: "25x25")
@@ -62,7 +64,8 @@ class RecentsViewModel: RecentsViewModelProtocol {
         DetailsViewModel(item: items[indexPath.row])
     }
     
-    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: () -> Void) {
+    func checkTransition(by viewModel: DetailsViewModelProtocol,
+                         completion: () -> Void) {
         if viewModel.preview != nil, networkIsConnected {
             completion()
         }

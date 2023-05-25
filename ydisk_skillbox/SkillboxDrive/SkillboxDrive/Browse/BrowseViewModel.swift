@@ -30,7 +30,9 @@ class BrowseViewModel: BrowseViewModelProtocol {
     private var path = "/"
     
     func fetchItems(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
+        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else {
+            return
+        }
         urlComponents.queryItems = [
             URLQueryItem(name: "path", value: path),
             URLQueryItem(name: "preview_size", value: "25x25")
@@ -52,9 +54,12 @@ class BrowseViewModel: BrowseViewModelProtocol {
         }
     }
     
-    func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void) {
+    func fetchExtraItems(afterRowAt indexPath: IndexPath,
+                         completion: @escaping () -> Void) {
         if items.count == offset, indexPath.row == (items.count - 1) {
-            guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else { return }
+            guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else {
+                return
+            }
             urlComponents.queryItems = [
                 URLQueryItem(name: "path", value: path),
                 URLQueryItem(name: "preview_size", value: "25x25"),
@@ -89,7 +94,8 @@ class BrowseViewModel: BrowseViewModelProtocol {
         DetailsViewModel(item: items[indexPath.row])
     }
     
-    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: (Bool) -> Void) {
+    func checkTransition(by viewModel: DetailsViewModelProtocol,
+                         completion: (Bool) -> Void) {
         if viewModel.preview != nil, networkIsConnected {
             completion(true)
         } else if viewModel.type == "dir", networkIsConnected {
