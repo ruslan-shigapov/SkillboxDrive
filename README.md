@@ -9,6 +9,10 @@ Final project at Skillbox's course
 
 Прототип в Figma: https://www.figma.com/file/bjueI35O32MHqRnrMwibfY/Skillbox-Drive?type=design&node-id=3-54&mode=design
 
+<img width="368" alt="Screenshot_0" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/ca69c27e-b8fb-4280-94f6-cc21dffcc013">
+
+<img width="368" alt="Screenshot" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/d075f9e6-18ff-4500-b6ad-b913847c0628">
+
 <img width="366" alt="Screenshot_1" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/82e233e7-9a84-44f7-9e45-5eb9aa2b13ee">
 
 <img width="366" alt="Screenshot_2" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/81e65649-42f4-478e-86b0-03dbb896d4a7">
