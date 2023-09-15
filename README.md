@@ -7,8 +7,6 @@ Final project at Skillbox's course
 
 Вы реализуете небольшую часть функциональности приложения Яндекс Диска. Это позволит задействовать все знания, которые вы получили на курсе. В результате вы создадите готовое к релизу приложение, которое обеспечивает качественную работу с Яндекс Диском и имеет собственную хорошую графическую реализацию.
 
-Прототип в Figma: https://www.figma.com/file/bjueI35O32MHqRnrMwibfY/Skillbox-Drive?type=design&node-id=3-54&mode=design
-
 <img width="368" alt="Screenshot_0" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/ca69c27e-b8fb-4280-94f6-cc21dffcc013">
 
 <img width="368" alt="Screenshot" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/d075f9e6-18ff-4500-b6ad-b913847c0628">
