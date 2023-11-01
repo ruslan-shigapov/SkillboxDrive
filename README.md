@@ -1,5 +1,5 @@
 # SkillboxDrive
-Final project at Skillbox's course
+Final project at Skillbox's course (1 level)
 
 Над чем предстоит работать
 
