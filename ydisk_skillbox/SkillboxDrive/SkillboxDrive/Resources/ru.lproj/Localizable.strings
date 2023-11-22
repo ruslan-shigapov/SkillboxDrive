@@ -13,6 +13,7 @@
 "0 kb" = "0 кб";
 " kb" = " кб";
 "The directory doesn't contain files" = "Директория не содержит файлов";
+"You don't have published files yet" = "У вас пока нет опубликованных файлов";
 "Refresh" = "Обновить";
 "Cancel" = "Отмена";
 "Delete publication" = "Удалить публикацию";

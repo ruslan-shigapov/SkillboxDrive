@@ -57,7 +57,7 @@ class ProfileViewController: UIViewController {
         progressView.addSubview(progressRing)
         setupProgressRing()
         publishedFilesButton.layer.cornerRadius = 10
-        publishedFilesButton.layer.shadowOpacity = 0.3
+        publishedFilesButton.layer.shadowOpacity = 0.2
         publishedFilesButton.layer.shadowColor = UIColor.black.cgColor
         publishedFilesButton.layer.shadowRadius = 12
         circleViews.forEach { $0.layer.cornerRadius = $0.frame.width / 2 }

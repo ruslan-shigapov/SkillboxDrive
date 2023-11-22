@@ -44,6 +44,11 @@ enum Constants {
             value: "",
             table: "Localizable"
         )
+        static let emptyPublishedDirectory = Bundle.main.localizedString(
+            forKey: "You don't have published files yet",
+            value: "",
+            table: "Localizable"
+        )
         static let refresh = Bundle.main.localizedString(
             forKey: "Refresh",
             value: "",

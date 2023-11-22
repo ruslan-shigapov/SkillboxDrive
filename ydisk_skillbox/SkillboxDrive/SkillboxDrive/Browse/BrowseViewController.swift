@@ -159,7 +159,7 @@ class BrowseViewController: UITableViewController {
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor,
                                            constant: -20).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackView.widthAnchor.constraint(equalToConstant: 180).isActive = true
-        stackView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        stackView.widthAnchor.constraint(equalToConstant: 210).isActive = true
+        stackView.heightAnchor.constraint(equalToConstant: 205).isActive = true
     }
 }

@@ -13,6 +13,7 @@
 "0 kb" = "0 kb";
 " kb" = " kb";
 "The directory doesn't contain files" = "The directory doesn't contain files";
+"You don't have published files yet" = "You don't have published files yet";
 "Refresh" = "Refresh";
 "Cancel" = "Cancel";
 "Delete publication" = "Delete publication";

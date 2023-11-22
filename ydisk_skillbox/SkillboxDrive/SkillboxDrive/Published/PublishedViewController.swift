@@ -28,7 +28,7 @@ class PublishedViewController: UITableViewController {
         let imageView = UIImageView(image: UIImage(named: "EmptyFolder"))
         stackView.addArrangedSubview(imageView)
         let label = UILabel()
-        label.text = Constants.Text.emptyDirectory
+        label.text = Constants.Text.emptyPublishedDirectory
         label.font = UIFont(name: "Graphik-Regular", size: 17)
         label.textAlignment = .center
         label.numberOfLines = 2
@@ -150,8 +150,8 @@ class PublishedViewController: UITableViewController {
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor,
                                            constant: -20).isActive = true
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackView.widthAnchor.constraint(equalToConstant: 180).isActive = true
-        stackView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        stackView.widthAnchor.constraint(equalToConstant: 210).isActive = true
+        stackView.heightAnchor.constraint(equalToConstant: 205).isActive = true
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
         refreshButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                               constant: -92).isActive = true
