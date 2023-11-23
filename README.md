@@ -5,7 +5,7 @@
 
 Использовал в работе:
 
-Foundation, UIKit, Storyboard + NSLayoutConstraints, MVVM, Alamofire, OAuth 2.0, WebKit, PDFKit, ALProgressView, CoreData, Localizable 
+Foundation, UIKit, Storyboard + NSLayoutConstraints, MVVM, Alamofire, OAuth 2.0, WebKit, PDFKit, ALProgressView, CoreData, Localizable, Figma (макеты предоставлены Skillbox)
 
 <img width="388" alt="Login" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/5c660448-5fcd-4ed8-843b-1c0d0b974a9e">
 
