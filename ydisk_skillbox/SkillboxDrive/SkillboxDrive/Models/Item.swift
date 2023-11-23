@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum ItemType {
+    case image, pdf, document
+}
+
 struct Item: Codable {
     let _embedded: ItemList?
     let name: String?
@@ -42,8 +46,4 @@ struct ItemList: Codable {
 
 struct ItemLink: Codable {
     let href: String
-}
-
-enum ItemType {
-    case image, pdf, document
 }

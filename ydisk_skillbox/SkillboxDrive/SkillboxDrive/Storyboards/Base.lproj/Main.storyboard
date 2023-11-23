@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -102,7 +101,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="nextButtonPressed" destination="mkX-fg-OL8" eventType="touchUpInside" id="aR7-37-WqC"/>
+                                    <action selector="nextButtonWasPressed" destination="mkX-fg-OL8" eventType="touchUpInside" id="aR7-37-WqC"/>
                                 </connections>
                             </button>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="4k2-l6-qEc">
@@ -162,10 +161,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="AUb-gG-UEm">
-                                <rect key="frame" x="35" y="393.66666666666669" width="147.66666666666666" height="80"/>
+                                <rect key="frame" x="35" y="393.66666666666669" width="145" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3Gh-f1-I9T">
-                                        <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="119.33333333333333" height="30"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rck-gO-FH9">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -176,7 +175,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 GB - used" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLn-yH-Rqe">
-                                                <rect key="frame" x="37.999999999999993" y="0.0" width="82.333333333333314" height="30"/>
+                                                <rect key="frame" x="37.999999999999993" y="0.0" width="81.333333333333314" height="30"/>
                                                 <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -184,7 +183,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="a2Z-J9-hdL">
-                                        <rect key="frame" x="0.0" y="50" width="147.66666666666666" height="30"/>
+                                        <rect key="frame" x="0.0" y="50" width="145" height="30"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6J-qS-yxy">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -195,7 +194,7 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 GB - available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x75-gL-OKX">
-                                                <rect key="frame" x="38.000000000000007" y="0.0" width="109.66666666666669" height="30"/>
+                                                <rect key="frame" x="38" y="0.0" width="107" height="30"/>
                                                 <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -215,7 +214,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Published files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOT-HE-Yib">
-                                        <rect key="frame" x="19.999999999999993" y="14.999999999999943" width="101.33333333333331" height="15"/>
+                                        <rect key="frame" x="19.999999999999993" y="12.333333333333316" width="97.333333333333314" height="17.666666666666671"/>
                                         <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -238,7 +237,7 @@
                                 <rect key="frame" x="76.666666666666686" y="94" width="240" height="240"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 GB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ql2-66-FsX">
-                                        <rect key="frame" x="99.999999999999986" y="111.66666666666666" width="40.000000000000014" height="17"/>
+                                        <rect key="frame" x="100.33333333333333" y="110" width="38.999999999999986" height="20"/>
                                         <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -293,7 +292,7 @@
             <objects>
                 <viewController id="AtK-fJ-G9H" customClass="AuthViewController" customModule="SkillboxDrive" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tqa-NX-P7s">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUu-P8-Rl4">
@@ -408,7 +407,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no Internet connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8B-si-Cqa">
-                                    <rect key="frame" x="108" y="7" width="177" height="26"/>
+                                    <rect key="frame" x="108" y="4.9999999999999982" width="177" height="30.333333333333329"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="177" id="BZh-J0-hwR"/>
                                     </constraints>
@@ -441,14 +440,14 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="1Uh-G7-Hvj">
                                             <rect key="frame" x="58" y="7" width="317" height="30"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TC3-GV-u5M">
-                                                    <rect key="frame" x="0.0" y="0.0" width="317" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TC3-GV-u5M">
+                                                    <rect key="frame" x="0.0" y="0.0" width="317" height="17.666666666666668"/>
                                                     <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zd-VT-EKc">
-                                                    <rect key="frame" x="0.0" y="17" width="317" height="13"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zd-VT-EKc">
+                                                    <rect key="frame" x="0.0" y="19.666666666666668" width="317" height="10.333333333333332"/>
                                                     <fontDescription key="fontDescription" name="Graphik-Light" family="Graphik" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -558,16 +557,16 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="xvX-J1-44s">
-                                <rect key="frame" x="96.666666666666686" y="70" width="200" height="37"/>
+                                <rect key="frame" x="96.666666666666686" y="70" width="200" height="42.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsp-5v-e68">
-                                        <rect key="frame" x="76.666666666666671" y="0.0" width="46.666666666666671" height="17"/>
+                                        <rect key="frame" x="77.333333333333329" y="0.0" width="45.333333333333329" height="20"/>
                                         <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUo-8f-6Va">
-                                        <rect key="frame" x="65.666666666666686" y="24" width="68.333333333333314" height="13"/>
+                                        <rect key="frame" x="66.999999999999986" y="26.999999999999996" width="66.000000000000014" height="15.333333333333332"/>
                                         <fontDescription key="fontDescription" name="Graphik-Light" family="Graphik" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -679,7 +678,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no Internet connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5m-l7-hOa">
-                                    <rect key="frame" x="108" y="7" width="177" height="26"/>
+                                    <rect key="frame" x="108" y="4.9999999999999982" width="177" height="30.333333333333329"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="177" id="QnA-RA-MrJ"/>
                                     </constraints>
@@ -712,14 +711,14 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="TKP-2w-rSk">
                                             <rect key="frame" x="58" y="7" width="317" height="30"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0du-i0-lDe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="317" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0du-i0-lDe">
+                                                    <rect key="frame" x="0.0" y="0.0" width="317" height="17.666666666666668"/>
                                                     <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37d-6r-Ekx">
-                                                    <rect key="frame" x="0.0" y="17" width="317" height="13"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37d-6r-Ekx">
+                                                    <rect key="frame" x="0.0" y="19.666666666666668" width="317" height="10.333333333333332"/>
                                                     <fontDescription key="fontDescription" name="Graphik-Light" family="Graphik" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -790,7 +789,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no Internet connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9p-tT-sZf">
-                                    <rect key="frame" x="108" y="7" width="177" height="26"/>
+                                    <rect key="frame" x="108" y="4.9999999999999982" width="177" height="30.333333333333329"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="177" id="h4n-my-i65"/>
                                     </constraints>
@@ -823,14 +822,14 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="zGH-a5-Yq0">
                                             <rect key="frame" x="58" y="7" width="285" height="30"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQZ-df-BnT">
-                                                    <rect key="frame" x="0.0" y="0.0" width="285" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQZ-df-BnT">
+                                                    <rect key="frame" x="0.0" y="0.0" width="285" height="17.666666666666668"/>
                                                     <fontDescription key="fontDescription" name="Graphik-Regular" family="Graphik" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68d-HY-9Xw">
-                                                    <rect key="frame" x="0.0" y="17" width="285" height="13"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68d-HY-9Xw">
+                                                    <rect key="frame" x="0.0" y="19.666666666666668" width="285" height="10.333333333333332"/>
                                                     <fontDescription key="fontDescription" name="Graphik-Light" family="Graphik" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

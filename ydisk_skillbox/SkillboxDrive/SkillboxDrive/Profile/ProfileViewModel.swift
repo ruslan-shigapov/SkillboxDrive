@@ -15,7 +15,7 @@ protocol ProfileViewModelProtocol {
     func fetchDiskInfo(completion: @escaping () -> Void)
 }
 
-class ProfileViewModel: ProfileViewModelProtocol {
+final class ProfileViewModel: ProfileViewModelProtocol {
     
     var totalSpaceInfo: String {
         String(convertToGB(totalSpace)) + Constants.Text.totalSpace
@@ -24,7 +24,8 @@ class ProfileViewModel: ProfileViewModelProtocol {
         String(convertToGB(usedSpace)) + Constants.Text.usedSpace
     }
     var availableSpaceInfo: String {
-        String(convertToGB(totalSpace) - convertToGB(usedSpace)) + Constants.Text.availableSpace
+        let availableSpace = convertToGB(totalSpace) - convertToGB(usedSpace)
+        return String(availableSpace) + Constants.Text.availableSpace
     }
     var progress: Float {
         Float(usedSpace ?? 0) / Float(totalSpace ?? 0)

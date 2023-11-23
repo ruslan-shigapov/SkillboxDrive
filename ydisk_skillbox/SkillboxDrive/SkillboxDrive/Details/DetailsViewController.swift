@@ -9,9 +9,8 @@ import UIKit
 import PDFKit
 import WebKit
 
-class DetailsViewController: UIViewController {
+final class DetailsViewController: UIViewController {
     
-    // MARK: - IB Outlets
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var infoLabel: UILabel!
@@ -20,18 +19,15 @@ class DetailsViewController: UIViewController {
     @IBOutlet var webView: WKWebView!
     @IBOutlet var imageViewHeight: NSLayoutConstraint!
     
-    // MARK: - Public Properties
     var delegate: DetailsViewControllerDelegate!
     var viewModel: DetailsViewModelProtocol!
     
-    // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupDoubleTap()
     }
     
-    // MARK: - IB Actions
     @IBAction func backButtonPressed() {
         dismiss(animated: true) { [weak self] in
             self?.delegate.backButtonWasPressed?()
@@ -54,7 +50,6 @@ class DetailsViewController: UIViewController {
         showShareAlert()
     }
     
-    // MARK: - Private Methods
     private func setupUI() {
         nameLabel.text = viewModel.name
         infoLabel.text = viewModel.created
@@ -94,8 +89,27 @@ class DetailsViewController: UIViewController {
         ? view.safeAreaLayoutGuide.layoutFrame.height
         : 450
     }
+}
 
-    // MARK: - Alert Controllers    
+// MARK: - WKNavigation delegate
+extension DetailsViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        activityIndicator.stopAnimating()
+    }
+}
+
+// MARK: - UIScrollView delegate
+extension DetailsViewController: UIScrollViewDelegate {
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        imageView
+    }
+}
+
+// MARK: - Alert controllers
+extension DetailsViewController {
+    
     private func showEditAlert(completion: @escaping (String) -> Void) {
         let title = Constants.Text.rename
         let alert = UIAlertController(
@@ -200,21 +214,5 @@ class DetailsViewController: UIViewController {
             alert.addAction(shareLinkAction)
         }
         present(alert, animated: true)
-    }
-}
-
-// MARK: - WKNavigationDelegate
-extension DetailsViewController: WKNavigationDelegate {
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        activityIndicator.stopAnimating()
-    }
-}
-
-// MARK: - UIScrollViewDelegate
-extension DetailsViewController: UIScrollViewDelegate {
-    
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        imageView
     }
 }

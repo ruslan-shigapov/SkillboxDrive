@@ -25,19 +25,23 @@ protocol DetailsViewModelProtocol {
     func renameItem(to name: String, completion: @escaping () -> Void)
 }
 
-class DetailsViewModel: DetailsViewModelProtocol {
+final class DetailsViewModel: DetailsViewModelProtocol {
     
     var itemData: Data?
+    
     var request: URLRequest?
+    
     var imageIsZoomed = false
 
     var name: String {
         guard let name = item.name else { return Constants.Text.unknownItemName }
         return NSString(string: name).deletingPathExtension
     }
+    
     var preview: String? {
         item.preview
     }
+    
     var created: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
@@ -46,12 +50,15 @@ class DetailsViewModel: DetailsViewModelProtocol {
         formatter.dateFormat = "dd.MM.yy HH:mm"
         return formatter.string(from: date)
     }
+    
     var path: String {
         item.path ?? ""
     }
+    
     var type: String {
         item.type ?? ""
     }
+    
     var itemType: ItemType {
         let pathExtension = NSString(string: path).pathExtension
         if ["jpg", "png", "jpeg", "gif", "bmp"].contains(pathExtension) {
@@ -69,13 +76,19 @@ class DetailsViewModel: DetailsViewModelProtocol {
         self.item = item
     }
     
+    // MARK: Public Methods
     func fetchItem(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toDetails.rawValue) else {
+        guard var urlComponents = URLComponents(
+            string: Link.toDetails.rawValue
+        ) else {
             return
         }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.fetch(ItemLink.self, from: url) { [weak self] result in
+        NetworkManager.shared.fetch(
+            ItemLink.self,
+            from: url
+        ) { [weak self] result in
             switch result {
             case .success(let link):
                 self?.fetchItemData(from: link.href) {
@@ -88,7 +101,9 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func deleteItem(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else {
+        guard var urlComponents = URLComponents(
+            string: Link.toBrowse.rawValue
+        ) else {
             return
         }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
@@ -108,7 +123,9 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func shareItemLink(completion: @escaping (String?) -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toShare.rawValue) else {
+        guard var urlComponents = URLComponents(
+            string: Link.toShare.rawValue
+        ) else {
             return
         }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]
@@ -130,7 +147,9 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     func renameItem(to name: String, completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toEdit.rawValue) else {
+        guard var urlComponents = URLComponents(
+            string: Link.toEdit.rawValue
+        ) else {
             return
         }
         urlComponents.queryItems = [
@@ -152,6 +171,7 @@ class DetailsViewModel: DetailsViewModelProtocol {
         }
     }
     
+    // MARK: Private Methods
     private func changePath(by name: String) -> String {
         guard let fullName = path.split(separator: "/").last else { return "" }
         let nameToChange = NSString(string: String(fullName)).deletingPathExtension
@@ -178,7 +198,9 @@ class DetailsViewModel: DetailsViewModelProtocol {
     }
     
     private func fetchItemLink(completion: @escaping (String?) -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else {
+        guard var urlComponents = URLComponents(
+            string: Link.toBrowse.rawValue
+        ) else {
             return
         }
         urlComponents.queryItems = [URLQueryItem(name: "path", value: path)]

@@ -7,7 +7,7 @@
 
 import CoreData
 
-class StorageManager {
+final class StorageManager {
     
     static let shared = StorageManager()
     
@@ -27,12 +27,14 @@ class StorageManager {
     
     private init() {}
     
-    func saveFile(_ name: String?,
-                  _ preview: String?,
-                  _ created: String?,
-                  _ type: String?,
-                  _ size: Int64?,
-                  fromList: String) {
+    func saveFile(
+        _ name: String?,
+        _ preview: String?,
+        _ created: String?,
+        _ type: String?,
+        _ size: Int64?,
+        fromList: String
+    ) {
         let file = File(context: viewContext)
         file.name = name
         file.preview = preview

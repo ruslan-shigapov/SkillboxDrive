@@ -1,5 +1,5 @@
 //
-//  OnboardingScreen.swift
+//  OnboardingPage.swift
 //  SkillboxDrive
 //
 //  Created by Руслан Шигапов on 18.04.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum OnboardingScreen: Int {
+enum OnboardingPage: Int {
     case first
     case second
     case third
@@ -15,6 +15,7 @@ enum OnboardingScreen: Int {
     var image: UIImage? {
         UIImage(named: "Picture \(self.rawValue)")
     }
+    
     var description: String {
         switch self {
         case .first:

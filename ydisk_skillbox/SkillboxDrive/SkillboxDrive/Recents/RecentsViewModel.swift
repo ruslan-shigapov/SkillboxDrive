@@ -17,18 +17,25 @@ protocol RecentsViewModelProtocol: DetailsViewControllerDelegate {
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
-    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: () -> Void)
+    func checkTransition(
+        by viewModel: DetailsViewModelProtocol,
+        completion: () -> Void
+    )
 }
 
-class RecentsViewModel: RecentsViewModelProtocol {
+final class RecentsViewModel: RecentsViewModelProtocol {
     
     var backButtonWasPressed: (() -> Void)?
+    
     var networkIsConnected = false
 
     private var items: [Item] = []
     
+    // MARK: Public Methods
     func fetchItems(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toRecents.rawValue) else {
+        guard var urlComponents = URLComponents(
+            string: Link.toRecents.rawValue
+        ) else {
             return
         }
         urlComponents.queryItems = [
@@ -36,7 +43,10 @@ class RecentsViewModel: RecentsViewModelProtocol {
             URLQueryItem(name: "preview_size", value: "25x25")
         ]
         guard let url = urlComponents.url else { return }
-        NetworkManager.shared.fetch(ItemList.self, from: url) { [weak self] result in
+        NetworkManager.shared.fetch(
+            ItemList.self,
+            from: url
+        ) { [weak self] result in
             switch result {
             case .success(let itemList):
                 self?.networkIsConnected = true
@@ -64,13 +74,16 @@ class RecentsViewModel: RecentsViewModelProtocol {
         DetailsViewModel(item: items[indexPath.row])
     }
     
-    func checkTransition(by viewModel: DetailsViewModelProtocol,
-                         completion: () -> Void) {
+    func checkTransition(
+        by viewModel: DetailsViewModelProtocol,
+        completion: () -> Void
+    ) {
         if viewModel.preview != nil, networkIsConnected {
             completion()
         }
     }
     
+    // MARK: Private Methods
     private func fetchCache() {
         StorageManager.shared.fetchFiles { result in
             switch result {

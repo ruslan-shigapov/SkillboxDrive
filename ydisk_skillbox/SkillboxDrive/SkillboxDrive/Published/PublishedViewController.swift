@@ -7,9 +7,8 @@
 
 import UIKit
 
-class PublishedViewController: UITableViewController {
-
-    // MARK: - IB Outlets
+final class PublishedViewController: UITableViewController {
+    
     @IBOutlet var alertView: UIView!
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
@@ -19,7 +18,6 @@ class PublishedViewController: UITableViewController {
         return activityIndicator
     }()
     
-    // MARK: - Private Properties
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -59,51 +57,16 @@ class PublishedViewController: UITableViewController {
         }
     }
     
-    // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = PublishedViewModel()
         setupUI()
     }
     
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRows()
-    }
-    
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-            withIdentifier: "publishedItem",
-            for: indexPath
-        )
-        guard let cell = cell as? PublishedItemCell else { return UITableViewCell() }
-        cell.viewModel = viewModel.getPublishedItemCellViewModel(at: indexPath)
-        cell.delegate = viewModel as PublishedItemCellDelegate
-        return cell
-    }
-    
-    // MARK: - Table view delegate
-    override func tableView(_ tableView: UITableView,
-                            didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    override func tableView(_ tableView: UITableView,
-                            willDisplay cell: UITableViewCell,
-                            forRowAt indexPath: IndexPath) {
-        viewModel.fetchExtraItems(afterRowAt: indexPath) { [weak self] in
-            self?.updateUI()
-        }
-    }
-    
-    // MARK: - IB Actions
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
     
-    // MARK: - Private Methods
     private func setupUI() {
         tableView.separatorStyle = .none
         tableView.refreshControl?.addTarget(
@@ -147,21 +110,80 @@ class PublishedViewController: UITableViewController {
     
     private func setupConstraints(on view: UIView) {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor,
-                                           constant: -20).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackView.widthAnchor.constraint(equalToConstant: 210).isActive = true
-        stackView.heightAnchor.constraint(equalToConstant: 205).isActive = true
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
-        refreshButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                                              constant: -92).isActive = true
-        refreshButton.widthAnchor.constraint(equalTo: view.widthAnchor,
-                                             multiplier: 0.814249).isActive = true
-        refreshButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        refreshButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        NSLayoutConstraint.activate([
+            stackView.centerYAnchor.constraint(
+                equalTo: view.centerYAnchor,
+                constant: -20
+            ),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.widthAnchor.constraint(equalToConstant: 210),
+            stackView.heightAnchor.constraint(equalToConstant: 205),
+            refreshButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: -92
+            ),
+            refreshButton.widthAnchor.constraint(
+                equalTo: view.widthAnchor,
+                multiplier: 0.814249
+            ),
+            refreshButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            refreshButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+}
+
+// MARK: - UITableView data source
+extension PublishedViewController {
+    
+    override func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        viewModel.numberOfRows()
     }
     
-    // MARK: - Alert Controllers
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "publishedItem",
+            for: indexPath
+        )
+        guard let cell = cell as? PublishedItemCell else {
+            return UITableViewCell()
+        }
+        cell.viewModel = viewModel.getPublishedItemCellViewModel(at: indexPath)
+        cell.delegate = viewModel as PublishedItemCellDelegate
+        return cell
+    }
+}
+
+// MARK: - UITableView delegate
+extension PublishedViewController {
+    
+    override func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        viewModel.fetchExtraItems(afterRowAt: indexPath) { [weak self] in
+            self?.updateUI()
+        }
+    }
+}
+ 
+// MARK: - UIAlertController
+extension PublishedViewController {
+    
     private func showDeleteAlert(to item: PublishedItemCellViewModelProtocol) {
         let alert = UIAlertController(
             title: item.name,

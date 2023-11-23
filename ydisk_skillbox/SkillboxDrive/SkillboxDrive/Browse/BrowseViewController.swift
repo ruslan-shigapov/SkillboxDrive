@@ -7,13 +7,11 @@
 
 import UIKit
 
-class BrowseViewController: UITableViewController {
+final class BrowseViewController: UITableViewController {
     
-    // MARK: - IB Outlets
     @IBOutlet var alertView: UIView!
     @IBOutlet var backButton: UIBarButtonItem!
     
-    // MARK: - Private Properties
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.hidesWhenStopped = true
@@ -50,14 +48,12 @@ class BrowseViewController: UITableViewController {
         }
     }
     
-    // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = BrowseViewModel()
         setupUI()
     }
     
-    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let detailsViewController = segue.destination as? DetailsViewController else {
             return
@@ -66,46 +62,6 @@ class BrowseViewController: UITableViewController {
         detailsViewController.delegate = viewModel as DetailsViewControllerDelegate
     }
     
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int {
-        viewModel.numberOfRows()
-    }
-    
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "item", for: indexPath)
-        guard let cell = cell as? ItemCell else { return UITableViewCell() }
-        cell.viewModel = viewModel.getItemCellViewModel(at: indexPath)
-        return cell
-    }
-    
-    // MARK: - Table view delegate
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let detailsViewModel = viewModel.getDetailsViewModel(at: indexPath)
-        viewModel.checkTransition(by: detailsViewModel) { isFile in
-            if isFile {
-                performSegue(withIdentifier: "toDetails", sender: detailsViewModel)
-            } else {
-                tableView.backgroundView = activityIndicator
-                viewModel.fetchItems { [weak self] in
-                    self?.backButton.tintColor = .systemGray
-                    self?.updateUI()
-                }
-            }
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView,
-                            willDisplay cell: UITableViewCell,
-                            forRowAt indexPath: IndexPath) {
-        viewModel.fetchExtraItems(afterRowAt: indexPath) { [weak self] in
-            self?.updateUI()
-        }
-    }
-    
-    // MARK: - IB Actions
     @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
         viewModel.goToBackScreen {
             tableView.backgroundView = activityIndicator
@@ -115,7 +71,6 @@ class BrowseViewController: UITableViewController {
         }
     }
     
-    // MARK: - Private Methods
     private func setupUI() {
         backButton.tintColor = .white
         tableView.separatorStyle = .none
@@ -125,13 +80,6 @@ class BrowseViewController: UITableViewController {
             for: .valueChanged
         )
         tableView.backgroundView = activityIndicator
-    }
-    
-    @objc private func refresh(sender: UIRefreshControl) {
-        viewModel.fetchItems { [weak self] in
-            self?.updateUI()
-            sender.endRefreshing()
-        }
     }
     
     private func updateUI() {
@@ -147,6 +95,13 @@ class BrowseViewController: UITableViewController {
         }
     }
     
+    @objc private func refresh(sender: UIRefreshControl) {
+        viewModel.fetchItems { [weak self] in
+            self?.updateUI()
+            sender.endRefreshing()
+        }
+    }
+    
     private func setupBackgroundView() {
         let contentView = UIView()
         tableView.backgroundView = contentView
@@ -156,10 +111,74 @@ class BrowseViewController: UITableViewController {
 
     private func setupConstraints(on view: UIView) {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor,
-                                           constant: -20).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        stackView.widthAnchor.constraint(equalToConstant: 210).isActive = true
-        stackView.heightAnchor.constraint(equalToConstant: 205).isActive = true
+        NSLayoutConstraint.activate([
+            stackView.centerYAnchor.constraint(
+                equalTo: view.centerYAnchor,
+                constant: -20
+            ),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.widthAnchor.constraint(equalToConstant: 210),
+            stackView.heightAnchor.constraint(equalToConstant: 205)
+        ])
+    }
+}
+
+// MARK: - UITableView data source
+extension BrowseViewController {
+    
+    override func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        viewModel.numberOfRows()
+    }
+    
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "item",
+            for: indexPath
+        )
+        guard let cell = cell as? ItemCell else { return UITableViewCell() }
+        cell.viewModel = viewModel.getItemCellViewModel(at: indexPath)
+        return cell
+    }
+}
+
+// MARK: - UITableView delegate
+extension BrowseViewController {
+    
+    override func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let detailsViewModel = viewModel.getDetailsViewModel(at: indexPath)
+        viewModel.checkTransition(by: detailsViewModel) { isFile in
+            if isFile {
+                performSegue(
+                    withIdentifier: "toDetails",
+                    sender: detailsViewModel
+                )
+            } else {
+                tableView.backgroundView = activityIndicator
+                viewModel.fetchItems { [weak self] in
+                    self?.backButton.tintColor = .systemGray
+                    self?.updateUI()
+                }
+            }
+        }
+    }
+    
+    override func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        viewModel.fetchExtraItems(afterRowAt: indexPath) { [weak self] in
+            self?.updateUI()
+        }
     }
 }

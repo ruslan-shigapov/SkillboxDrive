@@ -7,15 +7,13 @@
 
 import UIKit
 
-class ItemCell: UITableViewCell {
+final class ItemCell: UITableViewCell {
 
-    // MARK: - IB Outlets
     @IBOutlet var iconView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var infoLabel: UILabel!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    // MARK: - Public Properties
     var viewModel: ItemCellViewModelProtocol! {
         didSet {
             nameLabel.text = viewModel.name

@@ -14,21 +14,30 @@ protocol PublishedItemCellDelegate {
 protocol PublishedViewModelProtocol: PublishedItemCellDelegate {
     var networkIsConnected: Bool { get }
     func fetchItems(completion: @escaping () -> Void)
-    func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void)
+    func fetchExtraItems(
+        afterRowAt indexPath: IndexPath,
+        completion: @escaping () -> Void
+    )
     func numberOfRows() -> Int
     func getPublishedItemCellViewModel(at indexPath: IndexPath) -> PublishedItemCellViewModelProtocol
     func checkDirectory(completion: () -> Void)
-    func deletePublished(_ item: PublishedItemCellViewModelProtocol, completion: @escaping () -> Void)
+    func deletePublished(
+        _ item: PublishedItemCellViewModelProtocol,
+        completion: @escaping () -> Void
+    )
 }
 
-class PublishedViewModel: PublishedViewModelProtocol {
+final class PublishedViewModel: PublishedViewModelProtocol {
     
     var deleteButtonWasPressed: ((PublishedItemCellViewModelProtocol) -> Void)?
+    
     var networkIsConnected = false
 
     private var items: [Item] = []
+    
     private var offset = 20
 
+    // MARK: - Public Methods
     func fetchItems(completion: @escaping () -> Void) {
         guard var urlComponents = URLComponents(string: Link.toPublished.rawValue) else {
             return
@@ -113,6 +122,7 @@ class PublishedViewModel: PublishedViewModelProtocol {
         }
     }
     
+    // MARK: - Private Methods
     private func fetchCache() {
         StorageManager.shared.fetchFiles { result in
             switch result {

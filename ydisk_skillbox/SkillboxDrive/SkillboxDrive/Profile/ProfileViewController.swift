@@ -8,9 +8,8 @@
 import UIKit
 import ALProgressView
 
-class ProfileViewController: UIViewController {
-
-    // MARK: - IB Outlets
+final class ProfileViewController: UIViewController {
+    
     @IBOutlet var progressView: UIView!
     @IBOutlet var publishedFilesButton: UIView!
     @IBOutlet var circleViews: [UIView]!
@@ -19,8 +18,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet var usedMemoryLabel: UILabel!
     @IBOutlet var availableMemoryLabel: UILabel!
     
-    // MARK: - Private Properties
     private lazy var progressRing = ALProgressRing()
+    
     private var viewModel: ProfileViewModelProtocol! {
         didSet {
             viewModel.fetchDiskInfo { [weak self] in
@@ -35,7 +34,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    // MARK: - Override Methods
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         viewModel = ProfileViewModel()
@@ -43,16 +41,14 @@ class ProfileViewController: UIViewController {
         setupConstraints()
     }
     
-    // MARK: - IB Actions
     @IBAction func exitButtonPressed(_ sender: UIBarButtonItem) {
         showLogOutAlert()
     }
-      
+    
     @IBAction func publishedFilesButtonPressed() {
         performSegue(withIdentifier: "toPublished", sender: nil)
     }
     
-    // MARK: - Private Methods
     private func setupUI() {
         progressView.addSubview(progressRing)
         setupProgressRing()
@@ -65,10 +61,17 @@ class ProfileViewController: UIViewController {
     
     private func setupConstraints() {
         progressRing.translatesAutoresizingMaskIntoConstraints = false
-        progressRing.centerXAnchor.constraint(equalTo: progressView.centerXAnchor).isActive = true
-        progressRing.centerYAnchor.constraint(equalTo: progressView.centerYAnchor).isActive = true
-        progressRing.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        progressRing.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        NSLayoutConstraint.activate([
+            progressRing.centerXAnchor.constraint(
+                equalTo: progressView.centerXAnchor
+            ),
+            progressRing.centerYAnchor.constraint(
+                equalTo: progressView.centerYAnchor
+            ),
+            progressRing.widthAnchor.constraint(equalToConstant: 200),
+            progressRing.heightAnchor.constraint(equalToConstant: 200)
+        ])
     }
     
     private func setupProgressRing() {
@@ -76,15 +79,21 @@ class ProfileViewController: UIViewController {
         progressRing.endColor = circleViews[0].backgroundColor ?? .systemPink
         progressRing.grooveColor = circleViews[1].backgroundColor ?? .systemGray
     }
+}
+
+// MARK: - Alert controllers
+extension ProfileViewController {
     
-    // MARK: - Alert Controllers
     private func showLogOutAlert() {
         let alert = UIAlertController(
             title: Constants.Text.profile,
             message: nil,
             preferredStyle: .actionSheet
         )
-        let cancelAction = UIAlertAction(title: Constants.Text.cancel, style: .cancel)
+        let cancelAction = UIAlertAction(
+            title: Constants.Text.cancel,
+            style: .cancel
+        )
         let logOutAction = UIAlertAction(
             title: Constants.Text.logOut,
             style: .destructive
@@ -102,12 +111,18 @@ class ProfileViewController: UIViewController {
             message: Constants.Text.confirmation,
             preferredStyle: .alert
         )
-        let yesAction = UIAlertAction(title: Constants.Text.yes, style: .cancel) { _ in
+        let yesAction = UIAlertAction(
+            title: Constants.Text.yes,
+            style: .cancel
+        ) { _ in
             self.dismiss(animated: true) {
                 UserDefaults.standard.removeObject(forKey: "token")
             }
         }
-        let noAction = UIAlertAction(title: Constants.Text.no, style: .destructive)
+        let noAction = UIAlertAction(
+            title: Constants.Text.no,
+            style: .destructive
+        )
         alert.addAction(yesAction)
         alert.addAction(noAction)
         present(alert, animated: true)

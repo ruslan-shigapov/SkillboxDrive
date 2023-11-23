@@ -10,27 +10,38 @@ import Foundation
 protocol BrowseViewModelProtocol: DetailsViewControllerDelegate {
     var networkIsConnected: Bool { get }
     func fetchItems(completion: @escaping () -> Void)
-    func fetchExtraItems(afterRowAt indexPath: IndexPath, completion: @escaping () -> Void)
+    func fetchExtraItems(
+        afterRowAt indexPath: IndexPath,
+        completion: @escaping () -> Void
+    )
     func numberOfRows() -> Int
     func getItemCellViewModel(at indexPath: IndexPath) -> ItemCellViewModelProtocol
     func getDetailsViewModel(at indexPath: IndexPath) -> DetailsViewModelProtocol
-    func checkTransition(by viewModel: DetailsViewModelProtocol, completion: (Bool) -> Void)
+    func checkTransition(
+        by viewModel: DetailsViewModelProtocol,
+        completion: (Bool) -> Void
+    )
     func goToBackScreen(completion: () -> Void)
     func checkDirectory(completion: () -> Void)
     func checkRootDirectory(completion: () -> Void)
 }
 
-class BrowseViewModel: BrowseViewModelProtocol {
+final class BrowseViewModel: BrowseViewModelProtocol {
     
     var backButtonWasPressed: (() -> Void)?
+    
     var networkIsConnected = false
     
     private var items: [Item] = []
+    
     private var offset = 20
     private var path = "/"
     
+    // MARK: Public Methods
     func fetchItems(completion: @escaping () -> Void) {
-        guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else {
+        guard var urlComponents = URLComponents(
+            string: Link.toBrowse.rawValue
+        ) else {
             return
         }
         urlComponents.queryItems = [
@@ -54,10 +65,14 @@ class BrowseViewModel: BrowseViewModelProtocol {
         }
     }
     
-    func fetchExtraItems(afterRowAt indexPath: IndexPath,
-                         completion: @escaping () -> Void) {
+    func fetchExtraItems(
+        afterRowAt indexPath: IndexPath,
+        completion: @escaping () -> Void
+    ) {
         if items.count == offset, indexPath.row == (items.count - 1) {
-            guard var urlComponents = URLComponents(string: Link.toBrowse.rawValue) else {
+            guard var urlComponents = URLComponents(
+                string: Link.toBrowse.rawValue
+            ) else {
                 return
             }
             urlComponents.queryItems = [
@@ -66,7 +81,10 @@ class BrowseViewModel: BrowseViewModelProtocol {
                 URLQueryItem(name: "offset", value: String(offset))
             ]
             guard let url = urlComponents.url else { return }
-            NetworkManager.shared.fetch(Item.self, from: url) { [weak self] result in
+            NetworkManager.shared.fetch(
+                Item.self,
+                from: url
+            ) { [weak self] result in
                 switch result {
                 case .success(let item):
                     self?.offset += 20
@@ -94,8 +112,10 @@ class BrowseViewModel: BrowseViewModelProtocol {
         DetailsViewModel(item: items[indexPath.row])
     }
     
-    func checkTransition(by viewModel: DetailsViewModelProtocol,
-                         completion: (Bool) -> Void) {
+    func checkTransition(
+        by viewModel: DetailsViewModelProtocol,
+        completion: (Bool) -> Void
+    ) {
         if viewModel.preview != nil, networkIsConnected {
             completion(true)
         } else if viewModel.type == "dir", networkIsConnected {
@@ -124,6 +144,7 @@ class BrowseViewModel: BrowseViewModelProtocol {
         }
     }
     
+    // MARK: Private Methods
     private func fetchCache() {
         StorageManager.shared.fetchFiles { result in
             switch result {

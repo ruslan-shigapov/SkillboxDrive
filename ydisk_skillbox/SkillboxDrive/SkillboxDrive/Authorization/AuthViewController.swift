@@ -8,16 +8,13 @@
 import Foundation
 import WebKit
 
-class AuthViewController: UIViewController {
+final class AuthViewController: UIViewController {
     
-    // MARK: - IB Outlets
     @IBOutlet var webView: WKWebView!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    // MARK: - Public Properties
     var delegate: AuthViewControllerDelegate!
     
-    // MARK: - Private Properties
     private var viewModel: AuthViewModelProtocol!
 
     // MARK: - Override Methods
@@ -35,12 +32,14 @@ class AuthViewController: UIViewController {
     }
 }
 
-// MARK: - WKNavigationDelegate
+// MARK: - WKNavigation delegate
 extension AuthViewController: WKNavigationDelegate {
     
-    func webView(_ webView: WKWebView,
-                 decidePolicyFor navigationAction: WKNavigationAction,
-                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
         if let url = navigationAction.request.url {
             viewModel.getToken(from: url) {
                 dismiss(animated: true) { [weak self] in

@@ -7,14 +7,14 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
-    // MARK: - Private Properties
     private var viewModel: LoginViewModelProtocol! {
         didSet {
-            viewModel.showPresentation {
+            viewModel.showOnboarding {
                 if let onboardingVC = storyboard?.instantiateViewController(
-                    withIdentifier: "OnboardingViewController") as? OnboardingViewController {
+                    withIdentifier: "OnboardingViewController"
+                ) as? OnboardingViewController {
                     present(onboardingVC, animated: true)
                 }
             }
@@ -24,7 +24,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // MARK: - Override Methods
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         viewModel = LoginViewModel()
@@ -37,7 +36,6 @@ class LoginViewController: UIViewController {
         authViewController.delegate = sender as? AuthViewControllerDelegate
     }
     
-    // MARK: - IB Actions
     @IBAction func loginButtonPressed() {
         viewModel.tokenIsExist
         ? performSegue(withIdentifier: "toRecents", sender: nil)

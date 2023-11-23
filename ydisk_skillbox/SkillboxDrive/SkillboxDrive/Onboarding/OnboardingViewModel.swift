@@ -8,14 +8,15 @@
 import Foundation
 
 protocol OnboardingViewModelProtocol {
-    var currentPage: OnboardingScreen { get }
+    var currentPage: OnboardingPage { get }
     var viewModelDidChange: ((OnboardingViewModelProtocol) -> Void)? { get set }
     func goToNextPage(completion: () -> Void)
 }
 
-class OnboardingViewModel: OnboardingViewModelProtocol {
+final class OnboardingViewModel: OnboardingViewModelProtocol {
     
-    var currentPage: OnboardingScreen = .first
+    var currentPage: OnboardingPage = .first
+    
     var viewModelDidChange: ((OnboardingViewModelProtocol) -> Void)?
     
     func goToNextPage(completion: () -> Void) {

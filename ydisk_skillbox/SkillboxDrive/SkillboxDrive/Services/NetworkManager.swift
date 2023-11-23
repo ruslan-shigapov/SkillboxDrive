@@ -19,7 +19,7 @@ enum Link: String {
     case toUnpublish = "https://cloud-api.yandex.net/v1/disk/resources/unpublish"
 }
 
-class NetworkManager {
+final class NetworkManager {
     
     static let shared = NetworkManager()
         
@@ -32,9 +32,11 @@ class NetworkManager {
         
     private init() {}
     
-    func fetch<T: Decodable>(_ type: T.Type,
-                             from url: URL,
-                             completion: @escaping (Result<T, AFError>) -> Void) {
+    func fetch<T: Decodable>(
+        _ type: T.Type,
+        from url: URL,
+        completion: @escaping (Result<T, AFError>) -> Void
+    ) {
         AF.request(url, headers: headers) { $0.timeoutInterval = 3 }
             .validate()
             .responseDecodable(of: T.self) { response in
@@ -47,8 +49,10 @@ class NetworkManager {
             }
     }
     
-    func fetchData(from url: String,
-                   completion: @escaping (Result<Data, AFError>) -> Void) {
+    func fetchData(
+        from url: String,
+        completion: @escaping (Result<Data, AFError>) -> Void
+    ) {
         AF.request(url, headers: headers)
             .validate()
             .responseData { response in
@@ -61,10 +65,12 @@ class NetworkManager {
             }
     }
     
-    func sendRequest<T: Decodable>(with type: T.Type,
-                                   to url: URL,
-                                   byMethod method: HTTPMethod,
-                                   completion: @escaping (Result<T, AFError>) -> Void) {
+    func sendRequest<T: Decodable>(
+        with type: T.Type,
+        to url: URL,
+        byMethod method: HTTPMethod,
+        completion: @escaping (Result<T, AFError>) -> Void
+    ) {
         AF.request(url, method: method, headers: headers)
             .validate()
             .responseDecodable(of: T.self) { response in

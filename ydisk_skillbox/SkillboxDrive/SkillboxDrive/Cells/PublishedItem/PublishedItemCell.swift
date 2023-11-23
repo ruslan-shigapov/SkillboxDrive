@@ -7,15 +7,13 @@
 
 import UIKit
 
-class PublishedItemCell: UITableViewCell {
+final class PublishedItemCell: UITableViewCell {
     
-    // MARK: - IB Outlets
     @IBOutlet var iconView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var infoLabel: UILabel!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
  
-    // MARK: - Public Properties
     var delegate: PublishedItemCellDelegate!
     
     var viewModel: PublishedItemCellViewModelProtocol! {
@@ -30,7 +28,6 @@ class PublishedItemCell: UITableViewCell {
         }
     }
     
-    // MARK: - IB Actions
     @IBAction func deleteButtonPressed() {
         delegate.deleteButtonWasPressed?(viewModel)
     }

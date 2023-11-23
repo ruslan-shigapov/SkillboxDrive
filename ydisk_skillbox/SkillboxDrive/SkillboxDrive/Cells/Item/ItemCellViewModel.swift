@@ -1,24 +1,25 @@
 //
-//  PublishedItemCellViewModel.swift
+//  BrowseItemCellViewModel.swift
 //  SkillboxDrive
 //
-//  Created by Руслан Шигапов on 23.05.2023.
+//  Created by Руслан Шигапов on 07.05.2023.
 //
 
-import Foundation
+import UIKit
 
-protocol PublishedItemCellViewModelProtocol {
+protocol ItemCellViewModelProtocol {
     var name: String { get }
     var preview: String? { get }
     var information: String { get }
     var created: String { get }
-    var path: String { get }
+    var type: String { get }
     init(item: Item)
     func fetchImageData(completion: @escaping (Data) -> Void)
+    func setupUI(completion: (Bool) -> Void)
 }
 
-class PublishedItemCellViewModel: PublishedItemCellViewModelProtocol {
-    
+final class ItemCellViewModel: ItemCellViewModelProtocol {
+        
     var name: String {
         guard let name = item.name else { return Constants.Text.unknownItemName }
         return NSString(string: name).deletingPathExtension
@@ -41,8 +42,8 @@ class PublishedItemCellViewModel: PublishedItemCellViewModelProtocol {
         formatter.dateFormat = "dd.MM.yy HH:mm"
         return formatter.string(from: date)
     }
-    var path: String {
-        item.path ?? ""
+    var type: String {
+        item.type ?? ""
     }
     
     private let item: Item
@@ -60,6 +61,14 @@ class PublishedItemCellViewModel: PublishedItemCellViewModelProtocol {
             case .failure(let error):
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    func setupUI(completion: (Bool) -> Void) {
+        if type == "file" {
+            completion(true)
+        } else {
+            completion(false)
         }
     }
 }
