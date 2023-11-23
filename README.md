@@ -7,12 +7,18 @@
 
 <img width="368" alt="Screenshot_0" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/ca69c27e-b8fb-4280-94f6-cc21dffcc013">
 
-<img width="368" alt="Screenshot" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/d075f9e6-18ff-4500-b6ad-b913847c0628">
+<img width="388" alt="Onboarding" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/02bafb52-fd96-4e5c-93dc-7bcec4e7c1fe">
 
-<img width="366" alt="Screenshot_1" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/82e233e7-9a84-44f7-9e45-5eb9aa2b13ee">
+<img width="388" alt="New_Screenshot_0" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/ddf3b38e-514a-40dc-9fb0-c411465da300">
 
-<img width="366" alt="Screenshot_2" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/81e65649-42f4-478e-86b0-03dbb896d4a7">
+<img width="388" alt="New_Screenshot_1" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/196c04cd-23dc-4cda-86e6-7fcc879d241e">
 
-<img width="366" alt="Screenshot_3" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/c00ed115-ab0b-4d1f-8c60-474c011fc273">
+<img width="388" alt="New_Screenshot_2" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/c360d275-fa62-41b5-ad00-ec6c368edf29">
+
+<img width="388" alt="New_Screenshot_3" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/e90ace53-db63-4fb2-ac4c-63aee668c815">
+
+<img width="388" alt="Empty_Folder" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/30025613-a83a-4715-a074-0f29a68878e1">
 
 <img width="366" alt="Screenshot_4" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/1b1c7534-8a7b-4eb7-8037-4f2c3bc66a7f">
+
+<img width="388" alt="Rename" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/0736b493-2622-4fcb-9a33-83ef615f8510">
