@@ -10,7 +10,7 @@
 
 Кастомный UI и анимация: ALProgressView
 
-Работа с сетью: Alamofire
+Работа с сетью: Alamofire, OAuth 2.0
 
 Работа с данными: UserDefaults, CoreData
 
