@@ -3,12 +3,19 @@
 Приложение, выполненное на основании макетов предоставленных Skillbox, которое предоставляет оболочку для документооборота. В качестве бэкенда используется Яндекс Диск.
 
 Платформа: UIKit
+
 Архитектура: MVVM
+
 Верстка: Storyboard + программно (NSLayoutConstraints)
+
 Кастомный UI и анимация: ALProgressView
+
 Работа с сетью: Alamofire
+
 Работа с данными: UserDefaults, CoreData
+
 Доп. фреймворки: WebKit, PDFKit
+
 Поддерживаемые языки: русский, английский
 
 <img width="388" alt="Login" src="https://github.com/ruslan-shigapov/SkillboxDrive/assets/104629658/5c660448-5fcd-4ed8-843b-1c0d0b974a9e">
